@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+  before_action :authenticate_user!, only: [:auth_ping]
+
   def ping
     render plain: 'pong'
   end
