@@ -300,5 +300,7 @@ Devise.setup do |config|
     jwt.secret = ENV['DEVISE_JWT_SECRET_KEY']
     jwt.expiration_time = 1.day.to_i
   end
+  config.remember_for = 1.day.to_i
+  config.timeout_in = 1.day.to_i
   config.navigational_formats = []
 end
