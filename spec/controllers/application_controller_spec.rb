@@ -11,7 +11,7 @@ RSpec.describe ApplicationController, type: :controller do
     expect(response.status).to eq 401
   end
 
-  it 'auth_ping returns text "pong" if not loggedin', now: true do
+  it 'auth_ping returns text "pong" if not loggedin' do
     user = create(:user)
     sign_in(user)
     get :auth_ping
