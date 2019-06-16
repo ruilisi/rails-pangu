@@ -24,7 +24,7 @@ There is always a need to bring these two beatiful solutions together into rails
 * Docker (A faster docker building solution for rails is provided, that core gems are separated from peripheral gems)
 * Puma to start server
 * redis, redis-rails
-
+* jwt-blacklist in rails
 
 
 ### Build
@@ -49,3 +49,6 @@ Following environment varialbes are required in order to run or test:
 
 * `DEVISE_JWT_SECRET_KEY`: You generate this by running `rails secret`
 * `DATABASE_URL`: Postgres database url for database connection (You can change this repo to use other databases or make a issue/PR about this)
+
+### jwt-blacklist in rails
+* Revoke jwt by blacklist in rails, the project default sets at most one login session per user per device type, you can change the settings by edit `payload`, `on_jwt_dispatch` method in user.rb and `revoke` methods in jwt_blacklist.rb
