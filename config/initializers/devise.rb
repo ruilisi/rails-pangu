@@ -298,6 +298,13 @@ Devise.setup do |config|
   # config.sign_in_after_change_password = true
   config.jwt do |jwt|
     jwt.secret = ENV['DEVISE_JWT_SECRET_KEY']
+    #  You need to tell which requests will dispatch tokens for the user that has been previously
+    #  authenticated (usually through some other warden strategy, such as one requiring username and email parameters).
+    #  To configure it, you can add the the request path to dispath_requests
+    jwt.dispatch_requests = [['POST', %r{^users/sign_in$}]]
+
+    #  You need to tell which requests will revoke incoming JWT tokens, and you can add the the request path to revocation_requests
+    jwt.revocation_requests = [['DELETE', %r{^users/sign_out$}]]
     jwt.expiration_time = 1.day.to_i
   end
   config.remember_for = 1.day.to_i

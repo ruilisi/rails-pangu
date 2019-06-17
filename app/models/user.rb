@@ -17,16 +17,15 @@ class User < ApplicationRecord
   # The following method will be called on dispatching a jwt auth, You can set rules to revork jwt here
   # The following is to set one device_type can only be logged in by jwt by at most one user at each time
   def on_jwt_dispatch(token, payload)
-    # In the following example, keys start with user_login to record whether the jwt is used for login
-    # The keys start with user_device_jwt to record the last active jwt for the device
-    last_jwt = $redis.get("user_login:#{self.id}:#{payload['device']}")
-    if last_jwt
+    # In the following example, keys start with user_device_jwt to record whether the jwt is used for login
+    # The keys start with user_blacklist to record the last active jwt for the device
+    if $redis.get("user_device_jwt:#{self.id}:#{payload['device']}").present?
       jti, exp = last_jwt.split(":")
       expiration = exp.to_i - Time.now.to_i
       if expiration > 0
-        $redis.setex("user_device_jwt:#{self.id}:#{payload['device']}:#{jti}", expiration, jti)
+        $redis.setex("user_blacklist:#{self.id}:#{payload['device']}:#{jti}", expiration, jti)
       end
     end
-    $redis.setex("user_login:#{self.id}:#{payload['device']}", payload['exp'] - Time.now.to_i, "#{payload['jti']}:#{payload['exp']}")
+    $redis.setex("user_device_jwt):#{self.id}:#{payload['device']}", payload['exp'] - Time.now.to_i, "#{payload['jti']}:#{payload['exp']}")
   end
 end
