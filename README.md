@@ -50,5 +50,65 @@ Following environment varialbes are required in order to run or test:
 * `DEVISE_JWT_SECRET_KEY`: You generate this by running `rails secret`
 * `DATABASE_URL`: Postgres database url for database connection (You can change this repo to use other databases or make a issue/PR about this)
 
-### jwt-blacklist in rails
-* Revoke jwt by blacklist in rails, the project default sets at most one login session per user per device type, you can change the settings by edit `payload`, `on_jwt_dispatch` method in user.rb and `revoke` methods in jwt_blacklist.rb
+### Blacklist
+#### Defualt blacklist with redis
+In `jwt_blacklist` record, we implement blacklist with redis. When token has expired, it will auto delete this token in redis.
+
+```ruby
+  def self.jwt_revoked?(payload, user)
+    # Check if in the blacklist
+    $redis.get("user_blacklist:#{user.id}:#{payload['jti']}").present?
+  end
+
+  def self.revoke_jwt(payload, user)
+    # REVOKE JWT
+    expiration = payload['exp'] - payload['iat']
+    $redis.setex("user_blacklist:#{user.id}:#{payload['jti']}", expiration, payload['jti'])
+  end
+```
+#### Custom blacklist
+You can also implement blacklist by your own strategies. You just need to rewrite two methods: `jwt_revoked?` and `revoke_jwt` in `jwt_blacklist.rb`, both of them accepting as parameters the JWT payload and the `user` record, in this order.
+
+```ruby
+  def self.jwt_revoked?(payload, user)
+    # Does something to check whether the JWT token is revoked for given user
+  end
+
+  def self.revoke_jwt(payload, user)
+    # Does something to revoke the JWT token for given user
+  end
+```
+#### Dispatch requests
+You can config `dispatch_requests` in `devise.rb`. When config it, you need to tell which requests will dispatch tokens for the user that has been previously authenticated (usually through some other warden strategy, such as one requiring username and email parameters). To configure it, you can add the the request path to dispath_requests. 
+
+```ruby
+  # You should add this config in devise.rb
+  jwt.dispatch_requests = [['POST', %r{^users/sign_in$}]]
+
+```
+#### Revocation requests
+You can config `dispatch_requests` in `devise.rb`. When config it, you need to tell which requests will revoke incoming JWT tokens, and you can add the the request path to revocation_requests
+
+```ruby
+  # You should add this config in devise.rb
+  jwt.revocation_requests = [['DELETE', %r{^users/sign_out$}]]
+```
+#### Jwt payload
+`user` records may also implement a jwt_payload method, which gives it a chance to add something to the JWT payload. 
+
+```ruby
+  def jwt_payloads
+    { 'foo' => 'bar' }
+  end
+```
+
+#### Jwt dispatch
+You can add a hook method `on_jwt_dispatch` on the `user` record. It will execute when a token dispatched for that user instance, and it takes token and payload as parameters. And this method will call when 
+you access the routes which in dispatch_requests
+
+```ruby
+  def on_jwt_dispatch(token, payload)
+    # do_something(token, payload)
+  end
+```
+
