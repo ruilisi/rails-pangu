@@ -19,7 +19,8 @@ class User < ApplicationRecord
   def on_jwt_dispatch(token, payload)
     # In the following example, keys start with user_device_jwt to record whether the jwt is used for login
     # The keys start with user_blacklist to record the last active jwt for the device
-    if $redis.get("user_device_jwt:#{self.id}:#{payload['device']}").present?
+    last_jwt = $redis.get("user_device_jwt:#{self.id}:#{payload['device']}")
+    if last_jwt.present?
       jti, exp = last_jwt.split(":")
       expiration = exp.to_i - Time.now.to_i
       if expiration > 0
