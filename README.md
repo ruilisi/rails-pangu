@@ -82,7 +82,6 @@ You can also implement blacklist by your own strategies. You just need to rewrit
 You can config `dispatch_requests` in `devise.rb`. When config it, you need to tell which requests will dispatch tokens for the user that has been previously authenticated (usually through some other warden strategy, such as one requiring username and email parameters). To configure it, you can add the the request path to dispath_requests. 
 
 ```ruby
-  # You should add this config in devise.rb
   jwt.dispatch_requests = [['POST', %r{^users/sign_in$}]]
 
 ```
@@ -90,7 +89,6 @@ You can config `dispatch_requests` in `devise.rb`. When config it, you need to t
 You can config `dispatch_requests` in `devise.rb`. When config it, you need to tell which requests will revoke incoming JWT tokens, and you can add the the request path to revocation_requests
 
 ```ruby
-  # You should add this config in devise.rb
   jwt.revocation_requests = [['DELETE', %r{^users/sign_out$}]]
 ```
 #### Jwt payload
@@ -98,7 +96,7 @@ You can config `dispatch_requests` in `devise.rb`. When config it, you need to t
 
 ```ruby
   def jwt_payloads
-    { 'foo' => 'bar' }
+    # { 'foo' => 'bar' }
   end
 ```
 
