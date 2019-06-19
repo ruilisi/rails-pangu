@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DeviseCreateUsers < ActiveRecord::Migration[6.0]
-  enable_extension "uuid-ossp"
+  enable_extension "pgcrypto"
 
   def change
     create_table :users, id: :uuid, default: -> { "uuid_generate_v4()" } do |t|

@@ -14,13 +14,7 @@ ActiveRecord::Schema.define(version: 2019_06_03_062608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "uuid-ossp"
-
-  create_table "jwt_blacklist", id: :serial, force: :cascade do |t|
-    t.string "jti", null: false
-    t.datetime "exp", null: false
-    t.index ["jti"], name: "index_jwt_blacklist_on_jti"
-  end
+  enable_extension "pgcrypto"
 
   create_table "users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
