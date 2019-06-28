@@ -26,35 +26,50 @@ For example, the backend of a  `Computer Game Acceleration` product by our team,
 
 ## Features
 
-#### Rails 6
+#### 🚀 Rails 6
 
-As explained above, `rails 6` is the future and is far different from `rails 5`. Rails API only
+As explained above, `rails 6` is the future and is far different from `rails 5`. 
+
+#### 🚀 Rails API only
 
 It is common to use frontend js libraries like `react`, `vuejs` to replace `rails view` in mordern web deveopment
 
-#### Devise
+#### 🚀 Devise [Repo](https://github.com/plataformatec/devise)
 
-#### devise-jwt [Repo](https://github.com/waiting-for-dev/devise-jwt)
+Quoted from it's homepage: 
 
-While there are lots of solutions which hook `devise` and `jwt` together, this repo is better implemented from our point of view.
+>  Devise is a flexible authentication solution for Rails based on Warden. It:
+>
+> * Is Rack based;
+> * Is a complete MVC solution based on Rails engines;
+> * Allows you to have multiple models signed in at the same time;
+> * Is based on a modularity concept: use only what you really need.
 
 We implmented a devise-jwt blacklist policy leveraging the power of `redis` in [app/models/jwt_blacklist.rb](https://github.com/paiyou-network/rails-devise-jwt/blob/master/app/models/jwt_blacklist.rb).
 
-#### JWT
+To our best of knowledge, `devise` provides a full, industry-standard, easy-to-ingrate way of all kinds of authencations. Damn, it's awesome!
+
+#### 🚀 JWT
 
 JSON Web Tokens
 
-#### Postgres
+#### 🚀 devise-jwt [Repo](https://github.com/waiting-for-dev/devise-jwt)
+
+While there are lots of solutions which hook `devise` and `jwt` together, this repo is better implemented from our point of view.
+
+We implmented a devise-jwt blacklist policy leveraging the power of `redis` in [app/models/jwt_blacklist.rb](https://github.com/rallets-network/rails-devise-jwt/blob/master/app/models/jwt_blacklist.rb).
+
+#### 🚀 Postgres
 
 We use postgres as default database store cause sqlite3 will be replaced sooner or later when the traffic of one web server becomes lager enough
 
-#### Rspec
+#### 🚀 Rspec
 
-#### Factory Bot  [Doc](https://github.com/thoughtbot/factory_bothttps://github.com/thoughtbot/factory_bot)
+#### 🚀 Factory Bot  [Doc](https://github.com/thoughtbot/factory_bothttps://github.com/thoughtbot/factory_bot)
 
 A library for setting up Ruby objects as test data.
 
-#### Docker
+#### 🚀 Docker
 
 Standard containerize solution which is almost used in every team worldwide. As a result, a `Dockerfile` and couple scripts are provided to help generate a docker image of this project.
 
@@ -78,15 +93,15 @@ RUN bundle install --gemfile Gemfile -j16 --binstubs=$BUNDLE_PATH/bin
 
 Through the above lines, common and stablly used gems will be bundled first, then those transitory gems or gems under trying will be bundled. Though, this process generates extra docker image layers which makes the image lager a little bit(didn't caculate, but guess it's like hundreds of `KB`s). It worths that way cause **time is much more limited than disk space**
 
-#### Docker Compose
+#### 🚀 Docker Compose
 
-A `docker-compose.yml` is attached to help sticking postgres and web server together quickly, and make this repo **production ready**.
+A `docker-compose.yml` is attached to help stick postgres and web server together quickly.
 
-#### Puma  [Repo](https://github.com/puma/puma)
+🚀 Puma  [Repo](https://github.com/puma/puma)
 
 Puma is a simple, fast, threaded, and highly concurrent HTTP 1.1 server for Ruby/Rack applications in development and production.
 
-#### Redis
+#### 🚀 Redis
 
 Is there any web project isn't using `redis` as a faster and sometimes easier way of storing data? Well, if there isn't,  just replace it!
 
