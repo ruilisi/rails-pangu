@@ -16,31 +16,97 @@ At the same time, we saw couple of other repos doing the same work, but one big 
 
 As a result, we decided to create this repo which demonstrates how `rails 6`, `devise`, `jwt` fit together like a charm.
 
-### Features
+## Production Ready
 
-* Rails 6
-* Rails API only (It is common to use frontend js libraries like `react`, `vuejs` to replace `rails view` in mordern web deveopment)
-* Devise
-* JWT (JSON Web Tokens)
-* Rspec Tests
-* [Factory Bot](https://github.com/thoughtbot/factory_bothttps://github.com/thoughtbot/factory_bot) (A library for setting up Ruby objects as test data)
-* Docker (A faster docker building solution for rails is provided, that core gems are separated from peripheral gems)
-* Puma
-* redis, redis-rails
-* jwt-blacklist in rails
+We are using lots of cutting edge gems in `rails-devise-jwt`, but it does not mean projects built upon this repo will be fragile, cause our team has run lots of projects based upon it.
+
+For example, the backend of a  `Computer Game Acceleration` product by our team,  **LINGTI**  (https://lingti.io/)
+
+<img src="https://assets.lingti.paiyou.co/ed568fbe.png" width="200" align="middle" />
+
+## Features
+
+#### Rails 6
+
+As explained above, `rails 6` is the future and is far different from `rails 5`. Rails API only
+
+It is common to use frontend js libraries like `react`, `vuejs` to replace `rails view` in mordern web deveopment
+
+#### Devise
+
+#### devise-jwt [Repo](https://github.com/waiting-for-dev/devise-jwt)
+
+While there are lots of solutions which hook `devise` and `jwt` together, this repo is better implemented from our point of view.
+
+We implmented a devise-jwt blacklist policy leveraging the power of `redis` in [app/models/jwt_blacklist.rb](https://github.com/paiyou-network/rails-devise-jwt/blob/master/app/models/jwt_blacklist.rb).
+
+#### JWT
+
+JSON Web Tokens
+
+#### Postgres
+
+We use postgres as default database store cause sqlite3 will be replaced sooner or later when the traffic of one web server becomes lager enough
+
+#### Rspec
+
+#### Factory Bot  [Doc](https://github.com/thoughtbot/factory_bothttps://github.com/thoughtbot/factory_bot)
+
+A library for setting up Ruby objects as test data.
+
+#### Docker
+
+Standard containerize solution which is almost used in every team worldwide. As a result, a `Dockerfile` and couple scripts are provided to help generate a docker image of this project.
+
+While there are a vast number of `Dockerfile`s for rails related projects, we implemented a easy method that can boost the docker building process.  When a project grows, hundreds or even thousands of different versions of different gems will be tried, that most of the docker image building time is wasted for bundling a large amount of stable gems, such as `rails`, `pg`...
+
+Thus, the following lines demonstrates how we eliminate the duplicated parts of the image building process:
+
+```dockerfile
+COPY Gemfile.core .
+RUN echo 'gem: --no-document' >> ~/.gemrc && \
+    cp ~/.gemrc /etc/gemrc && \
+    chmod +r /etc/gemrc && \
+    bundle install --gemfile Gemfile.core -j16 --binstubs=$BUNDLE_PATH/bin
+
+COPY Gemfile .
+COPY Gemfile.lock .
+RUN bundle install --gemfile Gemfile -j16 --binstubs=$BUNDLE_PATH/bin
+```
 
 
-### Build
+
+Through the above lines, common and stablly used gems will be bundled first, then those transitory gems or gems under trying will be bundled. Though, this process generates extra docker image layers which makes the image lager a little bit(didn't caculate, but guess it's like hundreds of `KB`s). It worths that way cause **time is much more limited than disk space**
+
+#### Docker Compose
+
+A `docker-compose.yml` is attached to help sticking postgres and web server together quickly, and make this repo **production ready**.
+
+#### Puma  [Repo](https://github.com/puma/puma)
+
+Puma is a simple, fast, threaded, and highly concurrent HTTP 1.1 server for Ruby/Rack applications in development and production.
+
+#### Redis
+
+Is there any web project isn't using `redis` as a faster and sometimes easier way of storing data? Well, if there isn't,  just replace it!
+
+
+
+## Build
 
 Run `bin/build.sh` to build the docker image `rails-devise-jwt`.
 
-### RUN
+
+
+## RUN
 
 ```bash
 docker run -it --rm -v ${PWD}:/usr/src/app -e DEVISE_JWT_SECRET_KEY=XXX -e DATABASE_URL=XXX  rails-devise-jwt rails c
 ```
 
-### Test
+
+
+## Test
 
 ```bash
 docker run -it --rm -v ${PWD}:/usr/src/app -e DEVISE_JWT_SECRET_KEY=XXX -e DATABASE_URL=XXX  rails-devise-jwt rspec
@@ -53,7 +119,10 @@ Following environment varialbes are required in order to run or test:
 * `DEVISE_JWT_SECRET_KEY`: You generate this by running `rails secret`
 * `DATABASE_URL`: Postgres database url for database connection (You can change this repo to use other databases or make a issue/PR about this)
 
-### Blacklist
+
+
+## Blacklist
+
 #### Defualt blacklist with redis
 In `jwt_blacklist` record, we implement blacklist with redis. When token has expired, it will auto delete this token in redis.
 
