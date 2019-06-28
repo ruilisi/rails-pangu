@@ -4,7 +4,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
   enable_extension "pgcrypto"
 
   def change
-    create_table :users, id: :uuid, default: -> { "uuid_generate_v4()" } do |t|
+    create_table :users, id: :uuid, default: -> { "gen_random_uuid()" } do |t|
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
