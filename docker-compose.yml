@@ -11,4 +11,4 @@ services:
       - .:/usr/src/app
     environment:
       DATABASE_URL: postgres://postgres@db:5432/rails-devise-jwt?pool=25&encoding=unicode&schema_search_path=public
-
+      DEVISE_JWT_SECRET_KEY: RANDOM_SECRET

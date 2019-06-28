@@ -57,7 +57,7 @@ JSON Web Tokens
 
 While there are lots of solutions which hook `devise` and `jwt` together, this repo is better implemented from our point of view.
 
-We implmented a devise-jwt blacklist policy leveraging the power of `redis` in [app/models/jwt_blacklist.rb](https://github.com/rallets-network/rails-devise-jwt/blob/master/app/models/jwt_blacklist.rb).
+We implmented a devise-jwt blacklist policy leveraging the power of `redis` in [app/models/jwt_blacklist.rb](https://github.com/paiyou-network/rails-devise-jwt/blob/master/app/models/jwt_blacklist.rb).
 
 #### 🚀 Postgres
 
@@ -97,7 +97,7 @@ Through the above lines, common and stablly used gems will be bundled first, the
 
 A `docker-compose.yml` is attached to help stick postgres and web server together quickly.
 
-🚀 Puma  [Repo](https://github.com/puma/puma)
+#### 🚀  Puma  [Repo](https://github.com/puma/puma)
 
 Puma is a simple, fast, threaded, and highly concurrent HTTP 1.1 server for Ruby/Rack applications in development and production.
 
@@ -107,32 +107,34 @@ Is there any web project isn't using `redis` as a faster and sometimes easier wa
 
 
 
-## Build
+## Build, Run, Test
+
+#### Build
 
 Run `bin/build.sh` to build the docker image `rails-devise-jwt`.
 
 
 
-## RUN
+#### Run
+
+After built the image, run: `docker-compose up -d`
+
+Then, initialize the database with `docker-compose exec web rails db:create`
+
+
+
+#### Test
 
 ```bash
-docker run -it --rm -v ${PWD}:/usr/src/app -e DEVISE_JWT_SECRET_KEY=XXX -e DATABASE_URL=XXX  rails-devise-jwt rails c
+docker-compose exec web rspec
 ```
 
 
 
-## Test
-
-```bash
-docker run -it --rm -v ${PWD}:/usr/src/app -e DEVISE_JWT_SECRET_KEY=XXX -e DATABASE_URL=XXX  rails-devise-jwt rspec
-```
-
-
-
-Following environment varialbes are required in order to run or test:
+The following environment varialbes are required in order to run or test (check `docker-cmpose.yml`):
 
 * `DEVISE_JWT_SECRET_KEY`: You generate this by running `rails secret`
-* `DATABASE_URL`: Postgres database url for database connection (You can change this repo to use other databases or make a issue/PR about this)
+* `DATABASE_URL`: Postgres database url for database connection
 
 
 
