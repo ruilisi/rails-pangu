@@ -19,6 +19,7 @@ As a result, we decided to create this repo which demonstrates how `rails 6`, `d
 ### Features
 
 * Rails 6
+* Rails API only (It is common to use frontend js libraries like `react`, `vuejs` to replace `rails view` in mordern web deveopment)
 * Devise
 * JWT (JSON Web Tokens)
 * Rspec Tests
