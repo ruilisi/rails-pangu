@@ -2,27 +2,29 @@
 
 [Devise](https://github.com/plataformatec/devise) is a flexible and almost a standard authentication solution for Rails, while [JWT](https://jwt.io/)(JSON Web Tokens) is a JSON-based open standard (RFC 7519) for creating access tokens, which is a distributed and faster solution than authentication through databases. 
 
-There is always a need to bring these two beatiful solutions together into rails for better user authentication, which becomes the main reason I created this repo.  Thanks to a lot of the close solutions that gave lots of hints to this repo, for example, this article: [Rails 5 API + JWT setup in minutes (using Devise)](https://medium.com/@mazik.wyry/rails-5-api-jwt-setup-in-minutes-using-devise-71670fd4ed03). However, these articles have common issues:
+There is always a need to bring these two beatiful solutions together into rails for better user authentication, which becomes the main reason I created this repo.  Thanks to a lot of the close solutions that gave lots of hints to this repo, for example, this article: [Rails 5 API + JWT setup in minutes (using Devise)](https://medium.com/@mazik.wyry/rails-5-api-jwt-setup-in-minutes-using-devise-71670fd4ed03). However, these solutions have common problems:
+
+* Blurry explanation
 
 * Buggy
 
-* Legacy code
+* Lots of legacy code that are not usable for current version of frameworks, gems
 
-* Not showing code base
+  
 
-  And that's another reason I need to create a repo which demonstrates how `rails`, `devise`, `jwt` could fit together like a charm.
+At the same time, we saw couple of other repos doing the same work, but one big issue for these repos is that they are started with **Rails <= 5.0**, which is far different from **Rails 6**, and that contributes to the final reason why we have to "reinvent the wheel again".
 
-
+As a result, we decided to create this repo which demonstrates how `rails 6`, `devise`, `jwt` fit together like a charm.
 
 ### Features
 
+* Rails 6
 * Devise
-* JWT
+* JWT (JSON Web Tokens)
 * Rspec Tests
 * [Factory Bot](https://github.com/thoughtbot/factory_bothttps://github.com/thoughtbot/factory_bot) (A library for setting up Ruby objects as test data)
-* Rails 6
 * Docker (A faster docker building solution for rails is provided, that core gems are separated from peripheral gems)
-* Puma to start server
+* Puma
 * redis, redis-rails
 * jwt-blacklist in rails
 
