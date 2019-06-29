@@ -2,7 +2,7 @@
 
 [Devise](https://github.com/plataformatec/devise) is a flexible and almost a standard authentication solution for Rails, while [JWT](https://jwt.io/)(JSON Web Tokens) is a JSON-based open standard (RFC 7519) for creating access tokens, which is a distributed and faster solution than authentication through databases. 
 
-There is always a need to bring these two beatiful solutions together into rails for better user authentication, which becomes the main reason I created this repo.  Thanks to a lot of the close solutions that gave lots of hints to this repo, for example, this article: [Rails 5 API + JWT setup in minutes (using Devise)](https://medium.com/@mazik.wyry/rails-5-api-jwt-setup-in-minutes-using-devise-71670fd4ed03). However, these solutions have common problems:
+There is always a need to bring these two beautiful solutions together into rails for better user authentication, which becomes the main reason I created this repo.  Thanks to a lot of the close solutions that gave lots of hints to this repo, for example, this article: [Rails 5 API + JWT setup in minutes (using Devise)](https://medium.com/@mazik.wyry/rails-5-api-jwt-setup-in-minutes-using-devise-71670fd4ed03). However, these solutions have common problems:
 
 * Blurry explanation
 
@@ -32,7 +32,7 @@ As explained above, `rails 6` is the future and is far different from `rails 5`.
 
 #### 🚀 Rails API only
 
-It is common to use frontend js libraries like `react`, `vuejs` to replace `rails view` in mordern web deveopment
+It is common to use frontend js libraries like `react`, `vuejs` to replace `rails view` in modern web development
 
 #### 🚀 Devise [Repo](https://github.com/plataformatec/devise)
 
@@ -45,9 +45,7 @@ Quoted from it's homepage:
 > * Allows you to have multiple models signed in at the same time;
 > * Is based on a modularity concept: use only what you really need.
 
-We implmented a devise-jwt blacklist policy leveraging the power of `redis` in [app/models/jwt_blacklist.rb](https://github.com/paiyou-network/rails-devise-jwt/blob/master/app/models/jwt_blacklist.rb).
-
-To our best of knowledge, `devise` provides a full, industry-standard, easy-to-ingrate way of all kinds of authencations. Damn, it's awesome!
+To our best of knowledge, `devise` provides a full, industry-standard, easy-to-ingrate way of all kinds of authentication. Damn, it's awesome!
 
 #### 🚀 JWT
 
@@ -73,7 +71,7 @@ A library for setting up Ruby objects as test data.
 
 Standard containerize solution which is almost used in every team worldwide. As a result, a `Dockerfile` and couple scripts are provided to help generate a docker image of this project.
 
-While there are a vast number of `Dockerfile`s for rails related projects, we implemented a easy method that can boost the docker building process.  When a project grows, hundreds or even thousands of different versions of different gems will be tried, that most of the docker image building time is wasted for bundling a large amount of stable gems, such as `rails`, `pg`...
+While there are a vast number of `Dockerfile`s for rails related projects, we implemented an easy method that can boost the docker building process.  When a project grows, hundreds or even thousands of different versions of different gems will be tried, that most of the docker image building time is wasted for bundling a large amount of stable gems, such as `rails`, `pg`...
 
 Thus, the following lines demonstrates how we eliminate the duplicated parts of the image building process:
 
@@ -91,7 +89,7 @@ RUN bundle install --gemfile Gemfile -j16 --binstubs=$BUNDLE_PATH/bin
 
 
 
-Through the above lines, common and stablly used gems will be bundled first, then those transitory gems or gems under trying will be bundled. Though, this process generates extra docker image layers which makes the image lager a little bit(didn't caculate, but guess it's like hundreds of `KB`s). It worths that way cause **time is much more limited than disk space**
+Through the above lines, common and stably used gems will be bundled first, then those transitory gems or gems under trying will be bundled. Though, this process generates extra docker image layers which makes the image lager a little bit(didn't calculate, but guess it's like hundreds of `KB`s). It worths that way cause **time is much more limited than disk space**
 
 #### 🚀 Docker Compose
 
@@ -140,7 +138,7 @@ The following environment varialbes are required in order to run or test (check 
 
 ## Blacklist
 
-#### Defualt blacklist with redis
+#### Default blacklist with redis
 In `jwt_blacklist` record, we implement blacklist with redis. When token has expired, it will auto delete this token in redis.
 
 ```ruby
