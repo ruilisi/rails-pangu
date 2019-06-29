@@ -46,13 +46,36 @@ RSpec.describe 'GET /users/sign_in', type: :request do
 end
 
 RSpec.describe 'DELETE /users/sign_out', type: :request do
-  let(:url) { '/users/sign_out' }
-
-  before do
-    delete url
+  let(:user) { create(:user) }
+  let(:url) { '/users/sign_in' }
+  let(:params) do
+    {
+      user: {
+        email: user.email,
+        password: user.password
+      }
+    }
   end
 
-  it 'returns 204, no content' do
+  before(:each) do
+    post url, params: params
+  end
+
+  it 'sign_out with token' do
+    token = response.headers['Authorization']
+    expect(token).to be_present
+    delete '/users/sign_out', headers: {Authorization: token}
     expect(response).to have_http_status(204)
+    get '/auth_ping', headers: {Authorization: token}
+    expect(response).to have_http_status(401)
+  end
+
+  it 'sign_out without token' do
+    token = response.headers['Authorization']
+    expect(token).to be_present
+    delete '/users/sign_out'
+    expect(response).to have_http_status(204)
+    get '/auth_ping', headers: {Authorization: token}
+    expect(response).to have_http_status(200)
   end
 end
