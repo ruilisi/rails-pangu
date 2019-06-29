@@ -4,11 +4,11 @@
 
 There is always a need to bring these two beautiful solutions together into rails for better user authentication, which becomes the main reason I created this repo.  Thanks to a lot of the close solutions that gave lots of hints to this repo, for example, this article: [Rails 5 API + JWT setup in minutes (using Devise)](https://medium.com/@mazik.wyry/rails-5-api-jwt-setup-in-minutes-using-devise-71670fd4ed03). However, these solutions have common problems:
 
-* Blurry explanation
+- Blurry explanation
 
-* Buggy
+- Buggy
 
-* Lots of legacy code that are not usable for current version of frameworks, gems
+- Lots of legacy code that are not usable for current version of frameworks, gems
 
   
 
@@ -38,12 +38,12 @@ It is common to use frontend js libraries like `react`, `vuejs` to replace `rail
 
 Quoted from it's homepage: 
 
->  Devise is a flexible authentication solution for Rails based on Warden. It:
+> Devise is a flexible authentication solution for Rails based on Warden. It:
 >
-> * Is Rack based;
-> * Is a complete MVC solution based on Rails engines;
-> * Allows you to have multiple models signed in at the same time;
-> * Is based on a modularity concept: use only what you really need.
+> - Is Rack based;
+> - Is a complete MVC solution based on Rails engines;
+> - Allows you to have multiple models signed in at the same time;
+> - Is based on a modularity concept: use only what you really need.
 
 To our best of knowledge, `devise` provides a full, industry-standard, easy-to-ingrate way of all kinds of authentication. Damn, it's awesome!
 
@@ -131,15 +131,65 @@ docker-compose exec web rspec
 
 The following environment varialbes are required in order to run or test (check `docker-cmpose.yml`):
 
-* `DEVISE_JWT_SECRET_KEY`: You generate this by running `rails secret`
-* `DATABASE_URL`: Postgres database url for database connection
+- `DEVISE_JWT_SECRET_KEY`: You generate this by running `rails secret`
+- `DATABASE_URL`: Postgres database url for database connection
+- `REDIS_URL`: Redis database url for database connection
 
 
+
+## Devise
+
+### Generate custom model and controller
+
+In the following command you will replace `MODEL` with the class name used for the application’s users (it’s frequently `User` but could also be `Admin`). This will create a model (if one does not exist) and configure it with the default Devise modules. The generator also configures your `config/routes.rb` file to point to the Devise controller.
+
+```
+$ rails generate devise MODEL
+```
+
+Then run `rails db:migrate`
+
+And you can create your custom controllers using the generator which requires a scope:
+
+```
+$ rails generate devise:controllers [scope]
+```
+
+Tell the router to use this controller, you can add devise:controllers you want.
+
+```ruby
+devise_for :users, controllers: { sessions: 'users/sessions' }
+```
+
+You can completely override a controller action:
+
+```ruby
+class Users::SessionsController < Devise::SessionsController
+  def create
+    # custom sign-in code
+  end
+end
+```
+
+Or you can simply add new behaviour to it:
+
+```ruby
+class Users::SessionsController < Devise::SessionsController
+  def create
+    super do |resource|
+      BackgroundWorker.trigger(resource)
+    end
+  end
+end
+```
+
+You should restart your application after changing Devise's configuration options (this includes stopping spring). Otherwise, you will run into strange errors, for example, users being unable to login and route helpers being undefined.
 
 ## Blacklist
 
 #### Default blacklist with redis
-In `jwt_blacklist` record, we implement blacklist with redis. When token has expired, it will auto delete this token in redis.
+
+Redis is a good option for `blacklist` that will allow fast in memory access to the list. In `jwt_blacklist` record, we implement blacklist with redis. By setting `redis` expiration time to be the same as `jwt token` expiration time, this token can be automatically deleted from redis when the token expires.
 
 ```ruby
   def self.jwt_revoked?(payload, user)
@@ -153,7 +203,9 @@ In `jwt_blacklist` record, we implement blacklist with redis. When token has exp
     $redis.setex("user_blacklist:#{user.id}:#{payload['jti']}", expiration, payload['jti'])
   end
 ```
+
 #### Custom blacklist
+
 You can also implement blacklist by your own strategies. You just need to rewrite two methods: `jwt_revoked?` and `revoke_jwt` in `jwt_blacklist.rb`, both of them accepting as parameters the JWT payload and the `user` record, in this order.
 
 ```ruby
@@ -165,20 +217,26 @@ You can also implement blacklist by your own strategies. You just need to rewrit
     # Does something to revoke the JWT token for given user
   end
 ```
+
 #### Dispatch requests
+
 You can config `dispatch_requests` in `devise.rb`. When config it, you need to tell which requests will dispatch tokens for the user that has been previously authenticated (usually through some other warden strategy, such as one requiring username and email parameters). To configure it, you can add the the request path to dispath_requests. 
 
 ```ruby
   jwt.dispatch_requests = [['POST', %r{^users/sign_in$}]]
 
 ```
+
 #### Revocation requests
+
 You can config `dispatch_requests` in `devise.rb`. When config it, you need to tell which requests will revoke incoming JWT tokens, and you can add the the request path to revocation_requests
 
 ```ruby
   jwt.revocation_requests = [['DELETE', %r{^users/sign_out$}]]
 ```
+
 #### Jwt payload
+
 `user` records may also implement a jwt_payload method, which gives it a chance to add something to the JWT payload. 
 
 ```ruby
@@ -188,6 +246,7 @@ You can config `dispatch_requests` in `devise.rb`. When config it, you need to t
 ```
 
 #### Jwt dispatch
+
 You can add a hook method `on_jwt_dispatch` on the `user` record. It will execute when a token dispatched for that user instance, and it takes token and payload as parameters. And this method will call when 
 you access the routes which in dispatch_requests
 
@@ -196,4 +255,3 @@ you access the routes which in dispatch_requests
     # do_something(token, payload)
   end
 ```
-
