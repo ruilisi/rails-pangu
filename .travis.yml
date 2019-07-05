@@ -1,0 +1,33 @@
+sudo: required
+dist: trusty
+language: ruby
+services:
+  - postgresql
+  - redis-server
+addons:
+  postgresql: "9.6"
+before_install:
+  - gem update --system --no-doc
+  - gem install bundler --no-doc
+  - gem update bundler --no-doc
+rvm:
+  - ruby-head
+gemfile:
+  - Gemfile
+env:
+  global:
+    - DEVISE_JWT_SECRET_KEY=RANDOM_SECRET
+    - REDIS_URL="redis://localhost:6379"
+    - RAILS_ENV=test
+  matrix:
+    - TEST_TASK=rspec
+matrix:
+  allow_failures:
+    - rvm: ruby-head
+  include:
+    - { rvm: "2.6.1",   gemfile: "Gemfile" }
+  exclude:
+    - { rvm: ruby-head, gemfile: "Gemfile" }
+script:
+  - bundle exec rails db:create db:migrate db:seed
+  - bundle exec $TEST_TASK
