@@ -17,7 +17,7 @@ Rails-pangu 是一个基于Design、JWT、Postgres、Redis和Rails技术开发�
 
 	与此同时，我们看到其他一些开发者也在研究这个问题，但是他们都面临着Rails <= 5.0与Rails 6版本兼容性的问题 。两者之间有很大区别，因此，我们通过融合 `rails 6`, `devise`, `jwt` 这三项技术，解决了这个难题。
 
-<img src="https://res.rallets.org/pangu.jpg" width="200" align="middle" />
+<img src="https://res.paiyou.co/pangu.jpg" width="300" align="middle" />
 
 > 盘古是中国神话中万物的创造者。在神话故事，盘古用他巨大的斧头挥动创造了天地，站在天地之间使天地分开。Rails-pangu正是扮演了盘古这个开拓者的角色，助力开发者项目实践。
 
@@ -29,7 +29,7 @@ Rails-pangu 是一个基于Design、JWT、Postgres、Redis和Rails技术开发�
 
 例如，我们团队开发的  `Computer Game Acceleration` ,  **LINGTI** (https://lingti.io/)
 
-[![img](https://camo.githubusercontent.com/89ac37786992138ea8e62481f7f8a5ea8c9097b2/68747470733a2f2f6173736574732e6c696e6774692e706169796f752e636f2f65643536386662652e706e67)](https://camo.githubusercontent.com/89ac37786992138ea8e62481f7f8a5ea8c9097b2/68747470733a2f2f6173736574732e6c696e6774692e706169796f752e636f2f65643536386662652e706e67)
+<img src="https://assets.lingti.paiyou.co/ed568fbe.png" width="200" align="middle" />
 
 ## 产品特性
 

@@ -19,7 +19,7 @@ At the same time, we saw couple of other repos doing the same work, but one big 
 
 As a result, we decided to create this repo which demonstrates how `rails 6`, `devise`, `jwt` fit together like a charm.
 
-<img src="https://res.rallets.org/pangu.jpg" width="200" align="middle" />
+<img src="https://res.paiyou.co/pangu.jpg" width="300" align="middle" />
 
 > Pangu is the creator of all in Chinese mythology. In the stories, Pangu created the Earth and the Sky with a swing of his giant axe and kept them seperated by standing between them. The project acts as a creator for your projects, which helps you stay following the basic practices.
 
