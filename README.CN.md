@@ -1,5 +1,7 @@
 # rails-pangu
 
+[英文文档 English document](/README.md)
+
 Rails-pangu 是一个基于Design、JWT、Postgres、Redis和Rails技术开发的后台Rails API的简单模板。
 	
 [Devise](https://github.com/plataformatec/devise)作为一个标准第三方权限认证组件，提供了标准的Rails身份验证解决方案。而 [JWT](https://jwt.io/)（JOSN Web Tokens）是一个基于（RFC 7519）开放标准，直接用JSON创建访问令牌的高效分布式解决方案,而不是通过用数据库进行身份验证。
@@ -15,6 +17,7 @@ Rails-pangu 是一个基于Design、JWT、Postgres、Redis和Rails技术开发�
 
 	与此同时，我们看到其他一些开发者也在研究这个问题，但是他们都面临着Rails <= 5.0与Rails 6版本兼容性的问题 。两者之间有很大区别，因此，我们通过融合 `rails 6`, `devise`, `jwt` 这三项技术，解决了这个难题。
 
+<img src="https://res.rallets.org/pangu.jpg" width="200" align="middle" />
 
 > 盘古是中国神话中万物的创造者。在神话故事，盘古用他巨大的斧头挥动创造了天地，站在天地之间使天地分开。Rails-pangu正是扮演了盘古这个开拓者的角色，助力开发者项目实践。
 
