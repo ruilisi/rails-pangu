@@ -141,53 +141,9 @@ The following environment varialbes are required in order to run or test (check 
 
 
 
-## Devise
+## Create a role
 
-### Generate custom model and controller
-
-In the following command you will replace `MODEL` with the class name used for the application’s users (it’s frequently `User` but could also be `Admin`). This will create a model (if one does not exist) and configure it with the default Devise modules. The generator also configures your `config/routes.rb` file to point to the Devise controller.
-
-```
-$ rails generate devise MODEL
-```
-
-Then run `rails db:migrate`
-
-And you can create your custom controllers using the generator which requires a scope:
-
-```
-$ rails generate devise:controllers [scope]
-```
-
-Tell the router to use this controller, you can add devise:controllers you want.
-
-```ruby
-devise_for :users, controllers: { sessions: 'users/sessions' }
-```
-
-You can completely override a controller action:
-
-```ruby
-class Users::SessionsController < Devise::SessionsController
-  def create
-    # custom sign-in code
-  end
-end
-```
-
-Or you can simply add new behaviour to it:
-
-```ruby
-class Users::SessionsController < Devise::SessionsController
-  def create
-    super do |resource|
-      BackgroundWorker.trigger(resource)
-    end
-  end
-end
-```
-
-You should restart your application after changing Devise's configuration options (this includes stopping spring). Otherwise, you will run into strange errors, for example, users being unable to login and route helpers being undefined.
+In addition to the default role we provide, we also allow developers to create their custom role. There is a document about how to [create a new role](https://github.com/paiyou-network/rails-pangu/wiki/Create-a-role)
 
 ## Blacklist
 
