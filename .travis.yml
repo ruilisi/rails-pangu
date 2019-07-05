@@ -1,28 +1,40 @@
 sudo: required
 dist: trusty
 language: ruby
+services:
+  - postgresql
+  - redis-server
 before_install:
   - gem update --system --no-doc
   - gem install bundler --no-doc
   - gem update bundler --no-doc
 rvm:
   - ruby-head
-  - "2.6.1"
 gemfile:
   - Gemfile
 env:
-  - TEST_TASK=rspec
+  global:
+    - DATABASE_URL="postgres://postgres@localhost:5432/rails-pangu-test?pool=25&encoding=unicode&schema_search_path=public"
+    - DEVISE_JWT_SECRET_KEY=RANDOM_SECRET
+    - REDIS_URL="redis://localhost:6379"
+    - RAILS_ENV=test
+  matrix:
+    - TEST_TASK=rspec
 matrix:
   allow_failures:
     - rvm: ruby-head
   include:
-    - { rvm: "2.6",   gemfile: "Gemfile" }
+    - { rvm: "2.6.1",   gemfile: "Gemfile" }
   exclude:
     - { rvm: ruby-head, gemfile: "Gemfile" }
 addons:
+  postgresql: "10"
   apt:
     packages:
-      - haveged
+    - postgresql-10
+    - postgresql-client-10
 script:
+  - ss -lntp | grep post
+  - echo $DATABASE_URL
   - bundle exec rails db:create db:migrate db:seed
   - bundle exec $TEST_TASK
