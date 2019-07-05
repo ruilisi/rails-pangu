@@ -1,0 +1,28 @@
+sudo: required
+dist: trusty
+language: ruby
+before_install:
+  - gem update --system --no-doc
+  - gem install bundler --no-doc
+  - gem update bundler --no-doc
+rvm:
+  - ruby-head
+  - "2.6.1"
+gemfile:
+  - Gemfile
+env:
+  - TEST_TASK=rspec
+matrix:
+  allow_failures:
+    - rvm: ruby-head
+  include:
+    - { rvm: "2.6",   gemfile: "Gemfile" }
+  exclude:
+    - { rvm: ruby-head, gemfile: "Gemfile" }
+addons:
+  apt:
+    packages:
+      - haveged
+script:
+  - bundle exec rails db:create db:migrate db:seed
+  - bundle exec $TEST_TASK
