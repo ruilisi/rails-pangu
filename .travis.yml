@@ -14,7 +14,6 @@ gemfile:
   - Gemfile
 env:
   global:
-    - DATABASE_URL="postgres://postgres@localhost:5432/rails-pangu-test?pool=25&encoding=unicode&schema_search_path=public"
     - DEVISE_JWT_SECRET_KEY=RANDOM_SECRET
     - REDIS_URL="redis://localhost:6379"
     - RAILS_ENV=test
@@ -34,7 +33,5 @@ addons:
     - postgresql-10
     - postgresql-client-10
 script:
-  - ss -lntp | grep post
-  - echo $DATABASE_URL
   - bundle exec rails db:create db:migrate db:seed
   - bundle exec $TEST_TASK

@@ -1,3 +1,3 @@
 #!/bin/bash
-docker build -t rails-devise-jwt -f Dockerfile .
-docker run  -v $(PWD):/usr/src/app/ -it --rm rails-devise-jwt bundle install
+docker run  -v $(pwd):/usr/src/app/ -it --rm rails-pangu bundle install
+docker build -t rails-pangu -f Dockerfile .
