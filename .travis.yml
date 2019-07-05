@@ -4,6 +4,8 @@ language: ruby
 services:
   - postgresql
   - redis-server
+addons:
+  postgresql: "9.6"
 before_install:
   - gem update --system --no-doc
   - gem install bundler --no-doc
@@ -26,12 +28,6 @@ matrix:
     - { rvm: "2.6.1",   gemfile: "Gemfile" }
   exclude:
     - { rvm: ruby-head, gemfile: "Gemfile" }
-addons:
-  postgresql: "10"
-  apt:
-    packages:
-    - postgresql-10
-    - postgresql-client-10
 script:
   - bundle exec rails db:create db:migrate db:seed
   - bundle exec $TEST_TASK
