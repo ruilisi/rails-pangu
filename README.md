@@ -1,4 +1,6 @@
-# rails-devise-jwt
+# rails-pangu
+
+Rails-pangu is a simple boilerplate built on top of Devise, JWT, Postgres, Redis, Docker and Rails 6, which is a solid starting point for Rails API only projects.
 
 [Devise](https://github.com/plataformatec/devise) is a flexible and almost a standard authentication solution for Rails, while [JWT](https://jwt.io/)(JSON Web Tokens) is a JSON-based open standard (RFC 7519) for creating access tokens, which is a distributed and faster solution than authentication through databases. 
 
@@ -15,6 +17,8 @@ There is always a need to bring these two beautiful solutions together into rail
 At the same time, we saw couple of other repos doing the same work, but one big issue for these repos is that they are started with **Rails <= 5.0**, which is far different from **Rails 6**, and that contributes to the final reason why we have to "reinvent the wheel again".
 
 As a result, we decided to create this repo which demonstrates how `rails 6`, `devise`, `jwt` fit together like a charm.
+
+> Pangu is the creator of all in Chinese mythology. In the stories, Pangu created the Earth and the Sky with a swing of his giant axe and kept them seperated by standing between them. The project acts as a creator for your projects, which helps you stay following the basic practices.
 
 ## Production Ready
 
