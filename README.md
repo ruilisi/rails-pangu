@@ -144,6 +144,26 @@ The following environment varialbes are required in order to run or test (check 
 
 
 
+
+
+## Add script to cron job
+
+You can add cron job in `bin/gen_cronjobs.rb`, an example is as follows.
+
+```ruby
+puts [
+  "59 * * * * ruby script",
+  "*/10 * * * * ruby script"
+].map { |job|
+  *schedule, cmd = job.split(' ')
+  "#{schedule.join(' ')} cd /usr/src/app; rails runner \"Util.run_once('#{cmd}')\""
+}.join("\n")
+```
+
+If you want to run bash script, you can replace `cd /usr/src/app; rails runner \"Util.run_once('#{cmd}')\"` to your custom cmd.
+
+
+
 ## Create a role
 
 In addition to the default role we provide, we also allow developers to create their custom role. There is a document about how to [create a new role](https://github.com/paiyou-network/rails-pangu/wiki/Create-a-role)

@@ -134,6 +134,24 @@ docker-compose exec web rspec
 
 
 
+## 添加脚本到 cron job
+
+你可以添加cron job 在 `bin/gen_cronjobs.rb`, 样例如下.
+
+```ruby
+puts [
+  "59 * * * * ruby script",
+  "*/10 * * * * ruby script"
+].map { |job|
+  *schedule, cmd = job.split(' ')
+  "#{schedule.join(' ')} cd /usr/src/app; rails runner \"Util.run_once('#{cmd}')\""
+}.join("\n")
+```
+
+如果你想运行 bash 脚本,你可以把 `cd /usr/src/app; rails runner \"Util.run_once('#{cmd}')\"` 替换为你自定义的命令.
+
+
+
 ## 角色创建
 
 除了我们提供的默认角色之外，我们还允许developer创建他们的[自定义角色](https://github.com/paiyou-network/rails-pangu/wiki/create-a-role)。
