@@ -118,12 +118,12 @@ Puma是一个简单、快速、线程化、高度并发的HTTP1.1服务器，用
 #### Run
 
 创建镜像后，运行：`docker-compose up -d`
-然后，用`docker compose exec web rails db:create`初始化数据库。
+然后，用`docker compose exec server rails db:create`初始化数据库。
 
 #### Test
 
 ```ruby
-docker-compose exec web rspec
+docker-compose exec server rspec
 ```
 
 运行或测试需要以下环境变量（选中`docker-cmpose.yml`）:
