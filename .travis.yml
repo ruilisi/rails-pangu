@@ -31,3 +31,4 @@ matrix:
 script:
   - bundle exec rails db:create db:migrate db:seed
   - bundle exec $TEST_TASK
+  - rubocop --require rubocop-performance  --format progress

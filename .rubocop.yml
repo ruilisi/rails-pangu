@@ -1,0 +1,40 @@
+AllCops:
+  Include:
+  - 'Rakefile'
+  - '*.gemspec'
+  - 'lib/**/*.rb'
+  - 'app/**/*.rb'
+  Exclude:
+  - 'bin/**/*'
+  - 'db/schema.rb'
+  - 'spec/**/*.rb'
+  - 'vendor/**/*'
+  DisplayCopNames: true
+  StyleGuideCopsOnly: false
+  TargetRubyVersion: 2.3
+Documentation:
+  Enabled: false
+Metrics/LineLength:
+  Max: 150
+Metrics/AbcSize:
+  Max: 63
+Metrics/ClassLength:
+  Max: 150
+Metrics/MethodLength:
+  Max: 120
+Metrics/PerceivedComplexity:
+  Max: 12
+Metrics/CyclomaticComplexity:
+  Max: 12
+Metrics/BlockLength:
+  Max: 36
+Style/NumericLiterals:
+  MinDigits: 7
+Style/AsciiComments:
+  Enabled: No
+Style/SignalException:
+  Enabled: No
+Style/GlobalVars:
+  AllowedVariables: [$redis, $alipay_client] #不想报错的全局_变量加进来
+Style/ClassAndModuleChildren:
+  Enabled: No
