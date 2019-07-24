@@ -1,13 +1,7 @@
 AllCops:
-  Include:
-  - 'Rakefile'
-  - '*.gemspec'
-  - 'lib/**/*.rb'
-  - 'app/**/*.rb'
   Exclude:
   - 'bin/**/*'
   - 'db/schema.rb'
-  - 'spec/**/*.rb'
   - 'vendor/**/*'
   DisplayCopNames: true
   StyleGuideCopsOnly: false
@@ -35,6 +29,6 @@ Style/AsciiComments:
 Style/SignalException:
   Enabled: No
 Style/GlobalVars:
-  AllowedVariables: [$redis, $alipay_client] #不想报错的全局_变量加进来
+  AllowedVariables: [$redis]
 Style/ClassAndModuleChildren:
   Enabled: No
