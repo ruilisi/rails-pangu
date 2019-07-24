@@ -124,14 +124,14 @@ Run `bin/build.sh` to build the docker image `rails-devise-jwt`.
 
 After built the image, run: `docker-compose up -d`
 
-Then, initialize the database with `docker-compose exec web rails db:create`
+Then, initialize the database with `docker-compose exec server rails db:create`
 
 
 
 #### Test
 
 ```bash
-docker-compose exec web rspec
+docker-compose exec server rspec
 ```
 
 

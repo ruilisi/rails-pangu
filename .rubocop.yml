@@ -1,0 +1,34 @@
+AllCops:
+  Exclude:
+  - 'bin/**/*'
+  - 'db/schema.rb'
+  - 'vendor/**/*'
+  DisplayCopNames: true
+  StyleGuideCopsOnly: false
+  TargetRubyVersion: 2.3
+Documentation:
+  Enabled: false
+Metrics/LineLength:
+  Max: 150
+Metrics/AbcSize:
+  Max: 63
+Metrics/ClassLength:
+  Max: 150
+Metrics/MethodLength:
+  Max: 120
+Metrics/PerceivedComplexity:
+  Max: 12
+Metrics/CyclomaticComplexity:
+  Max: 12
+Metrics/BlockLength:
+  Max: 36
+Style/NumericLiterals:
+  MinDigits: 7
+Style/AsciiComments:
+  Enabled: No
+Style/SignalException:
+  Enabled: No
+Style/GlobalVars:
+  AllowedVariables: [$redis]
+Style/ClassAndModuleChildren:
+  Enabled: No

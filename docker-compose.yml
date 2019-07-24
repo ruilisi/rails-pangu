@@ -5,7 +5,7 @@ services:
     image: postgres:12-alpine
   redis:
     image: redis:alpine
-  web:
+  server:
     image: rails-devise-jwt
     links:
       - db
