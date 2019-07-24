@@ -65,12 +65,14 @@ JSON Web Tokens，是目前最流行的跨域认证解决方案。
 我们在 [app/models/jwt_blacklist.rb](https://github.com/paiyou-network/rails-devise-jwt/blob/master/app/models/jwt_blacklist.rb) 里面通过使用redis来实现了 devise-jwt的 `blacklist strategy`。
 
 #### 🚀 Postgres
-
 使用postgres作为默认数据库。当一个Web服务器的流量变得很大时，sqlite3显然无法满足我们的需求。
+
 #### 🚀 Rspec
 
-#### 🚀 Factory Bot  [Doc](https://github.com/thoughtbot/factory_bothttps://github.com/thoughtbot/factory_bot)
+#### 🚀 RuboCop
+Ruby代码静态分析和格式工具，基于社区Ruby样式准侧 https://docs.rubocop.org
 
+#### 🚀 Factory Bot  [Doc](https://github.com/thoughtbot/factory_bothttps://github.com/thoughtbot/factory_bot)
 将Ruby对象设置为测试用例。
 
 #### 🚀 Docker

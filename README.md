@@ -70,6 +70,9 @@ We use postgres as default database store cause sqlite3 will be replaced sooner 
 
 #### 🚀 Rspec
 
+#### 🚀 RuboCop
+A Ruby static code analyzer and formatter, based on the community Ruby style guide. https://docs.rubocop.org
+
 #### 🚀 Factory Bot  [Doc](https://github.com/thoughtbot/factory_bothttps://github.com/thoughtbot/factory_bot)
 
 A library for setting up Ruby objects as test data.
