@@ -241,3 +241,23 @@ you access the routes which in dispatch_requests
     # do_something(token, payload)
   end
 ```
+
+## MailGun
+
+#### Configure mailgun environment
+
+Before using mailgun, you should register a mailgun account on [Mailgun Official website](https://www.mailgun.com/) . After this is done, you only need to add these environment config in docker-compose.yml.
+
+```yml
+MAILGUN_EMAIL_FROM: [send_template_from_name]
+MAILGUN_DOMAIN: [your_domain_on_mailgun]
+MAILGUN_PRIVATE_API_KEY: [your-api-key]
+`````
+
+#### Send_email
+
+You only need to call `UtilMailgun.send_email(from_name, to_name, subject, text)` to send mail.
+
+#### Send_template
+
+If you want to send a email template, you should first set up your custom email template on mailgun. Then you can call `UtilMailgun.send_template(template_name, recipient_or_receipients, subject, variables = {})`   to send the mail template. `recipient_or_receipients` parameter allows an email or an array of emails.
