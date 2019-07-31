@@ -113,6 +113,10 @@ Puma is a simple, fast, threaded, and highly concurrent HTTP 1.1 server for Ruby
 
 Is there any web project isn't using `redis` as a faster and sometimes easier way of storing data? Well, if there isn't,  just replace it!
 
+#### 🚀 Mailgun
+
+Mailgun is an online service that provides a set of APIs for sending, receiving, tracking and storing email.
+
 
 
 ## Build, Run, Test
