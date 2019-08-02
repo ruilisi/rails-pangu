@@ -24,7 +24,7 @@ Rails-pangu 是一个基于Design、JWT、Postgres、Redis和Rails技术开发�
 
 ## 开发准备
 
-我们在`rails-devise-jwt`中使用了许多前沿的gems，但这并不意味着构建在这个仓库上的项目是不稳定的，因为我们的团队已经运行了很多基于它的项目。
+我们在`rails-pangu`中使用了许多前沿的gems，但这并不意味着构建在这个仓库上的项目是不稳定的，因为我们的团队已经运行了很多基于它的项目。
 
 例如，我们团队开发的  `Computer Game Acceleration` ,  **LINGTI** (https://lingti.io/)
 
@@ -61,7 +61,7 @@ JSON Web Tokens，是目前最流行的跨域认证解决方案。
 
 实现了将`devise`和`jwt`技术融合,虽然也有其他开发者通过其它方式也实现了两者的融合运用，但都效果欠佳。
 
-我们在 [app/models/jwt_blacklist.rb](https://github.com/paiyou-network/rails-devise-jwt/blob/master/app/models/jwt_blacklist.rb) 里面通过使用redis来实现了 devise-jwt的 `blacklist strategy`。
+我们在 [app/models/jwt_blacklist.rb](https://github.com/paiyou-network/rails-pangu/blob/master/app/models/jwt_blacklist.rb) 里面通过使用redis来实现了 devise-jwt的 `blacklist strategy`。
 
 #### 🚀 Postgres
 使用postgres作为默认数据库。当一个Web服务器的流量变得很大时，sqlite3显然无法满足我们的需求。

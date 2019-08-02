@@ -26,7 +26,7 @@ As a result, we decided to create this repo which demonstrates how `rails 6`, `d
 
 ## Production Ready
 
-We are using lots of cutting edge gems in `rails-devise-jwt`, but it does not mean projects built upon this repo will be fragile, cause our team has run lots of projects based upon it.
+We are using lots of cutting edge gems in `rails-pangu`, but it does not mean projects built upon this repo will be fragile, cause our team has run lots of projects based upon it.
 
 For example, the backend of a  `Computer Game Acceleration` product by our team,  **LINGTI**  (https://lingti.io/)
 
@@ -63,7 +63,7 @@ JSON Web Tokens
 
 While there are lots of solutions which hook `devise` and `jwt` together, this repo is better implemented from our point of view.
 
-We implmented a devise-jwt blacklist policy leveraging the power of `redis` in [app/models/jwt_blacklist.rb](https://github.com/paiyou-network/rails-devise-jwt/blob/master/app/models/jwt_blacklist.rb).
+We implmented a devise-jwt blacklist policy leveraging the power of `redis` in [app/models/jwt_blacklist.rb](https://github.com/paiyou-network/rails-pangu/blob/master/app/models/jwt_blacklist.rb).
 
 #### 🚀 Postgres
 We use postgres as default database store cause sqlite3 will be replaced sooner or later when the traffic of one web server becomes lager enough
@@ -122,7 +122,7 @@ Mailgun is an online service that provides a set of APIs for sending, receiving,
 
 #### Build
 
-Run `bin/build.sh` to build the docker image `rails-devise-jwt`.
+Run `bin/build.sh` to build the docker image `rails-pangu`.
 
 
 
