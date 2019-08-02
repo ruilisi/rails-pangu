@@ -19,9 +19,8 @@ Rails-pangu 是一个基于Design、JWT、Postgres、Redis和Rails技术开发�
 
 <img src="https://res.paiyou.co/pangu.jpg" width="300" align="middle" />
 
-> 盘古是中国神话中万物的创造者。在神话故事，盘古用他巨大的斧头挥动创造了天地，站在天地之间使天地分开。Rails-pangu正是扮演了盘古这个开拓者的角色，助力开发者项目实践。
-
-
+> 盘古是中国神话中万物的创造者。在神话故事，盘古用他巨大的斧头挥动创造了天地，站在天地之间使天地分开。
+> 正如盘古一样, `rails-pangu`志在成为你起Rails新项目时的基础性代码库，从而减轻你在做新项目时繁琐的调研和实验工作。
 
 ## 开发准备
 
@@ -37,11 +36,11 @@ Rails-pangu 是一个基于Design、JWT、Postgres、Redis和Rails技术开发�
 
 与`rails 5`不同，`rails 6`是未来发展的必然趋势。
 
-#### 🚀 Rails API 
+#### 🚀 Rails API
 
 使用流行前端的js库如`react`，`vuejs`，替换原来的`rails view`
 
-#### 🚀 Devise [Repo](https://github.com/plataformatec/devise)
+#### 🚀 [Devise](https://github.com/plataformatec/devise)
 
 来自Devise官方文档：
 
@@ -58,7 +57,7 @@ Rails-pangu 是一个基于Design、JWT、Postgres、Redis和Rails技术开发�
 
 JSON Web Tokens，是目前最流行的跨域认证解决方案。
 
-#### 🚀 devise-jwt [Repo](https://github.com/waiting-for-dev/devise-jwt)
+#### 🚀 [devise-jwt](https://github.com/waiting-for-dev/devise-jwt)
 
 实现了将`devise`和`jwt`技术融合,虽然也有其他开发者通过其它方式也实现了两者的融合运用，但都效果欠佳。
 
@@ -68,11 +67,12 @@ JSON Web Tokens，是目前最流行的跨域认证解决方案。
 使用postgres作为默认数据库。当一个Web服务器的流量变得很大时，sqlite3显然无法满足我们的需求。
 
 #### 🚀 Rspec
+Ruby行为驱动测试框架，让TDD高效有趣。
 
-#### 🚀 RuboCop
-Ruby代码静态分析和格式工具，基于社区Ruby样式准侧 https://docs.rubocop.org
+#### 🚀 [RuboCop](https://docs.rubocop.org)
+Ruby代码静态分析和格式工具，基于社区Ruby样式准侧 
 
-#### 🚀 Factory Bot  [Doc](https://github.com/thoughtbot/factory_bothttps://github.com/thoughtbot/factory_bot)
+#### 🚀 [Factory Bot](https://github.com/thoughtbot/factory_bothttps://github.com/thoughtbot/factory_bot)
 将Ruby对象设置为测试用例。
 
 #### 🚀 Docker
@@ -101,7 +101,7 @@ RUN bundle install --gemfile Gemfile -j16 --binstubs=$BUNDLE_PATH/bin
 
 通过一个`docker compose.yml`文件，可以实现postgres和web服务器的快速构建。
 
-#### 🚀 Puma  [Repo](https://github.com/puma/puma)
+#### 🚀 [Puma](https://github.com/puma/puma)
 
 Puma是一个简单、快速、线程化、高度并发的HTTP1.1服务器，用于Ruby/Rack应用的开发。
 
@@ -111,7 +111,7 @@ Puma是一个简单、快速、线程化、高度并发的HTTP1.1服务器，用
 
 
 
-##开始运行
+## 开始运行
 
 #### Build
 

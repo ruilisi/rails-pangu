@@ -13,7 +13,7 @@ There is always a need to bring these two beautiful solutions together into rail
 
 - Lots of legacy code that are not usable for current version of frameworks, gems
 
-  
+
 
 At the same time, we saw couple of other repos doing the same work, but one big issue for these repos is that they are started with **Rails <= 5.0**, which is far different from **Rails 6**, and that contributes to the final reason why we have to "reinvent the wheel again".
 
@@ -21,7 +21,8 @@ As a result, we decided to create this repo which demonstrates how `rails 6`, `d
 
 <img src="https://res.paiyou.co/pangu.jpg" width="300" align="middle" />
 
-> Pangu is the creator of all in Chinese mythology. In the stories, Pangu created the Earth and the Sky with a swing of his giant axe and kept them seperated by standing between them. The project acts as a creator for your projects, which helps you stay following the basic practices.
+> Pangu is the creator of all in Chinese mythology. In the stories, Pangu created the Earth and the Sky with a swing of his giant axe and kept them seperated by standing between them.
+> Just like pangu, `rails-pangu` aims at being a foundational code base which eliminates thoese tedious research and experimental work for your new Rails projects.
 
 ## Production Ready
 
@@ -41,7 +42,7 @@ As explained above, `rails 6` is the future and is far different from `rails 5`.
 
 It is common to use frontend js libraries like `react`, `vuejs` to replace `rails view` in modern web development
 
-#### 🚀 Devise [Repo](https://github.com/plataformatec/devise)
+#### 🚀 [Devise](https://github.com/plataformatec/devise)
 
 Quoted from it's homepage: 
 
@@ -58,27 +59,25 @@ To our best of knowledge, `devise` provides a full, industry-standard, easy-to-i
 
 JSON Web Tokens
 
-#### 🚀 devise-jwt [Repo](https://github.com/waiting-for-dev/devise-jwt)
+#### 🚀 [devise-jwt](https://github.com/waiting-for-dev/devise-jwt)
 
 While there are lots of solutions which hook `devise` and `jwt` together, this repo is better implemented from our point of view.
 
 We implmented a devise-jwt blacklist policy leveraging the power of `redis` in [app/models/jwt_blacklist.rb](https://github.com/paiyou-network/rails-devise-jwt/blob/master/app/models/jwt_blacklist.rb).
 
 #### 🚀 Postgres
-
 We use postgres as default database store cause sqlite3 will be replaced sooner or later when the traffic of one web server becomes lager enough
 
 #### 🚀 Rspec
+Behaviour Driven Development for Ruby. Making TDD Productive and Fun.
 
 #### 🚀 RuboCop
 A Ruby static code analyzer and formatter, based on the community Ruby style guide. https://docs.rubocop.org
 
-#### 🚀 Factory Bot  [Doc](https://github.com/thoughtbot/factory_bothttps://github.com/thoughtbot/factory_bot)
-
+#### 🚀 [Factory Bot](https://github.com/thoughtbot/factory_bothttps://github.com/thoughtbot/factory_bot)
 A library for setting up Ruby objects as test data.
 
 #### 🚀 Docker
-
 Standard containerize solution which is almost used in every team worldwide. As a result, a `Dockerfile` and couple scripts are provided to help generate a docker image of this project.
 
 While there are a vast number of `Dockerfile`s for rails related projects, we implemented an easy method that can boost the docker building process.  When a project grows, hundreds or even thousands of different versions of different gems will be tried, that most of the docker image building time is wasted for bundling a large amount of stable gems, such as `rails`, `pg`...
@@ -105,7 +104,7 @@ Through the above lines, common and stably used gems will be bundled first, then
 
 A `docker-compose.yml` is attached to help stick postgres and web server together quickly.
 
-#### 🚀  Puma  [Repo](https://github.com/puma/puma)
+#### 🚀 [Puma](https://github.com/puma/puma)
 
 Puma is a simple, fast, threaded, and highly concurrent HTTP 1.1 server for Ruby/Rack applications in development and production.
 
