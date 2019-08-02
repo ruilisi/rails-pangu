@@ -1,11 +1,15 @@
-# rails-pangu
+# Rails-pangu
 [中文文档 Chinese document](/README.CN.md)
 
-Rails-pangu is a simple boilerplate built on top of Devise, JWT, Postgres, Redis, Docker and Rails 6, which is a solid starting point for Rails API only projects.
+`Rails-pangu` is a **Rails 6(API Only)** boilerplate which follows cutting-edge solutions already adopted by the industry, notablly, [Devise](https://github.com/plataformatec/devise), [JWT(JSON Web Tokens)](https://jwt.io/), Postgres, Redis, Docker, Rspec, RuboCop, [CircleCI](https://circleci.com/). It is a solid production-ready starting point for your new backend projects.
+
+**Mixing all these solutions and letting them work perfectly is not easy. Here is an example**: 
 
 [Devise](https://github.com/plataformatec/devise) is a flexible and almost a standard authentication solution for Rails, while [JWT](https://jwt.io/)(JSON Web Tokens) is a JSON-based open standard (RFC 7519) for creating access tokens, which is a distributed and faster solution than authentication through databases. 
 
-There is always a need to bring these two beautiful solutions together into rails for better user authentication, which becomes the main reason I created this repo.  Thanks to a lot of the close solutions that gave lots of hints to this repo, for example, this article: [Rails 5 API + JWT setup in minutes (using Devise)](https://medium.com/@mazik.wyry/rails-5-api-jwt-setup-in-minutes-using-devise-71670fd4ed03). However, these solutions have common problems:
+There is always a strong need to bring these two beautiful solutions together into rails for better user authentication, however, there's no single satisfying article or project which demonstrates how to incorporate both with Rails 6(API Only), which becomes the main reason for the birth of `Rails-pangu`. 
+
+Thanks to lots of the close solutions that gave hints to this `Rails-pangu`, for example, this article: [Rails 5 API + JWT setup in minutes (using Devise)](https://medium.com/@mazik.wyry/rails-5-api-jwt-setup-in-minutes-using-devise-71670fd4ed03). However, these solutions have common problems:
 
 - Blurry explanation
 
@@ -13,20 +17,16 @@ There is always a need to bring these two beautiful solutions together into rail
 
 - Lots of legacy code that are not usable for current version of frameworks, gems
 
-
-
-At the same time, we saw couple of other repos doing the same work, but one big issue for these repos is that they are started with **Rails <= 5.0**, which is far different from **Rails 6**, and that contributes to the final reason why we have to "reinvent the wheel again".
-
-As a result, we decided to create this repo which demonstrates how `rails 6`, `devise`, `jwt` fit together like a charm.
+At the same time, we saw couple of other repos doing the same work, but one big issue for these repos is that they are started with **Rails <= 5.0**, which is far different from **Rails 6**, and that contributes to the final decision to "reinvent the wheel again".
 
 <img src="https://res.paiyou.co/pangu.jpg" width="300" align="middle" />
 
 > Pangu is the creator of all in Chinese mythology. In the stories, Pangu created the Earth and the Sky with a swing of his giant axe and kept them seperated by standing between them.
-> Just like pangu, `rails-pangu` aims at being a foundational code base which eliminates thoese tedious research and experimental work for your new Rails projects.
+> Just like pangu, `Rails-pangu` aims at being a foundational code base which eliminates thoese tedious research and experimental work for your new Rails projects.
 
 ## Production Ready
 
-We are using lots of cutting edge gems in `rails-pangu`, but it does not mean projects built upon this repo will be fragile, cause our team has run lots of projects based upon it.
+We are using lots of cutting edge gems in `rails-devise-jwt`, but it does not mean projects built upon this repo will be fragile, cause our team has run lots of projects based upon it.
 
 For example, the backend of a  `Computer Game Acceleration` product by our team,  **LINGTI**  (https://lingti.io/)
 
@@ -63,7 +63,7 @@ JSON Web Tokens
 
 While there are lots of solutions which hook `devise` and `jwt` together, this repo is better implemented from our point of view.
 
-We implmented a devise-jwt blacklist policy leveraging the power of `redis` in [app/models/jwt_blacklist.rb](https://github.com/paiyou-network/rails-pangu/blob/master/app/models/jwt_blacklist.rb).
+We implmented a devise-jwt blacklist policy leveraging the power of `redis` in [app/models/jwt_blacklist.rb](https://github.com/paiyou-network/rails-devise-jwt/blob/master/app/models/jwt_blacklist.rb).
 
 #### 🚀 Postgres
 We use postgres as default database store cause sqlite3 will be replaced sooner or later when the traffic of one web server becomes lager enough
@@ -73,6 +73,10 @@ Behaviour Driven Development for Ruby. Making TDD Productive and Fun.
 
 #### 🚀 RuboCop
 A Ruby static code analyzer and formatter, based on the community Ruby style guide. https://docs.rubocop.org
+
+#### 🚀 [CircleCI](https://circleci.com/)
+CircleCI is the leading continuous integration and delivery platform for teams looking to shorten the distance between idea and delivery
+In this project, we leverage CircleCI to test `Rails-pangu`'s code base with both `rspec` and `RuboCop`
 
 #### 🚀 [Factory Bot](https://github.com/thoughtbot/factory_bothttps://github.com/thoughtbot/factory_bot)
 A library for setting up Ruby objects as test data.
@@ -122,7 +126,7 @@ Mailgun is an online service that provides a set of APIs for sending, receiving,
 
 #### Build
 
-Run `bin/build.sh` to build the docker image `rails-pangu`.
+Run `bin/build.sh` to build the docker image `rails-devise-jwt`.
 
 
 
