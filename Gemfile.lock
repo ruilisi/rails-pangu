@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/paiyou-network/mailgun-ruby
   revision: 423399cca1398c53a8042a22c70b683f2857ed6e
-  ref: 423399cca1398c53a8042a22c70b683f2857ed6e
+  branch: master
   specs:
     mailgun-ruby (1.1.11)
       rest-client (~> 2.0.2)
@@ -133,7 +133,7 @@ GEM
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.11.3)
-    msgpack (1.3.0)
+    msgpack (1.3.1)
     netrc (0.11.0)
     nio4r (2.4.0)
     nokogiri (1.10.3)
@@ -167,7 +167,7 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.0.4)
+    rails-html-sanitizer (1.1.0)
       loofah (~> 2.2, >= 2.2.2)
     railties (6.0.0.rc2)
       actionpack (= 6.0.0.rc2)
