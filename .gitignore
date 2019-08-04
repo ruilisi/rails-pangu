@@ -23,6 +23,7 @@
 !/storage/.keep
 
 .byebug_history
+*.sublime-workspace
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
