@@ -24,6 +24,9 @@ module RailsDeviseJWT
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
+        # Rack CORS does not expose any headers except content-type and cache-control by default.
+        # If your client needs to read another header (like Authorization), you need explicitly expose it:
+        # resource '*', headers: :any, methods: %i[get post options put delete], expose: ['Authorization']
         resource '*', headers: :any, methods: %i[get post options put delete]
       end
     end
