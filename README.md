@@ -154,6 +154,10 @@ The following environment varialbes are required in order to run or test (check 
 
 
 
+## CORS
+
+We allow CORS and expose the Authorization header by default. If you want to disable it, you can comment out the contents of the `config/cors.rb` file.
+
 
 
 ## Add script to cron job
