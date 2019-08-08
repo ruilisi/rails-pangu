@@ -1,13 +1,15 @@
+[![CircleCI](https://circleci.com/gh/paiyou-network/rails-pangu.svg?style=svg)](https://circleci.com/gh/paiyou-network/rails-pangu)
+
 # Rails-pangu
 [中文文档 Chinese document](/README.CN.md)
 
 `Rails-pangu` is a **Rails 6(API Only)** boilerplate which follows cutting-edge solutions already adopted by the industry, notablly, [Devise](https://github.com/plataformatec/devise), [JWT(JSON Web Tokens)](https://jwt.io/), Postgres, Redis, Docker, Rspec, RuboCop, [CircleCI](https://circleci.com/). It is a solid production-ready starting point for your new backend projects.
 
-**Mixing all these solutions and letting them work perfectly is not easy. Here is an example**: 
+**Mixing all these solutions and letting them work perfectly is not easy. Here is an example**:
 
-[Devise](https://github.com/plataformatec/devise) is a flexible and almost a standard authentication solution for Rails, while [JWT](https://jwt.io/)(JSON Web Tokens) is a JSON-based open standard (RFC 7519) for creating access tokens, which is a distributed and faster solution than authentication through databases. 
+[Devise](https://github.com/plataformatec/devise) is a flexible and almost a standard authentication solution for Rails, while [JWT](https://jwt.io/)(JSON Web Tokens) is a JSON-based open standard (RFC 7519) for creating access tokens, which is a distributed and faster solution than authentication through databases.
 
-There is always a strong need to bring these two beautiful solutions together into rails for better user authentication, however, there's no single satisfying article or project which demonstrates how to incorporate both with Rails 6(API Only), which becomes the main reason for the birth of `Rails-pangu`. 
+There is always a strong need to bring these two beautiful solutions together into rails for better user authentication, however, there's no single satisfying article or project which demonstrates how to incorporate both with Rails 6(API Only), which becomes the main reason for the birth of `Rails-pangu`.
 
 Thanks to lots of the close solutions that gave hints to this `Rails-pangu`, for example, this article: [Rails 5 API + JWT setup in minutes (using Devise)](https://medium.com/@mazik.wyry/rails-5-api-jwt-setup-in-minutes-using-devise-71670fd4ed03). However, these solutions have common problems:
 
@@ -36,7 +38,7 @@ For example, the backend of a  `Computer Game Acceleration` product by our team,
 
 #### 🚀 Rails 6
 
-As explained above, `rails 6` is the future and is far different from `rails 5`. 
+As explained above, `rails 6` is the future and is far different from `rails 5`.
 
 #### 🚀 Rails API only
 
@@ -44,7 +46,7 @@ It is common to use frontend js libraries like `react`, `vuejs` to replace `rail
 
 #### 🚀 [Devise](https://github.com/plataformatec/devise)
 
-Quoted from it's homepage: 
+Quoted from it's homepage:
 
 > Devise is a flexible authentication solution for Rails based on Warden. It:
 >
@@ -217,7 +219,7 @@ You can also implement blacklist by your own strategies. You just need to rewrit
 
 #### Dispatch requests
 
-You can config `dispatch_requests` in `devise.rb`. When config it, you need to tell which requests will dispatch tokens for the user that has been previously authenticated (usually through some other warden strategy, such as one requiring username and email parameters). To configure it, you can add the the request path to dispath_requests. 
+You can config `dispatch_requests` in `devise.rb`. When config it, you need to tell which requests will dispatch tokens for the user that has been previously authenticated (usually through some other warden strategy, such as one requiring username and email parameters). To configure it, you can add the the request path to dispath_requests.
 
 ```ruby
   jwt.dispatch_requests = [['POST', %r{^users/sign_in$}]]
@@ -234,7 +236,7 @@ You can config `dispatch_requests` in `devise.rb`. When config it, you need to t
 
 #### Jwt payload
 
-`user` records may also implement a jwt_payload method, which gives it a chance to add something to the JWT payload. 
+`user` records may also implement a jwt_payload method, which gives it a chance to add something to the JWT payload.
 
 ```ruby
   def jwt_payloads
@@ -244,7 +246,7 @@ You can config `dispatch_requests` in `devise.rb`. When config it, you need to t
 
 #### Jwt dispatch
 
-You can add a hook method `on_jwt_dispatch` on the `user` record. It will execute when a token dispatched for that user instance, and it takes token and payload as parameters. And this method will call when 
+You can add a hook method `on_jwt_dispatch` on the `user` record. It will execute when a token dispatched for that user instance, and it takes token and payload as parameters. And this method will call when
 you access the routes which in dispatch_requests
 
 ```ruby
