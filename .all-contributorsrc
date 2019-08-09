@@ -1,0 +1,23 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "hophacker",
+      "name": "hophacker",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/3121413?v=4",
+      "profile": "https://paiyou.co/",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "rails-pangu",
+  "projectOwner": "paiyou-network",
+  "repoType": "github",
+  "repoHost": "https://github.com"
+}
