@@ -271,12 +271,12 @@ If you want to send a email template, you should first set up your custom email 
 
 ## Projects using rails-pangu
 
-We are using lots of cutting edge gems in `rails-devise-jwt`, but it does not mean projects built upon this repo will be fragile, cause our team has run lots of projects based upon it.
-
-For example:
-
-* **[LINGTI](https://lingti.io)**  (https://lingti.io/): One `Computer Game Acceleration` product provided by our team;
-* **[eSheep](https://esheep.io)**  (https://esheep.io/): One `Chinese Multimedia Acceleration` product that helps to access Chinese network.
+* **[LINGTI](https://lingti.io)**  (https://lingti.io/): Game booster which helps you get better, faster, smoother performance from your PC. It is now popular among game players playing [MTGA](https://magic.wizards.com/en/mtgarena), [MTGO](https://magic.wizards.com/en/mtgo), [LOL](https://lol.qq.com/main.shtml), [World of Warcraft](https://worldofwarcraft.com/), [PUBG](https://www.pubg.com/), [Dota2](https://www.dota2.com.cn/index.htm), [CSGO](https://www.csgo.com.cn/index.html), etc.
+* **[eSheep](https://esheep.io)**  (https://esheep.io/): Network booster which helps global users access better entertainment content from China.
 
 [<img src="https://assets.lingti.paiyou.co/ed568fbe.png" width="150" align="middle" />](https://lingti.io) [<img src="https://res.paiyou.co/44920709.png" width="200" align="middle" />](https://lingti.io)
+
+## License
+
+Code and documentation copyright 2019 the [Rails-pangu Authors](https://github.com/paiyou-network/rails-pangu/graphs/contributors) and [Paiyou Network](https://paiyou.co/) Code released under the [MIT License](https://github.com/paiyou-network/rails-pangu/blob/master/LICENSE). 
 
