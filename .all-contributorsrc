@@ -35,6 +35,16 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "Eric-Guo",
+      "name": "Eric Guo",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1131536?v=4",
+      "profile": "http://blog.cloud-mes.com/",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
