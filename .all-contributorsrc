@@ -11,7 +11,9 @@
       "avatar_url": "https://avatars2.githubusercontent.com/u/3121413?v=4",
       "profile": "https://paiyou.co/",
       "contributions": [
-        "code"
+        "code",
+        "doc",
+        "infra"
       ]
     }
   ],
