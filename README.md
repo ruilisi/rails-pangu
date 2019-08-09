@@ -280,6 +280,10 @@ For example:
 
 [<img src="https://assets.lingti.paiyou.co/ed568fbe.png" width="150" align="middle" />](https://lingti.io) [<img src="https://res.paiyou.co/44920709.png" width="200" align="middle" />](https://lingti.io)
 
+## Contributors
+
+
+
 ## License
 
 Code and documentation copyright 2019 the [Rails-pangu Authors](https://github.com/paiyou-network/rails-pangu/graphs/contributors) and [Paiyou Network](https://paiyou.co/) Code released under the [MIT License](https://github.com/paiyou-network/rails-pangu/blob/master/LICENSE). 
