@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/paiyou-network/rails-pangu.svg?style=svg)](https://circleci.com/gh/paiyou-network/rails-pangu)
-[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors)
 
 # Rails-pangu
 [中文文档 Chinese document](/README.CN.md)
@@ -292,6 +292,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/zhcalvin"><img src="https://avatars3.githubusercontent.com/u/5792099?v=4" width="100px;" alt="Jiawei Li"/><br /><sub><b>Jiawei Li</b></sub></a><br /><a href="https://github.com/paiyou-network/rails-pangu/commits?author=zhcalvin" title="Code">💻</a> <a href="https://github.com/paiyou-network/rails-pangu/commits?author=zhcalvin" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/caibiwsq"><img src="https://avatars0.githubusercontent.com/u/37767017?v=4" width="100px;" alt="caibiwsq"/><br /><sub><b>caibiwsq</b></sub></a><br /><a href="https://github.com/paiyou-network/rails-pangu/commits?author=caibiwsq" title="Code">💻</a> <a href="https://github.com/paiyou-network/rails-pangu/commits?author=caibiwsq" title="Documentation">📖</a></td>
     <td align="center"><a href="http://blog.cloud-mes.com/"><img src="https://avatars3.githubusercontent.com/u/1131536?v=4" width="100px;" alt="Eric Guo"/><br /><sub><b>Eric Guo</b></sub></a><br /><a href="https://github.com/paiyou-network/rails-pangu/commits?author=Eric-Guo" title="Code">💻</a> <a href="https://github.com/paiyou-network/rails-pangu/commits?author=Eric-Guo" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/alen9968"><img src="https://avatars2.githubusercontent.com/u/38801833?v=4" width="100px;" alt="张学财"/><br /><sub><b>张学财</b></sub></a><br /><a href="https://github.com/paiyou-network/rails-pangu/commits?author=alen9968" title="Code">💻</a> <a href="https://github.com/paiyou-network/rails-pangu/commits?author=alen9968" title="Documentation">📖</a></td>
   </tr>
 </table>
 
