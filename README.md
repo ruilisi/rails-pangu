@@ -1,4 +1,5 @@
 [![CircleCI](https://circleci.com/gh/paiyou-network/rails-pangu.svg?style=svg)](https://circleci.com/gh/paiyou-network/rails-pangu)
+[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors-)
 
 # Rails-pangu
 [中文文档 Chinese document](/README.CN.md)
@@ -24,15 +25,7 @@ At the same time, we saw couple of other repos doing the same work, but one big 
 <img src="https://res.paiyou.co/pangu.jpg" width="300" align="middle" />
 
 > Pangu is the creator of all in Chinese mythology. In the stories, Pangu created the Earth and the Sky with a swing of his giant axe and kept them seperated by standing between them.
-> Just like pangu, `Rails-pangu` aims at being a foundational code base which eliminates thoese tedious research and experimental work for your new Rails projects.
-
-## Production Ready
-
-We are using lots of cutting edge gems in `rails-devise-jwt`, but it does not mean projects built upon this repo will be fragile, cause our team has run lots of projects based upon it.
-
-For example, the backend of a  `Computer Game Acceleration` product by our team,  **LINGTI**  (https://lingti.io/)
-
-<img src="https://assets.lingti.paiyou.co/ed568fbe.png" width="200" align="middle" />
+> Just like pangu, `Rails-pangu` aims at being a foundational code base which eliminates those tedious research and experimental work for your new Rails projects.
 
 ## Features
 
@@ -265,7 +258,7 @@ Before using mailgun, you should register a mailgun account on [Mailgun Official
 MAILGUN_EMAIL_FROM: [send_template_from_name]
 MAILGUN_DOMAIN: [your_domain_on_mailgun]
 MAILGUN_PRIVATE_API_KEY: [your-api-key]
-`````
+```
 
 #### Send_email
 
@@ -274,3 +267,16 @@ You only need to call `UtilMailgun.send_email(from_name, to_name, subject, text)
 #### Send_template
 
 If you want to send a email template, you should first set up your custom email template on mailgun. Then you can call `UtilMailgun.send_template(template_name, recipient_or_receipients, subject, variables = {})`   to send the mail template. `recipient_or_receipients` parameter allows an email or an array of emails.
+
+
+## Projects using rails-pangu
+
+* **[LINGTI](https://lingti.io)**  (https://lingti.io/): Game booster which helps you get better, faster, smoother performance from your PC. It is now popular among game players playing [MTGA](https://magic.wizards.com/en/mtgarena), [MTGO](https://magic.wizards.com/en/mtgo), [LOL](https://lol.qq.com/main.shtml), [World of Warcraft](https://worldofwarcraft.com/), [PUBG](https://www.pubg.com/), [Dota2](https://www.dota2.com.cn/index.htm), [CSGO](https://www.csgo.com.cn/index.html), etc.
+* **[eSheep](https://esheep.io)**  (https://esheep.io/): Network booster which helps global users access better entertainment content from China.
+
+[<img src="https://assets.lingti.paiyou.co/ed568fbe.png" width="150" align="middle" />](https://lingti.io) [<img src="https://res.paiyou.co/44920709.png" width="200" align="middle" />](https://lingti.io)
+
+## License
+
+Code and documentation copyright 2019 the [Rails-pangu Authors](https://github.com/paiyou-network/rails-pangu/graphs/contributors) and [Paiyou Network](https://paiyou.co/) Code released under the [MIT License](https://github.com/paiyou-network/rails-pangu/blob/master/LICENSE). 
+
