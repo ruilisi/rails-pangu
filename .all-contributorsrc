@@ -45,6 +45,16 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "alen9968",
+      "name": "张学财",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/38801833?v=4",
+      "profile": "https://github.com/alen9968",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
