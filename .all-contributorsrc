@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "caibiwsq",
+      "name": "caibiwsq",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/37767017?v=4",
+      "profile": "https://github.com/caibiwsq",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "rails-pangu",
+  "projectOwner": "paiyou-network",
+  "repoType": "github",
+  "repoHost": "https://github.com"
+}
