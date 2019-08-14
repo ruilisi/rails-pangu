@@ -77,11 +77,21 @@ In this project, we leverage CircleCI to test `Rails-pangu`'s code base with bot
 A library for setting up Ruby objects as test data.
 
 #### 🚀 Docker
-Standard containerize solution which is almost used in every team worldwide. As a result, a `Dockerfile` and couple scripts are provided to help generate a docker image of this project.
 
-While there are a vast number of `Dockerfile`s for rails related projects, we implemented an easy method that can boost the docker building process.  When a project grows, hundreds or even thousands of different versions of different gems will be tried, that most of the docker image building time is wasted for bundling a large amount of stable gems, such as `rails`, `pg`...
+Docker is a standard containerize solution which is almost used in every team worldwide. As a result, a `Dockerfile` and related scripts are provided to help generate a docker image for this project.
 
-Thus, the following lines demonstrates how we eliminate the duplicated parts of the image building process:
+The provided docker building solution contains the following optimizations: 
+
+* Docker building acceleration
+
+  When a project grows, hundreds or even thousands of different versions of different gems will be tried or used. Even a small change in `Gemfile` causes re-bundling for every `Gem` while building a `Ruby` based docker image, that most of the docker image building time is wasted for bundling a large number of stable gems, such as `rails`, `pg`... To solve this issue, we utilized a trick which accelerates the docker building process by bundling two rounds for `Gemfile` files, and generates two layers of docker image: 
+
+  * Build the first layer for `Gemfile.core`, which is for stable or core `Gem`s, such as `rails`, `pg`.
+  * Build the second layer for `Gemfile`,  which is for mutable or non-core `Gem`s, for example, `Gem`s wrote or forted by yourself. Inside `Rails-pangu`, we demonstrate an example by putting `mailgun` gem inside `Gemfile`. 
+
+  Though, this process generates extra one layer of docker image which makes the image lager a little bit(hundreds of `KB`s). It worths that way cause **time is much more limited than disk space**
+
+  The following lines of `Dockerfile` demonstrates this docker building process: 
 
 ```dockerfile
 COPY Gemfile.core .
@@ -95,9 +105,11 @@ COPY Gemfile.lock .
 RUN bundle install --gemfile Gemfile -j16 --binstubs=$BUNDLE_PATH/bin
 ```
 
+* Bundling `Gem`s acceleration (For developers in China only)
 
+  By default, we mirror gem source `https://rubygems.org` to `https://gems.ruby-china.com`, which boosts the bundling speed largely for developers in China. 
 
-Through the above lines, common and stably used gems will be bundled first, then those transitory gems or gems under trying will be bundled. Though, this process generates extra docker image layers which makes the image lager a little bit(didn't calculate, but guess it's like hundreds of `KB`s). It worths that way cause **time is much more limited than disk space**
+  
 
 #### 🚀 Docker Compose
 
