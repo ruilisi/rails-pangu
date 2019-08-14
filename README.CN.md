@@ -80,11 +80,20 @@ CircleCI是一个行业流行的持续集成和持续部署的开发工具，方
 
 #### 🚀 Docker
 
-标准的轻量级操作系统虚拟化解决方案，在全球得到了广泛应用。它提供了dockerfile文件和couple脚本来生成docker镜像。
+Docker是标准的轻量级操作系统虚拟化解决方案，在全球得到了广泛应用。所以，我们也一并提供了Dockerfile文件和脚本来帮助生成docker镜像。
 
-虽然有很多用于rails相关项目的`Dockerfile`，但我们通过一个更简单的方法来进一步简化了启动docker的构建过程。当一个项目迭代更新时，docker可以同时实现数百甚至数千种不同版本的gems，大多数docker镜像在创建时会因为捆绑不必要的gems浪费系统资源，例如`rails`，`pg`等等。
+本项目提供的Docker构建方案包含了两大优化: 
 
-因此，下面演示了我们如何清除镜像构建过程的重复部分：
+* Docker镜像构建加速
+
+  当一个项目迭代增长时，上百甚至上千个Gem会被尝试或者使用。即使是对`Gemfile`的一个微小变动都会触发一次所有Gem的重新bundle，故而绝大部分bundle时间都浪费在去bundle绝大多数稳定的Gem，例如：`rails`, `pg`。为了解决这个问题，我们通过一个小技巧来加速docker构建过程。这个技巧就是分两次来bundle `Gemfile`，然后产生两层镜像文件：
+
+  * 第一次为`Gemfile.core`构建镜像层，该文件服务于稳定或者核心的`Gem`，例如`rails`, `pg`。
+  * 第二次为`Gemfile`构建镜像层，该文件服务于易于变化的或者非核心的`Gem`， 例如你自己写的或者forked项目。在`Rails-pangu`中，我们通过把`mailgun` 放到`Gemfile`来演示了这个情况。
+
+  尽管这个过程会生成额外的Docker镜像层，使镜像变大（预计几百KB）。但这样做是有意义的，因为程序运行时间比磁盘空间要有限得多。
+
+  下面的`Dockerfile`代码片段演示了该镜像构建过程：
 
 ```shell
 COPY Gemfile.core .
@@ -98,7 +107,9 @@ COPY Gemfile.lock .
 RUN bundle install --gemfile Gemfile -j16 --binstubs=$BUNDLE_PATH/bin
 ```
 
-通过以上几行代码，可以将常见的最常用的gems 进行打包，然后将需要使用的库打包。不过，这个过程会生成额外的Docker镜像层，使镜像变大（预计几百KB）。但这样做是有意义的，因为程序运行时间比磁盘空间要有限得多。
+* Gem构建加速 (仅为中国开发者提供)
+
+  我们会将Gem源 `https://rubygems.org` 镜像到 `https://gems.ruby-china.com`, 这会帮助中国开发者加速Gem构建速度。
 
 #### 🚀 Docker Compose
 
