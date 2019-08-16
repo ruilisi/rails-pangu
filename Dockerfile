@@ -12,6 +12,7 @@ COPY Gemfile.core .
 RUN echo 'gem: --no-document' >> ~/.gemrc && \
     cp ~/.gemrc /etc/gemrc && \
     chmod +r /etc/gemrc && \
+    bundle config mirror.https://rubygems.org https://gems.ruby-china.com && \
     bundle install --gemfile Gemfile.core -j16 --binstubs=$BUNDLE_PATH/bin
 
 COPY Gemfile .

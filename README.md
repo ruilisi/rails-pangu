@@ -1,6 +1,5 @@
 [![CircleCI](https://circleci.com/gh/paiyou-network/rails-pangu.svg?style=svg)](https://circleci.com/gh/paiyou-network/rails-pangu)
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
-[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors)
 
 # Rails-pangu
 [中文文档 Chinese document](/README.CN.md)
@@ -78,11 +77,21 @@ In this project, we leverage CircleCI to test `Rails-pangu`'s code base with bot
 A library for setting up Ruby objects as test data.
 
 #### 🚀 Docker
-Standard containerize solution which is almost used in every team worldwide. As a result, a `Dockerfile` and couple scripts are provided to help generate a docker image of this project.
 
-While there are a vast number of `Dockerfile`s for rails related projects, we implemented an easy method that can boost the docker building process.  When a project grows, hundreds or even thousands of different versions of different gems will be tried, that most of the docker image building time is wasted for bundling a large amount of stable gems, such as `rails`, `pg`...
+Docker is a standard containerize solution which is almost used in every team worldwide. As a result, a `Dockerfile` and related scripts are provided to help generate a docker image for this project.
 
-Thus, the following lines demonstrates how we eliminate the duplicated parts of the image building process:
+The provided docker building solution contains the following optimizations: 
+
+* Docker building acceleration
+
+  When a project grows, hundreds or even thousands of different versions of different gems will be tried or used. Even a small change in `Gemfile` causes re-bundling for every `Gem` while building a `Ruby` based docker image, that most of the docker image building time is wasted for bundling a large number of stable gems, such as `rails`, `pg`... To solve this issue, we utilized a trick which accelerates the docker building process by bundling two rounds for `Gemfile` files, and generates two layers of docker image: 
+
+  * Build the first layer for `Gemfile.core`, which is for stable or core `Gem`s, such as `rails`, `pg`.
+  * Build the second layer for `Gemfile`,  which is for mutable or non-core `Gem`s, for example, `Gem`s wrote or forted by yourself. Inside `Rails-pangu`, we demonstrate an example by putting `mailgun` gem inside `Gemfile`. 
+
+  Though, this process generates extra one layer of docker image which makes the image lager a little bit(hundreds of `KB`s). It worths that way cause **time is much more limited than disk space**
+
+  The following lines of `Dockerfile` demonstrates this docker building process: 
 
 ```dockerfile
 COPY Gemfile.core .
@@ -96,9 +105,11 @@ COPY Gemfile.lock .
 RUN bundle install --gemfile Gemfile -j16 --binstubs=$BUNDLE_PATH/bin
 ```
 
+* Bundling `Gem`s acceleration (For developers in China only)
 
+  By default, we mirror gem source `https://rubygems.org` to `https://gems.ruby-china.com`, which boosts the bundling speed largely for developers in China. 
 
-Through the above lines, common and stably used gems will be bundled first, then those transitory gems or gems under trying will be bundled. Though, this process generates extra docker image layers which makes the image lager a little bit(didn't calculate, but guess it's like hundreds of `KB`s). It worths that way cause **time is much more limited than disk space**
+  
 
 #### 🚀 Docker Compose
 
@@ -281,7 +292,6 @@ If you want to send a email template, you should first set up your custom email 
 
 Code and documentation copyright 2019 the [Rails-pangu Authors](https://github.com/paiyou-network/rails-pangu/graphs/contributors) and [Paiyou Network](https://paiyou.co/) Code released under the [MIT License](https://github.com/paiyou-network/rails-pangu/blob/master/LICENSE). 
 
-
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -290,7 +300,13 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore -->
 <table>
   <tr>
+    <td align="center"><a href="https://paiyou.co/"><img src="https://avatars2.githubusercontent.com/u/3121413?v=4" width="100px;" alt="hophacker"/><br /><sub><b>hophacker</b></sub></a><br /><a href="https://github.com/paiyou-network/rails-pangu/commits?author=hophacker" title="Code">💻</a> <a href="https://github.com/paiyou-network/rails-pangu/commits?author=hophacker" title="Documentation">📖</a> <a href="#infra-hophacker" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+    <td align="center"><a href="https://github.com/zhcalvin"><img src="https://avatars3.githubusercontent.com/u/5792099?v=4" width="100px;" alt="Jiawei Li"/><br /><sub><b>Jiawei Li</b></sub></a><br /><a href="https://github.com/paiyou-network/rails-pangu/commits?author=zhcalvin" title="Code">💻</a> <a href="https://github.com/paiyou-network/rails-pangu/commits?author=zhcalvin" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/zyc9012"><img src="https://avatars1.githubusercontent.com/u/3034310?v=4" width="100px;" alt="tato"/><br /><sub><b>tato</b></sub></a><br /><a href="https://github.com/paiyou-network/rails-pangu/commits?author=zyc9012" title="Code">💻</a> <a href="https://github.com/paiyou-network/rails-pangu/commits?author=zyc9012" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/caibiwsq"><img src="https://avatars0.githubusercontent.com/u/37767017?v=4" width="100px;" alt="caibiwsq"/><br /><sub><b>caibiwsq</b></sub></a><br /><a href="https://github.com/paiyou-network/rails-pangu/commits?author=caibiwsq" title="Code">💻</a> <a href="https://github.com/paiyou-network/rails-pangu/commits?author=caibiwsq" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://blog.cloud-mes.com/"><img src="https://avatars3.githubusercontent.com/u/1131536?v=4" width="100px;" alt="Eric Guo"/><br /><sub><b>Eric Guo</b></sub></a><br /><a href="https://github.com/paiyou-network/rails-pangu/commits?author=Eric-Guo" title="Code">💻</a> <a href="https://github.com/paiyou-network/rails-pangu/commits?author=Eric-Guo" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/alen9968"><img src="https://avatars2.githubusercontent.com/u/38801833?v=4" width="100px;" alt="张学财"/><br /><sub><b>张学财</b></sub></a><br /><a href="https://github.com/paiyou-network/rails-pangu/commits?author=alen9968" title="Code">💻</a> <a href="https://github.com/paiyou-network/rails-pangu/commits?author=alen9968" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/czj-Crazy"><img src="https://avatars1.githubusercontent.com/u/54089927?v=4" width="100px;" alt="czj-Crazy"/><br /><sub><b>czj-Crazy</b></sub></a><br /><a href="https://github.com/paiyou-network/rails-pangu/commits?author=czj-Crazy" title="Documentation">📖</a></td>
   </tr>
 </table>
 
