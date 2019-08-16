@@ -290,7 +290,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/zyc9012"><img src="https://avatars1.githubusercontent.com/u/3034310?v=4" width="100px;" alt="tato"/><br /><sub><b>tato</b></sub></a><br /><a href="https://github.com/paiyou-network/rails-pangu/commits?author=zyc9012" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/zyc9012"><img src="https://avatars1.githubusercontent.com/u/3034310?v=4" width="100px;" alt="tato"/><br /><sub><b>tato</b></sub></a><br /><a href="https://github.com/paiyou-network/rails-pangu/commits?author=zyc9012" title="Code">💻</a> <a href="https://github.com/paiyou-network/rails-pangu/commits?author=zyc9012" title="Documentation">📖</a></td>
   </tr>
 </table>
 
