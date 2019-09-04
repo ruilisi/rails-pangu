@@ -1,5 +1,6 @@
 [![CircleCI](https://circleci.com/gh/paiyou-network/rails-pangu.svg?style=svg)](https://circleci.com/gh/paiyou-network/rails-pangu)
 [![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors)
+[![StackShare](http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](https://stackshare.io/su-zhou-pai-you-wang-luo-ji-zhu-you-xian-ze-ren-gong-si/rails-pangu)
 
 # Rails-pangu
 
