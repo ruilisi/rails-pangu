@@ -13,7 +13,7 @@ jobs:
   checkout_code:
     <<: *defaults
     docker:
-      - image: circleci/ruby:2.6.1
+      - image: circleci/ruby:2.6.5
     steps:
       - checkout
       - save_cache:
@@ -24,7 +24,7 @@ jobs:
   linting:
     <<: *defaults
     docker:
-      - image: circleci/ruby:2.6.1
+      - image: circleci/ruby:2.6.5
     steps:
       - restore_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
@@ -46,13 +46,18 @@ jobs:
   build:
     <<: *defaults
     docker:
-      - image: circleci/ruby:2.6.1
+      - image: circleci/ruby:2.6.5
         environment:
           <<: *common_env
       - image: circleci/postgres:11.3-alpine
       - image: circleci/redis:alpine
     steps:
       - checkout
+      # Should keep same as Gemfile.lock
+      - run:
+          name: install bundler v2.0.2
+          command: gem install bundler:2.0.2 && bundle -v
+
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
