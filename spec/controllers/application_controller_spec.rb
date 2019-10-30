@@ -13,11 +13,15 @@ RSpec.describe ApplicationController, type: :controller do
     expect(response.status).to eq 401
   end
 
-  it 'auth_ping returns text "pong" if not loggedin' do
-    user = create(:user)
-    sign_in(user)
-    get :auth_ping
-    expect(response.status).to eq 200
-    expect(response.body).to eq 'pong'
+  describe 'after logged in' do
+    login_user
+
+    it 'auth_ping returns text "pong"' do
+      user = create(:user)
+      sign_in(user)
+      get :auth_ping
+      expect(response.status).to eq 200
+      expect(response.body).to eq 'pong'
+    end
   end
 end
