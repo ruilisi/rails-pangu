@@ -1,6 +1,6 @@
-FROM ruby:2.6.1-alpine3.9 as base
-RUN echo "http://mirrors.ustc.edu.cn/alpine/v3.9/main/" > /etc/apk/repositories && \
-    echo "http://mirrors.ustc.edu.cn/alpine/v3.9/community/" >> /etc/apk/repositories
+FROM ruby:2.6.5-alpine3.10 as base
+RUN echo "http://mirrors.ustc.edu.cn/alpine/v3.10/main/" > /etc/apk/repositories && \
+    echo "http://mirrors.ustc.edu.cn/alpine/v3.10/community/" >> /etc/apk/repositories
 WORKDIR /usr/src/app
 RUN apk add --no-cache tzdata libpq git && \
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
