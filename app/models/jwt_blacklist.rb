@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class JWTBlacklist < ApplicationRecord
+class JwtBlacklist < ApplicationRecord
   include Devise::JWT::RevocationStrategies::Blacklist
 
   def self.jwt_revoked?(payload, user)
