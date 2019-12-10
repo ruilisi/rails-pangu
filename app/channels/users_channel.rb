@@ -12,7 +12,6 @@ class UsersChannel < ApplicationCable::Channel
     data = params['data']
 
     case path
-    when 'self'
     when 'set_avatar'
       current_user.data['avatar'] = data['avatar']
       current_user.save

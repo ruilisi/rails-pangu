@@ -9,9 +9,9 @@ class RoomsChannel < ApplicationCable::Channel
     # Any cleanup needed when channel is unsubscribed
   end
 
-  def load(_params)
-    path = _params['path']
-    data = _params['data']
+  def load(params)
+    path = params['path']
+    data = params['data']
     ret = { path: path, room_id: data['room_id'] }
     case path
     when 'messages'
