@@ -7,3 +7,4 @@ end
 gem 'devise', '>= 4.7.1'
 gem 'devise-jwt'
 gem 'mailgun-ruby', git: 'https://github.com/paiyou-network/mailgun-ruby', branch: :master
+gem 'qiniu'

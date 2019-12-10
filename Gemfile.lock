@@ -145,6 +145,9 @@ GEM
     public_suffix (4.0.1)
     puma (4.2.1)
       nio4r (~> 2.0)
+    qiniu (6.9.0)
+      mime-types (~> 3.1)
+      rest-client (~> 2.0)
     rack (2.0.7)
     rack-cors (1.0.3)
     rack-test (1.1.0)
@@ -284,6 +287,7 @@ DEPENDENCIES
   mailgun-ruby!
   pg
   puma (~> 4.2.1)
+  qiniu
   rack-cors
   rails (~> 6.0.0)
   redis
@@ -299,4 +303,7 @@ DEPENDENCIES
   webmock
 
 RUBY VERSION
-   ruby 2.6.1p33
+   ruby 2.6.5p114
+
+BUNDLED WITH
+   1.17.2
