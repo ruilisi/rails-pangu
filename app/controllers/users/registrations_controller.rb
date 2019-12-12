@@ -18,7 +18,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     build_resource(sign_up_params)
 
-    resource.save
+    if resource.save
+      room = Room.find_by_title('chat')
+      if room
+        $redis.sadd("room:#{room.id}", resource.id)
+        $redis.sadd("user:#{resource.id}", room.id)
+      end
+    end
     render_resource(resource)
     # super
   end

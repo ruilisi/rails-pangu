@@ -10,5 +10,7 @@
 
 first_user = User.create(email: 'info@pangu', password: 'Pangu123')
 %w[rails javascript actioncable ruby react chat].each do |title|
-  Room.create(title: title, user_id: first_user.id)
+  room = Room.create(title: title, user_id: first_user.id)
+  $redis.sadd("room:#{room.id}", first_user.id)
+  $redis.sadd("user:#{first_user.id}", room.id)
 end
