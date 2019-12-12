@@ -13,6 +13,11 @@ services:
     volumes:
       - .:/usr/src/app
     environment:
-      DATABASE_URL: postgres://postgres@db:5432/rails-pangu?pool=25&encoding=unicode&schema_search_path=public
+      # DATABASE_URL: postgres://postgres@db:5432/rails-pangu?pool=25&encoding=unicode&schema_search_path=public
       DEVISE_JWT_SECRET_KEY: RANDOM_SECRET
       REDIS_URL: redis://redis:6379
+      QINIU_ENABLED: 'yes'
+      QINIU_ACCESS_KEY: empty
+      QINIU_SECRET_KEY: empty
+      QINIU_BUCKET: empty
+      QINIU_HOST: empty

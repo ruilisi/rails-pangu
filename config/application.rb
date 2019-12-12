@@ -31,7 +31,7 @@ module RailsPangu
     end
 
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.2
+    config.load_defaults '6.0' # enables zeitwerk mode
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
@@ -42,5 +42,6 @@ module RailsPangu
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    config.action_cable.allowed_request_origins = [%r{http://*}, %r{https://*}]
   end
 end
