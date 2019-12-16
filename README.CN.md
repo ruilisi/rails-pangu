@@ -91,7 +91,7 @@ Docker是标准的轻量级操作系统虚拟化解决方案，在全球得到�
   当一个项目迭代增长时，上百甚至上千个Gem会被尝试或者使用。即使是对`Gemfile`的一个微小变动都会触发一次所有Gem的重新bundle，故而绝大部分bundle时间都浪费在去bundle绝大多数稳定的Gem，例如：`rails`, `pg`。为了解决这个问题，我们通过一个小技巧来加速docker构建过程。这个技巧就是分两次来bundle `Gemfile`，然后产生两层镜像文件：
 
   * 第一次为`Gemfile.core`构建镜像层，该文件服务于稳定或者核心的`Gem`，例如`rails`, `pg`。
-  * 第二次为`Gemfile`构建镜像层，该文件服务于易于变化的或者非核心的`Gem`， 例如你自己写的或者forked项目。在`Rails-pangu`中，我们通过把`mailgun` 放到`Gemfile`来演示了这个情况。
+  * 第二次为`Gemfile`构建镜像层，该文件服务于易于变化的或者非核心的`Gem`， 例如你自己写的或者forked项目。
 
   尽管这个过程会生成额外的Docker镜像层，使镜像变大（预计几百KB），但这样做是有意义的，因为程序运行时间比磁盘空间要有限得多。
 
@@ -124,10 +124,6 @@ Puma是一个简单、快速、线程化、高度并发的HTTP1.1服务器，用
 #### 🚀 Redis
 
 几乎所有的Web项目都使用`redis`作为存储系统，因为它快速、高效、简洁。
-
-#### 🚀 Mailgun
-Mailgun 是一种线上邮件服务，提供一组用于发送，接收，跟踪和存储电子邮件的API。
-
 
 
 ## 开始运行
@@ -256,27 +252,3 @@ puts [
     # do_something(token, payload)
   end
 ```
-
-
-
-##MailGun
-
-####配置初始化环境
-
-在使用之前，先到[mailgun 官网](https://www.mailgun.com/)注册一个账号。然后，你只需要在你的`docker-compose.yml`文件中加入以下代码。
-
-
-```yml
-MAILGUN_EMAIL_FROM: [send_template_from_name]
-MAILGUN_DOMAIN: [your_domain_on_mailgun]
-MAILGUN_PRIVATE_API_KEY: [your-api-key]
-`````
-
-#### Send_email
-
-`UtilMailgun.send_email(from_name, to_name, subject, text)` ，用该命令发送邮件。
-
-#### Send_template
-
-如果你想发送一个邮件模板，你需要先设置你的自定义邮件模板，然后执行以下操作来发送email模板：
-`UtilMailgun.send_template(template_name, recipient_or_receipients, subject, variables = {})` 。你也可以通过 `recipient_or_receipients`这个参数来设置发送单封email或同时发送多封email 。

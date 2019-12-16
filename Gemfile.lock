@@ -1,11 +1,3 @@
-GIT
-  remote: https://github.com/paiyou-network/mailgun-ruby
-  revision: 423399cca1398c53a8042a22c70b683f2857ed6e
-  branch: master
-  specs:
-    mailgun-ruby (1.1.11)
-      rest-client (~> 2.0.2)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -285,9 +277,8 @@ DEPENDENCIES
   devise-jwt
   factory_bot_rails
   listen
-  mailgun-ruby!
   pg
-  puma (~> 4.2.1)
+  puma
   qiniu
   rack-cors
   rails (~> 6.0.1)

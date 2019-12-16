@@ -87,7 +87,7 @@ The provided docker building solution contains the following optimizations:
   When a project grows, hundreds or even thousands of different versions of different gems will be tried or used. Even a small change in `Gemfile` causes re-bundling for every `Gem` while building a `Ruby` based docker image, that most of the docker image building time is wasted for bundling a large number of stable gems, such as `rails`, `pg`... To solve this issue, we utilized a trick which accelerates the docker building process by bundling two rounds for `Gemfile` files, and generates two layers of docker image: 
 
   * Build the first layer for `Gemfile.core`, which is for stable or core `Gem`s, such as `rails`, `pg`.
-  * Build the second layer for `Gemfile`,  which is for mutable or non-core `Gem`s, for example, `Gem`s wrote or forted by yourself. Inside `Rails-pangu`, we demonstrate an example by putting `mailgun` gem inside `Gemfile`. 
+  * Build the second layer for `Gemfile`,  which is for mutable or non-core `Gem`s, for example, `Gem`s wrote or forted by yourself.
 
   Though, this process generates extra one layer of docker image which makes the image lager a little bit(hundreds of `KB`s). It worths that way cause **time is much more limited than disk space**
 
@@ -122,11 +122,6 @@ Puma is a simple, fast, threaded, and highly concurrent HTTP 1.1 server for Ruby
 #### 🚀 Redis
 
 Is there any web project isn't using `redis` as a faster and sometimes easier way of storing data? Well, if there isn't,  just replace it!
-
-#### 🚀 Mailgun
-
-Mailgun is an online service that provides a set of APIs for sending, receiving, tracking and storing email.
-
 
 
 ## Build, Run, Test
@@ -259,26 +254,6 @@ you access the routes which in dispatch_requests
     # do_something(token, payload)
   end
 ```
-
-## MailGun
-
-#### Configure mailgun environment
-
-Before using mailgun, you should register a mailgun account on [Mailgun Official website](https://www.mailgun.com/) . After this is done, you only need to add these environment config in docker-compose.yml.
-
-```yml
-MAILGUN_EMAIL_FROM: [send_template_from_name]
-MAILGUN_DOMAIN: [your_domain_on_mailgun]
-MAILGUN_PRIVATE_API_KEY: [your-api-key]
-```
-
-#### Send_email
-
-You only need to call `UtilMailgun.send_email(from_name, to_name, subject, text)` to send mail.
-
-#### Send_template
-
-If you want to send a email template, you should first set up your custom email template on mailgun. Then you can call `UtilMailgun.send_template(template_name, recipient_or_receipients, subject, variables = {})`   to send the mail template. `recipient_or_receipients` parameter allows an email or an array of emails.
 
 
 ## Projects using rails-pangu
