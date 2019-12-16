@@ -7,3 +7,4 @@ end
 gem 'devise', '>= 4.7.1'
 gem 'devise-jwt'
 gem 'qiniu'
+gem 'wechat'

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resource :wechat, only: [:show, :create]
   mount ActionCable.server => '/cable'
   resources :rooms, only: %i[index create destroy] do
     collection do
