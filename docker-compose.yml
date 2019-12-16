@@ -21,3 +21,7 @@ services:
       QINIU_SECRET_KEY: empty
       QINIU_BUCKET: empty
       QINIU_HOST: empty
+      WECHAT_APP_ID: empty
+      WECHAT_APP_SECRET: empty
+      WECHAT_APP_TOKEN: empty
+      WECHAT_APP_ENCODING_AES_KEY: empty
