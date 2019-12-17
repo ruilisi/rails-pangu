@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/paiyou-network/rails-pangu.svg?style=svg)](https://circleci.com/gh/paiyou-network/rails-pangu)
+[![CircleCI](https://circleci.com/gh/ruilisi/rails-pangu.svg?style=svg)](https://circleci.com/gh/ruilisi/rails-pangu)
 [![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors)
 
 # Rails-pangu
@@ -62,7 +62,7 @@ JSON Web Tokens，是目前最流行的跨域认证解决方案。
 
 实现了将`devise`和`jwt`技术融合，虽然也有其他开发者通过其它方式实现了两者的融合运用，但都效果欠佳。
 
-我们在 [app/models/jwt_blacklist.rb](https://github.com/paiyou-network/Rails-pangu/blob/master/app/models/jwt_blacklist.rb) 里面通过使用redis实现了 devise-jwt的 `blacklist strategy`。
+我们在 [app/models/jwt_blacklist.rb](https://github.com/ruilisi/Rails-pangu/blob/master/app/models/jwt_blacklist.rb) 里面通过使用redis实现了 devise-jwt的 `blacklist strategy`。
 
 #### 🚀 Postgres
 使用postgres作为默认数据库。当一个Web服务器的流量变得很大时，sqlite3显然无法满足我们的需求。
@@ -171,7 +171,7 @@ puts [
 
 ## 角色创建
 
-除了我们提供的默认角色之外，我们还允许developer创建他们的[自定义角色](https://github.com/paiyou-network/Rails-pangu/wiki/create-a-role)。
+除了我们提供的默认角色之外，我们还允许developer创建他们的[自定义角色](https://github.com/ruilisi/Rails-pangu/wiki/create-a-role)。
 
 ## Blacklist
 

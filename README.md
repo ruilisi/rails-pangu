@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/paiyou-network/rails-pangu.svg?style=svg)](https://circleci.com/gh/paiyou-network/rails-pangu)
+[![CircleCI](https://circleci.com/gh/ruilisi/rails-pangu.svg?style=svg)](https://circleci.com/gh/ruilisi/rails-pangu)
 [![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors)
 
 # Rails-pangu
@@ -58,7 +58,7 @@ JSON Web Tokens
 
 While there are lots of solutions which hook `devise` and `jwt` together, this repo is better implemented from our point of view.
 
-We implmented a devise-jwt blacklist policy leveraging the power of `redis` in [app/models/jwt_blacklist.rb](https://github.com/paiyou-network/rails-devise-jwt/blob/master/app/models/jwt_blacklist.rb).
+We implmented a devise-jwt blacklist policy leveraging the power of `redis` in [app/models/jwt_blacklist.rb](https://github.com/ruilisi/rails-devise-jwt/blob/master/app/models/jwt_blacklist.rb).
 
 #### 🚀 Postgres
 We use postgres as default database store cause sqlite3 will be replaced sooner or later when the traffic of one web server becomes lager enough
@@ -182,7 +182,7 @@ If you want to run bash script, you can replace `cd /usr/src/app; rails runner \
 
 ## Create a role
 
-In addition to the default role we provide, we also allow developers to create their custom role. There is a document about how to [create a new role](https://github.com/paiyou-network/rails-pangu/wiki/Create-a-role)
+In addition to the default role we provide, we also allow developers to create their custom role. There is a document about how to [create a new role](https://github.com/ruilisi/rails-pangu/wiki/Create-a-role)
 
 ## Blacklist
 
@@ -265,7 +265,7 @@ you access the routes which in dispatch_requests
 
 ## License
 
-Code and documentation copyright 2019 the [Rails-pangu Authors](https://github.com/paiyou-network/rails-pangu/graphs/contributors) and [Paiyou Network](https://paiyou.co/) Code released under the [MIT License](https://github.com/paiyou-network/rails-pangu/blob/master/LICENSE). 
+Code and documentation copyright 2019 the [Rails-pangu Authors](https://github.com/ruilisi/rails-pangu/graphs/contributors) and [Paiyou Network](https://paiyou.co/) Code released under the [MIT License](https://github.com/ruilisi/rails-pangu/blob/master/LICENSE). 
 
 ## Contributors ✨
 
@@ -275,13 +275,13 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore -->
 <table>
   <tr>
-    <td align="center"><a href="https://paiyou.co/"><img src="https://avatars2.githubusercontent.com/u/3121413?v=4" width="100px;" alt="hophacker"/><br /><sub><b>hophacker</b></sub></a><br /><a href="https://github.com/paiyou-network/rails-pangu/commits?author=hophacker" title="Code">💻</a> <a href="https://github.com/paiyou-network/rails-pangu/commits?author=hophacker" title="Documentation">📖</a> <a href="#infra-hophacker" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
-    <td align="center"><a href="https://github.com/zhcalvin"><img src="https://avatars3.githubusercontent.com/u/5792099?v=4" width="100px;" alt="Jiawei Li"/><br /><sub><b>Jiawei Li</b></sub></a><br /><a href="https://github.com/paiyou-network/rails-pangu/commits?author=zhcalvin" title="Code">💻</a> <a href="https://github.com/paiyou-network/rails-pangu/commits?author=zhcalvin" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://github.com/zyc9012"><img src="https://avatars1.githubusercontent.com/u/3034310?v=4" width="100px;" alt="tato"/><br /><sub><b>tato</b></sub></a><br /><a href="https://github.com/paiyou-network/rails-pangu/commits?author=zyc9012" title="Code">💻</a> <a href="https://github.com/paiyou-network/rails-pangu/commits?author=zyc9012" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://github.com/caibiwsq"><img src="https://avatars0.githubusercontent.com/u/37767017?v=4" width="100px;" alt="caibiwsq"/><br /><sub><b>caibiwsq</b></sub></a><br /><a href="https://github.com/paiyou-network/rails-pangu/commits?author=caibiwsq" title="Code">💻</a> <a href="https://github.com/paiyou-network/rails-pangu/commits?author=caibiwsq" title="Documentation">📖</a></td>
-    <td align="center"><a href="http://blog.cloud-mes.com/"><img src="https://avatars3.githubusercontent.com/u/1131536?v=4" width="100px;" alt="Eric Guo"/><br /><sub><b>Eric Guo</b></sub></a><br /><a href="https://github.com/paiyou-network/rails-pangu/commits?author=Eric-Guo" title="Code">💻</a> <a href="https://github.com/paiyou-network/rails-pangu/commits?author=Eric-Guo" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://github.com/alen9968"><img src="https://avatars2.githubusercontent.com/u/38801833?v=4" width="100px;" alt="张学财"/><br /><sub><b>张学财</b></sub></a><br /><a href="https://github.com/paiyou-network/rails-pangu/commits?author=alen9968" title="Code">💻</a> <a href="https://github.com/paiyou-network/rails-pangu/commits?author=alen9968" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://github.com/czj-Crazy"><img src="https://avatars1.githubusercontent.com/u/54089927?v=4" width="100px;" alt="czj-Crazy"/><br /><sub><b>czj-Crazy</b></sub></a><br /><a href="https://github.com/paiyou-network/rails-pangu/commits?author=czj-Crazy" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://paiyou.co/"><img src="https://avatars2.githubusercontent.com/u/3121413?v=4" width="100px;" alt="hophacker"/><br /><sub><b>hophacker</b></sub></a><br /><a href="https://github.com/ruilisi/rails-pangu/commits?author=hophacker" title="Code">💻</a> <a href="https://github.com/ruilisi/rails-pangu/commits?author=hophacker" title="Documentation">📖</a> <a href="#infra-hophacker" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+    <td align="center"><a href="https://github.com/zhcalvin"><img src="https://avatars3.githubusercontent.com/u/5792099?v=4" width="100px;" alt="Jiawei Li"/><br /><sub><b>Jiawei Li</b></sub></a><br /><a href="https://github.com/ruilisi/rails-pangu/commits?author=zhcalvin" title="Code">💻</a> <a href="https://github.com/ruilisi/rails-pangu/commits?author=zhcalvin" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/zyc9012"><img src="https://avatars1.githubusercontent.com/u/3034310?v=4" width="100px;" alt="tato"/><br /><sub><b>tato</b></sub></a><br /><a href="https://github.com/ruilisi/rails-pangu/commits?author=zyc9012" title="Code">💻</a> <a href="https://github.com/ruilisi/rails-pangu/commits?author=zyc9012" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/caibiwsq"><img src="https://avatars0.githubusercontent.com/u/37767017?v=4" width="100px;" alt="caibiwsq"/><br /><sub><b>caibiwsq</b></sub></a><br /><a href="https://github.com/ruilisi/rails-pangu/commits?author=caibiwsq" title="Code">💻</a> <a href="https://github.com/ruilisi/rails-pangu/commits?author=caibiwsq" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://blog.cloud-mes.com/"><img src="https://avatars3.githubusercontent.com/u/1131536?v=4" width="100px;" alt="Eric Guo"/><br /><sub><b>Eric Guo</b></sub></a><br /><a href="https://github.com/ruilisi/rails-pangu/commits?author=Eric-Guo" title="Code">💻</a> <a href="https://github.com/ruilisi/rails-pangu/commits?author=Eric-Guo" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/alen9968"><img src="https://avatars2.githubusercontent.com/u/38801833?v=4" width="100px;" alt="张学财"/><br /><sub><b>张学财</b></sub></a><br /><a href="https://github.com/ruilisi/rails-pangu/commits?author=alen9968" title="Code">💻</a> <a href="https://github.com/ruilisi/rails-pangu/commits?author=alen9968" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/czj-Crazy"><img src="https://avatars1.githubusercontent.com/u/54089927?v=4" width="100px;" alt="czj-Crazy"/><br /><sub><b>czj-Crazy</b></sub></a><br /><a href="https://github.com/ruilisi/rails-pangu/commits?author=czj-Crazy" title="Documentation">📖</a></td>
   </tr>
 </table>
 
