@@ -11,6 +11,11 @@ module UtilJwt
       end 
     end
 
+    def generate_new_authorization(user)
+      token, payload = Warden::JWTAuth::UserEncoder.new.call(user, :user, nil)
+      "Bearer #{token}"
+    end
+
     def user_from_authorization(authorization)
       return nil if authorization.nil?
 

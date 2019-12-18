@@ -11,6 +11,12 @@ class WechatsController < ApplicationController
   def login_callback
     data = Wechat.api.web_access_token(params[:code])
     data = Wechat.api.web_userinfo(data['access_token'], data['unionid'])
+    user = User.find_by_unionid(data['unionid'])
+    if user
+      UsersChannel.broadcast_to User.traveler_user, path: 'wechat_login', data: UtilJwt.generate_new_authorization(user)
+    else
+      UsersChannel.broadcast_to User.traveler_user, path: 'wechat_login', data: UtilJwt.generate_new_authorization(User.create(unionid: data['unionid']))
+    end
     render json: data
   end
 end

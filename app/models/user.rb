@@ -14,6 +14,15 @@ class User < ApplicationRecord
       data: data
     )
   end
+
+  def self.traveler_user=(u)
+    @t_user = u
+  end
+
+  def self.traveler_user
+    @t_user
+  end
+
   # Set other keys in payload, you can also append them in blacklist redis key
   # def jwt_payload
   #    { 'foo' => 'bar' }
