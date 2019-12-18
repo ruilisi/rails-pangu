@@ -7,4 +7,10 @@ class WechatsController < ApplicationController
   on :text do |request, content|
     request.reply.text "echo: #{content}" # Just echo
   end
+
+  def login_callback
+    data = Wechat.api.web_access_token(params[:code])
+    data = Wechat.api.web_userinfo(data['access_token'], data['unionid'])
+    render json: data
+  end
 end

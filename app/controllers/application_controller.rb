@@ -7,6 +7,12 @@ class ApplicationController < ActionController::API
     render plain: 'pong'
   end
 
+  def data
+    render json: {
+      wechat_app_id: ENV['WECHAT_APP_ID']
+    }
+  end
+
   def auth_ping
     render plain: 'pong'
   end
