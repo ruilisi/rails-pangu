@@ -15,22 +15,8 @@ class RoomsChannel < ApplicationCable::Channel
     ret = { path: path, room_id: data['room_id'] }
     case path
     when 'messages'
-      messages = Message.where(room_id: data['room_id'])
+      messages = Message.where(room_id: data['room_id']).order('created_at')
       ret['messages'] = messages
-      avatars = {}
-      ids = []
-      if current_user.data['avatar']
-        avatars[current_user.id] = current_user.data['avatar']
-        ids << current_user.id
-      end
-      messages.map do |m|
-        next if ids.include?(m.user_id)
-
-        ids << m.user_id
-        user = User.find_by_id(m.user_id)
-        avatars[current_user.id] = current_user.data['avatar'] if user && current_user.data['avatar']
-      end
-      ret['avatars'] = avatars
     when 'add_message', 'join_room'
       message = Message.new(data.merge(user_id: current_user.id, data: { email: current_user.email }))
       ret['message'] = message if message.save
