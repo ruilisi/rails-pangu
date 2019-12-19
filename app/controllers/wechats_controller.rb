@@ -9,11 +9,12 @@ class WechatsController < ApplicationController
   end
 
   def login_callback
+    guest = params[:guest]
     data = Wechat.api.web_access_token(params[:code])
     data = Wechat.api.web_userinfo(data['access_token'], data['unionid'])
     user = User.where("data ->> 'unionid' = ? ", data['unionid']).first
     user = User.create(email: data['nickname'], data: {unionid: data['unionid'], avatar: data['headimgurl']}) unless user
-    UsersChannel.broadcast_to User.traveler_user, path: 'wechat_login', data: UtilJwt.generate_new_authorization(user)
+    ActionCable.server.broadcast "guest:#{guest}", path: 'wechat_login', data: UtilJwt.generate_new_authorization(user)
 
     render json: data
   end
