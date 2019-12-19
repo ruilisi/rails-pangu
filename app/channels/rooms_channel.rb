@@ -31,7 +31,7 @@ class RoomsChannel < ApplicationCable::Channel
         avatars[current_user.id] = current_user.data['avatar'] if user && current_user.data['avatar']
       end
       ret['avatars'] = avatars
-    when 'add_message'
+    when 'add_message', 'join_room'
       message = Message.new(data.merge(user_id: current_user.id, data: { email: current_user.email }))
       ret['message'] = message if message.save
     end

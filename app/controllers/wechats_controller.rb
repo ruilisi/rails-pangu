@@ -13,9 +13,26 @@ class WechatsController < ApplicationController
     data = Wechat.api.web_access_token(params[:code])
     data = Wechat.api.web_userinfo(data['access_token'], data['unionid'])
     user = User.where("data ->> 'unionid' = ? ", data['unionid']).first
-    user = User.create(email: data['nickname'], data: {unionid: data['unionid'], avatar: data['headimgurl']}) unless user
+    user ||= User.create(email: data['nickname'], data: { unionid: data['unionid'], avatar: data['headimgurl'] })
     ActionCable.server.broadcast "guest:#{guest}", path: 'wechat_login', data: UtilJwt.generate_new_authorization(user)
 
-    render json: data
+    # rubocop:disable Lint/ImplicitStringConcatenation
+    html = '''<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="application/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+    <script type="application/javascript">
+      setInterval(function() {
+        if (wx) {
+          wx.closeWindow()
+        }
+      }, 200)
+    </script>
+  </head>
+</html>
+'''
+    # rubocop:enable Lint/ImplicitStringConcatenation
+    render html: html.html_safe
   end
 end

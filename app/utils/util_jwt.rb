@@ -5,14 +5,11 @@ module UtilJwt
     def user_from_jwt_token(token)
       return nil if token.nil?
 
-      begin
-        Warden::JWTAuth::UserDecoder.new.call(token, :user, nil)
-      rescue
-      end 
+      Warden::JWTAuth::UserDecoder.new.call(token, :user, nil)
     end
 
     def generate_new_authorization(user)
-      token, payload = Warden::JWTAuth::UserEncoder.new.call(user, :user, nil)
+      token, _payload = Warden::JWTAuth::UserEncoder.new.call(user, :user, nil)
       "Bearer #{token}"
     end
 
