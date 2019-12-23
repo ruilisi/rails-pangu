@@ -17,6 +17,22 @@ class RoomsChannel < ApplicationCable::Channel
     when 'messages'
       messages = Message.where(room_id: data['room_id']).order('created_at')
       ret['messages'] = messages
+    when 'delete_message'
+      message = Message.find_by_id(data['message_id'])
+      if message.user_id == current_user.id
+        message.delete
+        ret['message_id'] = message.id
+      else
+        ret['error'] = "You can't delete others's message"
+      end
+    when 'update_message'
+      message = Message.find_by_id(data['message_id'])
+      if message.user_id == current_user.id
+        message.update(text: data['text'])
+        ret['message'] = message
+      else
+        ret['error'] = "You can't edit others's message"
+      end
     when 'add_message', 'join_room'
       message = Message.new(data.merge(user_id: current_user.id, data: { email: current_user.email }))
       ret['message'] = message if message.save
