@@ -6,6 +6,8 @@ module UtilJwt
       return nil if token.nil?
 
       Warden::JWTAuth::UserDecoder.new.call(token, :user, nil)
+    rescue JWT::DecodeError
+      nil
     end
 
     def generate_new_authorization(user)
