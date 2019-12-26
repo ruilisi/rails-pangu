@@ -34,8 +34,38 @@ class RoomsChannel < ApplicationCable::Channel
         ret['error'] = "You can't edit others's message"
       end
     when 'add_message', 'join_room'
-      message = Message.new(data.merge(user_id: current_user.id, data: { email: current_user.email }))
+      text = data['text']
+      case text
+      when %r{^/vote}
+        _, title, *choices = text.split(' ')
+        message = Message.new(data.merge(user_id: current_user.id, data: {
+                                           email: current_user.email,
+                                           type: 'vote',
+                                           title: title,
+                                           choices: choices.map {|c| [c, []]}
+                                         }))
+      else
+        message = Message.new(data.merge(user_id: current_user.id, data: { email: current_user.email }))
+      end
       ret['message'] = message if message.save
+    when 'vote'
+      puts ret
+      message = Message.find(data['message_id'])
+      index = data['index']
+      message.data['choices'].each_with_index do |(_, voted_users), i|
+        user_id = current_user.id
+        included = voted_users.include?(user_id)
+        is_index = index == i
+        voted_users.delete(user_id) if included && !is_index
+        voted_users.push(user_id) if !included && is_index
+      end
+      return unless message.changed?
+
+      message.save
+      ret.merge!({
+        message: message,
+        path: 'update_message'
+      })
     end
     RoomsChannel.broadcast_to room, ret
   end
