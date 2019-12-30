@@ -63,10 +63,8 @@ class RoomsChannel < ApplicationCable::Channel
       return unless message.changed?
 
       message.save
-      ret.merge!(
-        message: message,
-        path: 'update_message'
-      )
+      ret[:message] = message
+      ret[:path] = 'update_message'
     end
     RoomsChannel.broadcast_to room, ret
   end
