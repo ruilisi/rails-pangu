@@ -9,7 +9,9 @@ class RoomsChannel < ApplicationCable::Channel
     # Any cleanup needed when channel is unsubscribed
   end
 
+  # rubocop:disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
   def load(params)
+    # rubocop:enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
     path = params['path']
     data = params['data']
     ret = { path: path, room_id: data['room_id'] }
@@ -42,7 +44,7 @@ class RoomsChannel < ApplicationCable::Channel
                                            email: current_user.email,
                                            type: 'vote',
                                            title: title,
-                                           choices: choices.map {|c| [c, []]}
+                                           choices: choices.map { |c| [c, []] }
                                          }))
       else
         message = Message.new(data.merge(user_id: current_user.id, data: { email: current_user.email }))
@@ -61,10 +63,10 @@ class RoomsChannel < ApplicationCable::Channel
       return unless message.changed?
 
       message.save
-      ret.merge!({
+      ret.merge!(
         message: message,
         path: 'update_message'
-      })
+      )
     end
     RoomsChannel.broadcast_to room, ret
   end
