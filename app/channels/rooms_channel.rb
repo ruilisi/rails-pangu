@@ -49,7 +49,6 @@ class RoomsChannel < ApplicationCable::Channel
       end
       ret['message'] = message if message.save
     when 'vote'
-      puts ret
       message = Message.find(data['message_id'])
       index = data['index']
       message.data['choices'].each_with_index do |(_, voted_users), i|

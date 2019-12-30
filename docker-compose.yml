@@ -1,8 +1,6 @@
 version: '2'
 
 services:
-  mongo:
-    image: mongo
   db:
     image: postgres:12-alpine
   redis:
