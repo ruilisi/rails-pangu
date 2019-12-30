@@ -22,14 +22,12 @@ class WechatsController < ApplicationController
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <script type="application/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
-    <script type="application/javascript">
-      setInterval(function() {
-        if (wx) {
-          wx.closeWindow()
-        }
-      }, 200)
+    <script>
+      document.addEventListener("WeixinJSBridgeReady", function(){ WeixinJSBridge.call("closeWindow"); }, false);
     </script>
   </head>
+  <body>
+  </body>
 </html>
 '''
     # rubocop:enable Lint/ImplicitStringConcatenation
