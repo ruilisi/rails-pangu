@@ -6,7 +6,6 @@
 #
 default: &default
   adapter: postgresql
-  host: db
   username: postgres
   password: postgres
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -14,7 +13,7 @@ default: &default
 
 development:
   <<: *default
-  database: rails_pangu_deveopment
+  database: rails_pangu_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

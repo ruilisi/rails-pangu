@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  db:
+  postgres:
     image: postgres:12-alpine
   redis:
     image: redis:alpine
@@ -11,7 +11,7 @@ services:
       dockerfile: ./Dockerfile
     image: rails-pangu
     links:
-      - db
+      - postgres
       - redis
     volumes:
       - .:/usr/src/app
