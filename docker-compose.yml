@@ -6,6 +6,9 @@ services:
   redis:
     image: redis:alpine
   server:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
     image: rails-pangu
     links:
       - db
