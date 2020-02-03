@@ -6,6 +6,5 @@ gemfiles.each do |gemfile|
 end
 gem 'devise', '>= 4.7.1'
 gem 'devise-jwt'
-gem 'mongoid'
 gem 'qiniu'
 gem 'wechat'
