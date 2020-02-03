@@ -11,9 +11,7 @@
 [Devise](https://github.com/plataformatec/devise)作为一个标准第三方权限认证组件，提供了标准的Rails身份验证解决方案，而 [JWT](https://jwt.io/)（JOSN Web Tokens）是一个基于（RFC 7519）开放标准，直接用JSON创建访问令牌的高效分布式解决方案，而不是通过用数据库进行身份验证。在实际的开发需求中，我们迫切希望通过融合以上这两种技术来解决用户身份验证的问题。但是，当我们研究以上两种解决方案时，我们发现了一些共同问题：
 
 - 文档解释不清晰
-
 - 存在多处bug
-
 - 代码冗余、存在版本兼容性问题
 
 与此同时，我们看到其他一些开发者也在研究这个问题，但是他们都面临着**Rails <= 5.0**与**Rails 6**版本兼容性的问题 。两者之间有很大区别，因此，通过梳理 `rails 6`, `devise`, `jwt` 这三项技术，我们顺利解决了这个难题，实现了三者在Rails中的完美融合。与此同时，非常感谢为此项目提供很多参考建议的朋友们，比如这篇文章： [Rails 5 API + JWT setup in minutes (using Devise)](https://medium.com/@mazik.wyry/rails-5-api-jwt-setup-in-minutes-using-devise-71670fd4ed03) 。
@@ -65,19 +63,24 @@ JSON Web Tokens，是目前最流行的跨域认证解决方案。
 我们在 [app/models/jwt_blacklist.rb](https://github.com/ruilisi/Rails-pangu/blob/master/app/models/jwt_blacklist.rb) 里面通过使用redis实现了 devise-jwt的 `blacklist strategy`。
 
 #### 🚀 Postgres
+
 使用postgres作为默认数据库。当一个Web服务器的流量变得很大时，sqlite3显然无法满足我们的需求。
 
 #### 🚀 Rspec
+
 Ruby行为驱动测试框架，让TDD高效有趣。
 
 #### 🚀 [RuboCop](https://docs.rubocop.org)
+
 Ruby代码静态分析和格式工具，基于社区Ruby样式准侧 
 
 #### 🚀 [CircleCI](https://circleci.com/)
+
 CircleCI是一个行业流行的持续集成和持续部署的开发工具，方便与团队成员之间代码交流，密切协作。
 在本项目中，我们通过CircleCI用`rspec`和`RuboCop`来测试`Rails-pangu`的代码库。
 
 #### 🚀 [Factory Bot](https://github.com/thoughtbot/factory_bothttps://github.com/thoughtbot/factory_bot)
+
 将Ruby对象设置为测试用例。
 
 #### 🚀 Docker
@@ -86,12 +89,12 @@ Docker是标准的轻量级操作系统虚拟化解决方案，在全球得到�
 
 本项目提供的Docker构建方案包含了两大优化: 
 
-* Docker镜像构建加速
+- Docker镜像构建加速
 
   当一个项目迭代增长时，上百甚至上千个Gem会被尝试或者使用。即使是对`Gemfile`的一个微小变动都会触发一次所有Gem的重新bundle，故而绝大部分bundle时间都浪费在去bundle绝大多数稳定的Gem，例如：`rails`, `pg`。为了解决这个问题，我们通过一个小技巧来加速docker构建过程。这个技巧就是分两次来bundle `Gemfile`，然后产生两层镜像文件：
 
-  * 第一次为`Gemfile.core`构建镜像层，该文件服务于稳定或者核心的`Gem`，例如`rails`, `pg`。
-  * 第二次为`Gemfile`构建镜像层，该文件服务于易于变化的或者非核心的`Gem`， 例如你自己写的或者forked项目。
+  - 第一次为`Gemfile.core`构建镜像层，该文件服务于稳定或者核心的`Gem`，例如`rails`, `pg`。
+  - 第二次为`Gemfile`构建镜像层，该文件服务于易于变化的或者非核心的`Gem`， 例如你自己写的或者forked项目。
 
   尽管这个过程会生成额外的Docker镜像层，使镜像变大（预计几百KB），但这样做是有意义的，因为程序运行时间比磁盘空间要有限得多。
 
@@ -109,7 +112,7 @@ COPY Gemfile.lock .
 RUN bundle install --gemfile Gemfile -j16 --binstubs=$BUNDLE_PATH/bin
 ```
 
-* Gem构建加速 (仅为中国开发者提供)
+- Gem构建加速 (仅为中国开发者提供)
 
   我们会将Gem源 `https://rubygems.org` 镜像到 `https://gems.ruby-china.com`, 这会帮助中国开发者加速Gem构建速度。
 
@@ -124,7 +127,6 @@ Puma是一个简单、快速、线程化、高度并发的HTTP1.1服务器，用
 #### 🚀 Redis
 
 几乎所有的Web项目都使用`redis`作为存储系统，因为它快速、高效、简洁。
-
 
 ## 开始运行
 
@@ -148,6 +150,12 @@ docker-compose exec server rspec
 - `DEVISE_JWT_SECRET_KEY`:运行`Rails Secret`生成密钥。
 - `DATABASE_URL`: 连接Postgres数据库的URL。
 - `REDIS_URL`: 连接Redis数据库的URL。
+
+
+
+## CORS
+
+在默认情况下，`Rails-pangs`允许CORS并公开Authorization的Header。如果你想要禁用它，可以注释掉`config/cors.rb`文件的内容。
 
 
 
@@ -175,7 +183,7 @@ puts [
 
 ## Blacklist
 
-####默认redis黑名单
+#### 默认redis黑名单
 
 由于redis的访问内存的性能极高，redis是用来实现`blacklist`的一个好的选择。在`jwt_blacklist`中，我们用redis实现了黑名单。通过将`redis`的过期时间设置为与`jwt token`的过期时间相同，可以在令牌过期时自动从redis中删除此令牌。
 
@@ -241,8 +249,6 @@ puts [
   end
 ```
 
-
-
 #### Jwt dispatch
 
 在`user`记录上添加一个hook方法`on_jwt_dispatch`。它在用户调用令牌时执行，并将令牌和有效负载作为参数。这个方法也会在你调用`dispatch_requests`访问路由时被调用。
@@ -252,3 +258,37 @@ puts [
     # do_something(token, payload)
   end
 ```
+
+## 使用Rails-pangu的一些项目
+
+- **[LINGTI](https://lingti.io)**  (https://lingti.io/): 灵缇加速器是一款游戏加速器，包含PC、iOS、Android客户端。灵缇iOS和Android客户端支持Switch游戏热点加速，让你享受极致的联机和下载体验。灵缇PC客户端支持加速Switch、万智牌、LOL英雄联盟、DOTA2、绝地求生、CSGO等热门中外网游。
+- **[eSheep](https://esheep.io)**  (https://esheep.io/): 电子绵羊eSheep是一款网络加速器，它可以帮助身在海外的您极速连接中国的视频音乐网站。
+
+[<img src="https://assets.lingti.paiyou.co/ed568fbe.png" width="150" align="middle" />](https://lingti.io) [<img src="https://res.paiyou.co/44920709.png" width="200" align="middle" />](https://lingti.io)
+
+## 执照
+
+代码和文档版权归2019年[MIT许可](https://github.com/ruilisi/rails-pangu/blob/master/LICENSE)下发布的[Rails-pangu Authors](https://github.com/ruilisi/rails-pangu/graphs/contributors) 和 [Paiyou Network](https://paiyou.co/)所拥有。
+
+## Contributors ✨
+
+致谢 ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+
+<table>
+  <tr>
+    <td align="center"><a href="https://paiyou.co/"><img src="https://avatars2.githubusercontent.com/u/3121413?v=4" width="100px;" alt="hophacker"/><br /><sub><b>hophacker</b></sub></a><br /><a href="https://github.com/ruilisi/rails-pangu/commits?author=hophacker" title="Code">💻</a> <a href="https://github.com/ruilisi/rails-pangu/commits?author=hophacker" title="Documentation">📖</a> <a href="#infra-hophacker" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+    <td align="center"><a href="https://github.com/zhcalvin"><img src="https://avatars3.githubusercontent.com/u/5792099?v=4" width="100px;" alt="Jiawei Li"/><br /><sub><b>Jiawei Li</b></sub></a><br /><a href="https://github.com/ruilisi/rails-pangu/commits?author=zhcalvin" title="Code">💻</a> <a href="https://github.com/ruilisi/rails-pangu/commits?author=zhcalvin" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/zyc9012"><img src="https://avatars1.githubusercontent.com/u/3034310?v=4" width="100px;" alt="tato"/><br /><sub><b>tato</b></sub></a><br /><a href="https://github.com/ruilisi/rails-pangu/commits?author=zyc9012" title="Code">💻</a> <a href="https://github.com/ruilisi/rails-pangu/commits?author=zyc9012" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/caibiwsq"><img src="https://avatars0.githubusercontent.com/u/37767017?v=4" width="100px;" alt="caibiwsq"/><br /><sub><b>caibiwsq</b></sub></a><br /><a href="https://github.com/ruilisi/rails-pangu/commits?author=caibiwsq" title="Code">💻</a> <a href="https://github.com/ruilisi/rails-pangu/commits?author=caibiwsq" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://blog.cloud-mes.com/"><img src="https://avatars3.githubusercontent.com/u/1131536?v=4" width="100px;" alt="Eric Guo"/><br /><sub><b>Eric Guo</b></sub></a><br /><a href="https://github.com/ruilisi/rails-pangu/commits?author=Eric-Guo" title="Code">💻</a> <a href="https://github.com/ruilisi/rails-pangu/commits?author=Eric-Guo" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/alen9968"><img src="https://avatars2.githubusercontent.com/u/38801833?v=4" width="100px;" alt="张学财"/><br /><sub><b>张学财</b></sub></a><br /><a href="https://github.com/ruilisi/rails-pangu/commits?author=alen9968" title="Code">💻</a> <a href="https://github.com/ruilisi/rails-pangu/commits?author=alen9968" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/czj-Crazy"><img src="https://avatars1.githubusercontent.com/u/54089927?v=4" width="100px;" alt="czj-Crazy"/><br /><sub><b>czj-Crazy</b></sub></a><br /><a href="https://github.com/ruilisi/rails-pangu/commits?author=czj-Crazy" title="Documentation">📖</a></td>
+  </tr>
+</table>
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+该项目遵循[贡献者](https://github.com/all-contributors/all-contributors)规范。欢迎任何形式的捐助！
