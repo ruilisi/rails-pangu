@@ -37,6 +37,23 @@ As explained above, `rails 6` is the future and is far different from `rails 5`.
 
 It is common to use frontend js libraries like `react`, `vuejs` to replace `rails view` in modern web development
 
+#### 🚀 ActionCable
+
+This project demonstrates usage of actioncable with a working chatting backend which is authenticable thorugh JWT with functionalities as below:
+
+* A user can
+  * create/delete a room
+  * set his/her avatar
+* Other users can join rooms
+* Users inside a room can
+  * send messages with each other
+  * update a message
+  * delete a message
+  * launch a vote which others can attend
+  * pick up random users of a specific number inside the room
+
+The related fronend demo is written in [react-pangu](https://github.com/ruilisi/react-pangu), and the js library bridges frontend and backend is written in [actioncable-jwt](https://github.com/ruilisi/actioncable-jwt)
+
 #### 🚀 [Devise](https://github.com/plataformatec/devise)
 
 Quoted from it's homepage:
