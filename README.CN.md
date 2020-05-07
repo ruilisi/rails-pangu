@@ -133,10 +133,6 @@ RUN bundle install --gemfile Gemfile -j16 --binstubs=$BUNDLE_PATH/bin
 
   我们会将Gem源 `https://rubygems.org` 镜像到 `https://gems.ruby-china.com`, 这会帮助中国开发者加速Gem构建速度。
 
-#### 🚀 Docker Compose
-
-通过一个`docker compose.yml`文件，可以实现postgres和web服务器的快速构建。
-
 #### 🚀 [Puma](https://github.com/puma/puma)
 
 Puma是一个简单、快速、线程化、高度并发的HTTP1.1服务器，用于Ruby/Rack应用的开发。
@@ -156,18 +152,12 @@ Puma是一个简单、快速、线程化、高度并发的HTTP1.1服务器，用
 创建镜像后，运行：`docker-compose up -d`
 然后，用`docker compose exec server rails db:create`初始化数据库。
 
-#### Test
+## Test
 
-```ruby
-docker-compose exec server rspec
+```bash
+rails db:reset db:seed RAILS_ENV="test"
+rspec
 ```
-
-运行或测试需要以下环境变量（选中`docker-cmpose.yml`）:
-
-- `DEVISE_JWT_SECRET_KEY`:运行`Rails Secret`生成密钥。
-- `DATABASE_URL`: 连接Postgres数据库的URL。
-- `REDIS_URL`: 连接Redis数据库的URL。
-
 
 
 ## CORS

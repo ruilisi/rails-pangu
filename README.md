@@ -128,10 +128,6 @@ RUN bundle install --gemfile Gemfile -j16 --binstubs=$BUNDLE_PATH/bin
 
   
 
-#### 🚀 Docker Compose
-
-A `docker-compose.yml` is attached to help stick postgres and web server together quickly.
-
 #### 🚀 [Puma](https://github.com/puma/puma)
 
 Puma is a simple, fast, threaded, and highly concurrent HTTP 1.1 server for Ruby/Rack applications in development and production.
@@ -141,28 +137,12 @@ Puma is a simple, fast, threaded, and highly concurrent HTTP 1.1 server for Ruby
 Is there any web project isn't using `redis` as a faster and sometimes easier way of storing data? Well, if there isn't,  just replace it!
 
 
-## Build, Run, Test
-
-#### Build
-
-Run `bin/build.sh` to build the docker image `rails-devise-jwt`.
-
-
-
-#### Run
-
-After built the image, run: `docker-compose up -d`
-
-Then, initialize the database with `docker-compose exec server rails db:create`
-
-
-
-#### Test
+## Test
 
 ```bash
-docker-compose exec server rspec
+rails db:reset db:seed RAILS_ENV="test"
+rspec
 ```
-
 
 
 The following environment varialbes are required in order to run or test (check `docker-cmpose.yml`):

@@ -1,11 +1,5 @@
 version: 2
 
-common_env: &common_env
-  DATABASE_URL: postgres://postgres@localhost:5432/rails-pangu-test?pool=25&encoding=unicode&schema_search_path=public
-  DEVISE_JWT_SECRET_KEY: RANDOM_SECRET
-  RAILS_ENV: test
-  REDIS_URL: redis://localhost:6379
-
 defaults: &defaults
   working_directory: ~/app
 
@@ -47,8 +41,6 @@ jobs:
     <<: *defaults
     docker:
       - image: circleci/ruby:2.6.5
-        environment:
-          <<: *common_env
       - image: circleci/postgres:11.3-alpine
       - image: circleci/redis:alpine
     steps:
