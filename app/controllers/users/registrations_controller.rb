@@ -9,6 +9,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/sign_up
   def new
     render(status: :bad_request) && return if User.exists?(email: sign_up_params['email'])
+
     build_resource(sign_up_params)
     resource.save
     render_resource(resource)
