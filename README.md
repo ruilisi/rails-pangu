@@ -75,7 +75,7 @@ JSON Web Tokens
 
 While there are lots of solutions which hook `devise` and `jwt` together, this repo is better implemented from our point of view.
 
-We implmented a devise-jwt blacklist policy leveraging the power of `redis` in [app/models/jwt_blacklist.rb](https://github.com/ruilisi/rails-devise-jwt/blob/master/app/models/jwt_blacklist.rb).
+We implmented a devise-jwt denylist policy leveraging the power of `redis` in [app/models/jwt_denylist.rb](https://github.com/ruilisi/rails-devise-jwt/blob/master/app/models/jwt_denylist.rb).
 
 #### 🚀 Postgres
 We use postgres as default database store cause sqlite3 will be replaced sooner or later when the traffic of one web server becomes lager enough
@@ -181,28 +181,28 @@ If you want to run bash script, you can replace `cd /usr/src/app; rails runner \
 
 In addition to the default role we provide, we also allow developers to create their custom role. There is a document about how to [create a new role](https://github.com/ruilisi/rails-pangu/wiki/Create-a-role)
 
-## Blacklist
+## Denylist
 
-#### Default blacklist with redis
+#### Default denylist with redis
 
-Redis is a good option for `blacklist` that will allow fast in memory access to the list. In `jwt_blacklist` record, we implement blacklist with redis. By setting `redis` expiration time to be the same as `jwt token` expiration time, this token can be automatically deleted from redis when the token expires.
+Redis is a good option for `denylist` that will allow fast in memory access to the list. In `jwt_denylist` record, we implement denylist with redis. By setting `redis` expiration time to be the same as `jwt token` expiration time, this token can be automatically deleted from redis when the token expires.
 
 ```ruby
   def self.jwt_revoked?(payload, user)
-    # Check if in the blacklist
-    $redis.get("user_blacklist:#{user.id}:#{payload['jti']}").present?
+    # Check if in the denylist
+    $redis.get("user_denylist:#{user.id}:#{payload['jti']}").present?
   end
 
   def self.revoke_jwt(payload, user)
     # REVOKE JWT
     expiration = payload['exp'] - payload['iat']
-    $redis.setex("user_blacklist:#{user.id}:#{payload['jti']}", expiration, payload['jti'])
+    $redis.setex("user_denylist:#{user.id}:#{payload['jti']}", expiration, payload['jti'])
   end
 ```
 
-#### Custom blacklist
+#### Custom denylist
 
-You can also implement blacklist by your own strategies. You just need to rewrite two methods: `jwt_revoked?` and `revoke_jwt` in `jwt_blacklist.rb`, both of them accepting as parameters the JWT payload and the `user` record, in this order.
+You can also implement denylist by your own strategies. You just need to rewrite two methods: `jwt_revoked?` and `revoke_jwt` in `jwt_denylist.rb`, both of them accepting as parameters the JWT payload and the `user` record, in this order.
 
 ```ruby
   def self.jwt_revoked?(payload, user)

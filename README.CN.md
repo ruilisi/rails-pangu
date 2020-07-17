@@ -77,7 +77,7 @@ JSON Web Tokens，是目前最流行的跨域认证解决方案。
 
 实现了将`devise`和`jwt`技术融合，虽然也有其他开发者通过其它方式实现了两者的融合运用，但都效果欠佳。
 
-我们在 [app/models/jwt_blacklist.rb](https://github.com/ruilisi/Rails-pangu/blob/master/app/models/jwt_blacklist.rb) 里面通过使用redis实现了 devise-jwt的 `blacklist strategy`。
+我们在 [app/models/jwt_denylist.rb](https://github.com/ruilisi/Rails-pangu/blob/master/app/models/jwt_denylist.rb) 里面通过使用redis实现了 devise-jwt的 `denylist strategy`。
 
 #### 🚀 Postgres
 
@@ -188,22 +188,22 @@ puts [
 
 除了我们提供的默认角色之外，我们还允许developer创建他们的[自定义角色](https://github.com/ruilisi/Rails-pangu/wiki/create-a-role)。
 
-## Blacklist
+## Denylist
 
 #### 默认redis黑名单
 
-由于redis的访问内存的性能极高，redis是用来实现`blacklist`的一个好的选择。在`jwt_blacklist`中，我们用redis实现了黑名单。通过将`redis`的过期时间设置为与`jwt token`的过期时间相同，可以在令牌过期时自动从redis中删除此令牌。
+由于redis的访问内存的性能极高，redis是用来实现`denylist`的一个好的选择。在`jwt_denylist`中，我们用redis实现了黑名单。通过将`redis`的过期时间设置为与`jwt token`的过期时间相同，可以在令牌过期时自动从redis中删除此令牌。
 
 ```ruby
   def self.jwt_revoked?(payload, user)
-    # Check if in the blacklist
-    $redis.get("user_blacklist:#{user.id}:#{payload['jti']}").present?
+    # Check if in the denylist
+    $redis.get("user_denylist:#{user.id}:#{payload['jti']}").present?
   end
 
   def self.revoke_jwt(payload, user)
     # REVOKE JWT
     expiration = payload['exp'] - payload['iat']
-    $redis.setex("user_blacklist:#{user.id}:#{payload['jti']}", expiration, payload['jti'])
+    $redis.setex("user_denylist:#{user.id}:#{payload['jti']}", expiration, payload['jti'])
   end
 ```
 
@@ -211,7 +211,7 @@ puts [
 
 #### 自定义黑名单
 
-你也可以通过自己的策略实现黑名单。你只需要重写两个方法：`jwt-revoked？`以及`jwt-blacklist.rb`中的`revoke-jwt`，这两个方法都接受jwt负载和`user`记录作为参数。
+你也可以通过自己的策略实现黑名单。你只需要重写两个方法：`jwt-revoked？`以及`jwt-denylist.rb`中的`revoke-jwt`，这两个方法都接受jwt负载和`user`记录作为参数。
 
 ```ruby
   def self.jwt_revoked?(payload, user)
