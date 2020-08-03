@@ -1,0 +1,84 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "hophacker",
+      "name": "hophacker",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/3121413?v=4",
+      "profile": "https://paiyou.co/",
+      "contributions": [
+        "code",
+        "doc",
+        "infra"
+      ]
+    },
+    {
+      "login": "zhcalvin",
+      "name": "Jiawei Li",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/5792099?v=4",
+      "profile": "https://github.com/zhcalvin",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "caibiwsq",
+      "name": "caibiwsq",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/37767017?v=4",
+      "profile": "https://github.com/caibiwsq",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "Eric-Guo",
+      "name": "Eric Guo",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1131536?v=4",
+      "profile": "http://blog.cloud-mes.com/",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "alen9968",
+      "name": "张学财",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/38801833?v=4",
+      "profile": "https://github.com/alen9968",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "czj-Crazy",
+      "name": "czj-Crazy",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/54089927?v=4",
+      "profile": "https://github.com/czj-Crazy",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "zyc9012",
+      "name": "tato",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/3034310?v=4",
+      "profile": "https://github.com/zyc9012",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "rails-pangu",
+  "projectOwner": "paiyou-network",
+  "repoType": "github",
+  "repoHost": "https://github.com"
+}
