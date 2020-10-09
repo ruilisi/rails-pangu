@@ -37,8 +37,13 @@ coreos
 *.rbc
 capybara-*.html
 .rspec
-log
-tmp
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
 db/*.sqlite3
 db/*.sqlite3-journal
 db/dumps

@@ -7,7 +7,7 @@ jobs:
   checkout_code:
     <<: *defaults
     docker:
-      - image: circleci/ruby:2.6.5
+      - image: circleci/ruby:2.7.2
     steps:
       - checkout
       - save_cache:
@@ -18,7 +18,7 @@ jobs:
   linting:
     <<: *defaults
     docker:
-      - image: circleci/ruby:2.6.5
+      - image: circleci/ruby:2.7.2
     steps:
       - restore_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
@@ -40,7 +40,7 @@ jobs:
   build:
     <<: *defaults
     docker:
-      - image: circleci/ruby:2.6.5
+      - image: circleci/ruby:2.7.2
       - image: circleci/postgres:11.3-alpine
       - image: circleci/redis:alpine
     steps:

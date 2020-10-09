@@ -95,7 +95,7 @@ A library for setting up Ruby objects as test data.
 
 #### 🚀 Docker
 
-Docker is a standard containerize solution which is almost used in every team worldwide. As a result, a `Dockerfile` and related scripts are provided to help generate a docker image for this project.
+`Dockerfile` and related scripts are provided to generate the docker image for this project.
 
 The provided docker building solution contains the following optimizations: 
 
