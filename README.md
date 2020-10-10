@@ -27,6 +27,39 @@ At the same time, we saw couple of other repos doing the same work, but one big 
 > Pangu is the creator of all in Chinese mythology. In the stories, Pangu created the Earth and the Sky with a swing of his giant axe and kept them seperated by standing between them.
 > Just like pangu, `Rails-pangu` aims at being a foundational code base which eliminates those tedious research and experimental work for your new Rails projects.
 
+## Getting Started
+```bash
+~ $ git clone https://github.com/ruilisi/rails-pangu
+~ $ cd rails-pangu
+~ $ bundle install
+~ $ rails db:create db:migrate db:seed
+~ $ rails s
+```
+
+Install `httpie` and run:
+```bash
+~ $ http post localhost:3000/users user:='{"email":"user@test.com","password":"Test1aBc"}'
+HTTP/1.1 200 OK
+Cache-Control: max-age=0, private, must-revalidate
+Content-Type: application/json; charset=utf-8
+ETag: W/"df30d418ad05c15dbfdc6e34ef53f723"
+Referrer-Policy: strict-origin-when-cross-origin
+Transfer-Encoding: chunked
+X-Content-Type-Options: nosniff
+X-Download-Options: noopen
+X-Frame-Options: SAMEORIGIN
+X-Permitted-Cross-Domain-Policies: none
+X-Request-Id: 689485eb-5e33-4ba2-afe8-ca7214088eda
+X-Runtime: 0.216293
+X-XSS-Protection: 1; mode=block
+
+{
+    "created_at": "2020-10-10T05:43:20.349Z",
+    "email": "user@test.com",
+    "id": 1,
+    "updated_at": "2020-10-10T05:43:20.349Z"
+}
+```
 ## Features
 
 #### 🚀 Rails 6

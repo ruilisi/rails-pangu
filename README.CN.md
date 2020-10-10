@@ -21,15 +21,41 @@
 > 盘古是中国神话中万物的创造者。在神话故事中，盘古挥舞着巨大的斧头开辟了天地，矗立在天地之间使其分隔开来。
 > 正如盘古一样, `Rails-pangu`志在成为你起用Rails新项目时的基础性代码库，从而减轻你在做新项目时繁琐的调研和实验工作。
 
-## 开发准备
+## 开始
+```bash
+~ $ git clone https://github.com/ruilisi/rails-pangu
+~ $ cd rails-pangu
+~ $ bundle install
+~ $ rails db:create db:migrate db:seed
+~ $ rails s
+```
 
-我们在`Rails-pangu`中使用了许多前沿的gems，但这并不意味着在这个仓库上构建的项目是不稳定的，因为我们的团队已经运行了很多基于它的项目。
+安装`httpie`然后运行:
+```bash
+~ $ http post localhost:3000/users user:='{"email":"user@test.com","password":"Test1aBc"}'
+HTTP/1.1 200 OK
+Cache-Control: max-age=0, private, must-revalidate
+Content-Type: application/json; charset=utf-8
+ETag: W/"df30d418ad05c15dbfdc6e34ef53f723"
+Referrer-Policy: strict-origin-when-cross-origin
+Transfer-Encoding: chunked
+X-Content-Type-Options: nosniff
+X-Download-Options: noopen
+X-Frame-Options: SAMEORIGIN
+X-Permitted-Cross-Domain-Policies: none
+X-Request-Id: 689485eb-5e33-4ba2-afe8-ca7214088eda
+X-Runtime: 0.216293
+X-XSS-Protection: 1; mode=block
 
-例如，我们团队开发的  `Computer Game Acceleration` ,  **LINGTI** (https://lingti.io/)
+{
+    "created_at": "2020-10-10T05:43:20.349Z",
+    "email": "user@test.com",
+    "id": 1,
+    "updated_at": "2020-10-10T05:43:20.349Z"
+}
+```
 
-<img src="https://assets.lingti.paiyou.co/ed568fbe.png" width="200" align="middle" />
-
-## 产品特性
+## 特性
 
 #### 🚀 基于Rails 6
 
