@@ -60,6 +60,41 @@ X-XSS-Protection: 1; mode=block
     "updated_at": "2020-10-10T05:43:20.349Z"
 }
 ```
+
+`GET` `auth_ping` with the bearer(`eyJhbGciOiJIUzI1NiJ9...2_Epa7U57z-pewuwuE`) returned by `POST` `users/sign_in`:
+```bash
+~ $ http localhost:3000/auth_ping "Authorization:Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjAyMzE2ODQ4LCJleHAiOjE2MDI0MDMyNDgsImp0aSI6ImE2N2UwZmUzLTBjOWMtNGE3Zi1iODEyLTM0NmIxYWJjMmUyNiJ9.l_s2CnPc4-xJe5PE6P3jLkji-2_Epa7U57z-pewuwuE"
+HTTP/1.1 200 OK
+Cache-Control: max-age=0, private, must-revalidate
+Content-Type: text/plain; charset=utf-8
+ETag: W/"9795c5ff8937f23526ccb207a5684c1f"
+Referrer-Policy: strict-origin-when-cross-origin
+Transfer-Encoding: chunked
+X-Content-Type-Options: nosniff
+X-Download-Options: noopen
+X-Frame-Options: SAMEORIGIN
+X-Permitted-Cross-Domain-Policies: none
+X-Request-Id: 1f12c45c-1496-4604-90d5-57d3db85924d
+X-Runtime: 0.005407
+X-XSS-Protection: 1; mode=block
+
+pong
+
+```
+
+`GET` `auth_ping` without bearer will result `401 Unauthorized`:
+```bash
+~ $ http localhost:3000/auth_ping                                                                                                                                                              [ruby-2.7.2]
+HTTP/1.1 401 Unauthorized
+Cache-Control: no-cache
+Content-Type: */*; charset=utf-8
+Transfer-Encoding: chunked
+X-Request-Id: 8c21f5f2-f385-4b0b-b1f6-478ef06de256
+X-Runtime: 0.003266
+
+You need to sign in or sign up before continuing.
+
+```
 ## Features
 
 #### 🚀 Rails 6
