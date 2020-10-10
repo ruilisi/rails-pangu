@@ -59,11 +59,34 @@ X-XSS-Protection: 1; mode=block
     "id": 1,
     "updated_at": "2020-10-10T05:43:20.349Z"
 }
+
+~ $ http post localhost:3000/users/sign_in user:='{"email":"user@test.com","password":"Test1aBc"}'
+HTTP/1.1 200 OK
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjAyMzE3ODYxLCJleHAiOjE2MDI0MDQyNjEsImp0aSI6IjNkOGY4ZThkLTY2YjUtNGE5Ny05YzkzLTUxZmFmMGQyMTM1YSJ9.Q-HWFNtLtfNO2iZsTRBfmlJlBBxHWTwrSlTjBaS6GNI
+Cache-Control: max-age=0, private, must-revalidate
+Content-Type: application/json; charset=utf-8
+ETag: W/"df30d418ad05c15dbfdc6e34ef53f723"
+Referrer-Policy: strict-origin-when-cross-origin
+Transfer-Encoding: chunked
+X-Content-Type-Options: nosniff
+X-Download-Options: noopen
+X-Frame-Options: SAMEORIGIN
+X-Permitted-Cross-Domain-Policies: none
+X-Request-Id: 957a1c92-c5a8-4607-81df-6ca70ba9b846
+X-Runtime: 0.193702
+X-XSS-Protection: 1; mode=block
+
+{
+    "created_at": "2020-10-10T05:43:20.349Z",
+    "email": "user@test.com",
+    "id": 1,
+    "updated_at": "2020-10-10T05:43:20.349Z"
+}
 ```
 
-`GET` `auth_ping` with the bearer(`eyJhbGciOiJIUzI1NiJ9...2_Epa7U57z-pewuwuE`) returned by `POST` `users/sign_in`:
+`GET auth_ping` with the bearer(`eyJhbGciOiJIUzI1NiJ9...`) returned by `POST users/sign_in`:
 ```bash
-~ $ http localhost:3000/auth_ping "Authorization:Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjAyMzE2ODQ4LCJleHAiOjE2MDI0MDMyNDgsImp0aSI6ImE2N2UwZmUzLTBjOWMtNGE3Zi1iODEyLTM0NmIxYWJjMmUyNiJ9.l_s2CnPc4-xJe5PE6P3jLkji-2_Epa7U57z-pewuwuE"
+~ $ http localhost:3000/auth_ping "Authorization:Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjAyMzE3ODYxLCJleHAiOjE2MDI0MDQyNjEsImp0aSI6IjNkOGY4ZThkLTY2YjUtNGE5Ny05YzkzLTUxZmFmMGQyMTM1YSJ9.Q-HWFNtLtfNO2iZsTRBfmlJlBBxHWTwrSlTjBaS6GNI"
 HTTP/1.1 200 OK
 Cache-Control: max-age=0, private, must-revalidate
 Content-Type: text/plain; charset=utf-8
@@ -74,8 +97,8 @@ X-Content-Type-Options: nosniff
 X-Download-Options: noopen
 X-Frame-Options: SAMEORIGIN
 X-Permitted-Cross-Domain-Policies: none
-X-Request-Id: 1f12c45c-1496-4604-90d5-57d3db85924d
-X-Runtime: 0.005407
+X-Request-Id: 5084b48f-6d27-4347-add5-b2d0c9661137
+X-Runtime: 0.004279
 X-XSS-Protection: 1; mode=block
 
 pong
