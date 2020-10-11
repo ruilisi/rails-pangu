@@ -1,14 +1,15 @@
 AllCops:
+  NewCops: enable
   Exclude:
   - 'bin/**/*'
   - 'db/schema.rb'
   - 'vendor/**/*'
   DisplayCopNames: true
   StyleGuideCopsOnly: false
-  TargetRubyVersion: 2.6.5
+  TargetRubyVersion: 2.7.2
 Documentation:
   Enabled: false
-Metrics/LineLength:
+Layout/LineLength:
   Max: 150
 Metrics/AbcSize:
   Max: 63
@@ -49,3 +50,6 @@ Layout/EmptyLines:
   Exclude:
     - 'config/**/*'
     - 'db/**/*'
+Style/BlockComments:
+  Exclude:
+    - 'spec/spec_helper.rb'
