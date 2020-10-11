@@ -18,8 +18,8 @@
 
 <img src="https://res.paiyou.co/pangu.jpg" width="300" align="middle" />
 
-> 盘古是中国神话中万物的创造者。在神话故事中，盘古挥舞着巨大的斧头开辟了天地，矗立在天地之间使其分隔开来。
-> 正如盘古一样, `Rails-pangu`志在成为你起用Rails新项目时的基础性代码库，从而减轻你在做新项目时繁琐的调研和实验工作。
+> 盘古在中国古神话中是万物创始之神[<sup>1</sup>](#refer-pangu).
+> 正如盘古，`Rails-pangu`意在成为您新rails项目的starter kit，它帮您扫除那些有难度但重复的活儿。
 
 ## 开始
 ```bash
@@ -27,91 +27,10 @@
 ~ $ cd rails-pangu
 ~ $ bundle install
 ~ $ rails db:create db:migrate db:seed
-~ $ rails s
+~ $ rspec
 ```
 
-安装`httpie`然后运行:
-```bash
-~ $ http post localhost:3000/users user:='{"email":"user@test.com","password":"Test1aBc"}'
-HTTP/1.1 200 OK
-Cache-Control: max-age=0, private, must-revalidate
-Content-Type: application/json; charset=utf-8
-ETag: W/"df30d418ad05c15dbfdc6e34ef53f723"
-Referrer-Policy: strict-origin-when-cross-origin
-Transfer-Encoding: chunked
-X-Content-Type-Options: nosniff
-X-Download-Options: noopen
-X-Frame-Options: SAMEORIGIN
-X-Permitted-Cross-Domain-Policies: none
-X-Request-Id: 689485eb-5e33-4ba2-afe8-ca7214088eda
-X-Runtime: 0.216293
-X-XSS-Protection: 1; mode=block
-
-{
-    "created_at": "2020-10-10T05:43:20.349Z",
-    "email": "user@test.com",
-    "id": 1,
-    "updated_at": "2020-10-10T05:43:20.349Z"
-}
-
-~ $ http post localhost:3000/users/sign_in user:='{"email":"user@test.com","password":"Test1aBc"}'
-HTTP/1.1 200 OK
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjAyMzE3ODYxLCJleHAiOjE2MDI0MDQyNjEsImp0aSI6IjNkOGY4ZThkLTY2YjUtNGE5Ny05YzkzLTUxZmFmMGQyMTM1YSJ9.Q-HWFNtLtfNO2iZsTRBfmlJlBBxHWTwrSlTjBaS6GNI
-Cache-Control: max-age=0, private, must-revalidate
-Content-Type: application/json; charset=utf-8
-ETag: W/"df30d418ad05c15dbfdc6e34ef53f723"
-Referrer-Policy: strict-origin-when-cross-origin
-Transfer-Encoding: chunked
-X-Content-Type-Options: nosniff
-X-Download-Options: noopen
-X-Frame-Options: SAMEORIGIN
-X-Permitted-Cross-Domain-Policies: none
-X-Request-Id: 957a1c92-c5a8-4607-81df-6ca70ba9b846
-X-Runtime: 0.193702
-X-XSS-Protection: 1; mode=block
-
-{
-    "created_at": "2020-10-10T05:43:20.349Z",
-    "email": "user@test.com",
-    "id": 1,
-    "updated_at": "2020-10-10T05:43:20.349Z"
-}
-```
-
-用`POST users/sign_in`得到的bearer(`eyJhbGciOiJIUzI1NiJ9...`)来`GET auth_ping`:
-```bash
-~ $ http localhost:3000/auth_ping "Authorization:Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjAyMzE3ODYxLCJleHAiOjE2MDI0MDQyNjEsImp0aSI6IjNkOGY4ZThkLTY2YjUtNGE5Ny05YzkzLTUxZmFmMGQyMTM1YSJ9.Q-HWFNtLtfNO2iZsTRBfmlJlBBxHWTwrSlTjBaS6GNI"
-HTTP/1.1 200 OK
-Cache-Control: max-age=0, private, must-revalidate
-Content-Type: text/plain; charset=utf-8
-ETag: W/"9795c5ff8937f23526ccb207a5684c1f"
-Referrer-Policy: strict-origin-when-cross-origin
-Transfer-Encoding: chunked
-X-Content-Type-Options: nosniff
-X-Download-Options: noopen
-X-Frame-Options: SAMEORIGIN
-X-Permitted-Cross-Domain-Policies: none
-X-Request-Id: 5084b48f-6d27-4347-add5-b2d0c9661137
-X-Runtime: 0.004279
-X-XSS-Protection: 1; mode=block
-
-pong
-
-```
-
-不用bearer来`GET` `auth_ping`会得到`401 Unauthorized`:
-```bash
-~ $ http localhost:3000/auth_ping                                                                                                                                                              [ruby-2.7.2]
-HTTP/1.1 401 Unauthorized
-Cache-Control: no-cache
-Content-Type: */*; charset=utf-8
-Transfer-Encoding: chunked
-X-Request-Id: 8c21f5f2-f385-4b0b-b1f6-478ef06de256
-X-Runtime: 0.003266
-
-You need to sign in or sign up before continuing.
-
-```
+尝试[快速测试](#quick-tests)来获得`rails-pang`的一手体验。
 
 ## 特性
 
@@ -350,12 +269,103 @@ puts [
   end
 ```
 
+## 快速测试
+<div id="quick-tests"></div>
+
+**要求**
+* rails服务器运行: `rails s`
+* 安装`httpie`
+
+```bash
+~ $ http post localhost:3000/users user:='{"email":"user@test.com","password":"Test1aBc"}'
+HTTP/1.1 200 OK
+Cache-Control: max-age=0, private, must-revalidate
+Content-Type: application/json; charset=utf-8
+ETag: W/"df30d418ad05c15dbfdc6e34ef53f723"
+Referrer-Policy: strict-origin-when-cross-origin
+Transfer-Encoding: chunked
+X-Content-Type-Options: nosniff
+X-Download-Options: noopen
+X-Frame-Options: SAMEORIGIN
+X-Permitted-Cross-Domain-Policies: none
+X-Request-Id: 689485eb-5e33-4ba2-afe8-ca7214088eda
+X-Runtime: 0.216293
+X-XSS-Protection: 1; mode=block
+
+{
+    "created_at": "2020-10-10T05:43:20.349Z",
+    "email": "user@test.com",
+    "id": 1,
+    "updated_at": "2020-10-10T05:43:20.349Z"
+}
+
+~ $ http post localhost:3000/users/sign_in user:='{"email":"user@test.com","password":"Test1aBc"}'
+HTTP/1.1 200 OK
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjAyMzE3ODYxLCJleHAiOjE2MDI0MDQyNjEsImp0aSI6IjNkOGY4ZThkLTY2YjUtNGE5Ny05YzkzLTUxZmFmMGQyMTM1YSJ9.Q-HWFNtLtfNO2iZsTRBfmlJlBBxHWTwrSlTjBaS6GNI
+Cache-Control: max-age=0, private, must-revalidate
+Content-Type: application/json; charset=utf-8
+ETag: W/"df30d418ad05c15dbfdc6e34ef53f723"
+Referrer-Policy: strict-origin-when-cross-origin
+Transfer-Encoding: chunked
+X-Content-Type-Options: nosniff
+X-Download-Options: noopen
+X-Frame-Options: SAMEORIGIN
+X-Permitted-Cross-Domain-Policies: none
+X-Request-Id: 957a1c92-c5a8-4607-81df-6ca70ba9b846
+X-Runtime: 0.193702
+X-XSS-Protection: 1; mode=block
+
+{
+    "created_at": "2020-10-10T05:43:20.349Z",
+    "email": "user@test.com",
+    "id": 1,
+    "updated_at": "2020-10-10T05:43:20.349Z"
+}
+```
+
+用`POST users/sign_in`得到的bearer(`eyJhbGciOiJIUzI1NiJ9...`)来`GET auth_ping`:
+```bash
+~ $ http localhost:3000/auth_ping "Authorization:Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjAyMzE3ODYxLCJleHAiOjE2MDI0MDQyNjEsImp0aSI6IjNkOGY4ZThkLTY2YjUtNGE5Ny05YzkzLTUxZmFmMGQyMTM1YSJ9.Q-HWFNtLtfNO2iZsTRBfmlJlBBxHWTwrSlTjBaS6GNI"
+HTTP/1.1 200 OK
+Cache-Control: max-age=0, private, must-revalidate
+Content-Type: text/plain; charset=utf-8
+ETag: W/"9795c5ff8937f23526ccb207a5684c1f"
+Referrer-Policy: strict-origin-when-cross-origin
+Transfer-Encoding: chunked
+X-Content-Type-Options: nosniff
+X-Download-Options: noopen
+X-Frame-Options: SAMEORIGIN
+X-Permitted-Cross-Domain-Policies: none
+X-Request-Id: 5084b48f-6d27-4347-add5-b2d0c9661137
+X-Runtime: 0.004279
+X-XSS-Protection: 1; mode=block
+
+pong
+
+```
+
+不用bearer来`GET` `auth_ping`会得到`401 Unauthorized`:
+```bash
+~ $ http localhost:3000/auth_ping                                                                                                                                                              [ruby-2.7.2]
+HTTP/1.1 401 Unauthorized
+Cache-Control: no-cache
+Content-Type: */*; charset=utf-8
+Transfer-Encoding: chunked
+X-Request-Id: 8c21f5f2-f385-4b0b-b1f6-478ef06de256
+X-Runtime: 0.003266
+
+You need to sign in or sign up before continuing.
+
+```
+
+
 ## 使用Rails-pangu的一些项目
 
-- **[LINGTI](https://lingti.io)**  (https://lingti.io/): 灵缇加速器是一款游戏加速器，包含PC、iOS、Android客户端。灵缇iOS和Android客户端支持Switch游戏热点加速，让你享受极致的联机和下载体验。灵缇PC客户端支持加速Switch、万智牌、LOL英雄联盟、DOTA2、绝地求生、CSGO等热门中外网游。
-- **[eSheep](https://esheep.io)**  (https://esheep.io/): 电子绵羊eSheep是一款网络加速器，它可以帮助身在海外的您极速连接中国的视频音乐网站。
+- **[LINGTI](https://lingti666.com)**  (https://lingti666.com/): 灵缇加速器是一款游戏加速器，包含PC、Mac、iOS、Android、路由器插件、路由盒子客户端。灵缇iOS和Android客户端支持Switch游戏热点加速，让你享受极致的联机和下载体验。
+- **[eSheep](https://esheeps.com)**  (https://esheeps.com/): 电子绵羊是一款帮助您极速连接亚洲的视频音乐网站网络加速器。
 
-[<img src="https://assets.lingti.paiyou.co/ed568fbe.png" width="150" align="middle" />](https://lingti.io) [<img src="https://res.paiyou.co/44920709.png" width="200" align="middle" />](https://lingti.io)
+[<img src="https://esheeps.com/imgs/logo.jpg" height="100" align="middle" />](https://esheeps.com)
+[<img src="https://lingti666.com/imgs/lingti-logo.png" height="50" align="middle" />](https://lingti666.com)
 
 ## 执照
 
@@ -383,3 +393,8 @@ puts [
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 该项目遵循[贡献者](https://github.com/all-contributors/all-contributors)规范。欢迎任何形式的捐助！
+
+## 索引
+<div id="refer-pangu"></div>
+
+- [1] [盘古维基](https://en.wikipedia.org/wiki/Pangu)

@@ -22,10 +22,8 @@ Thanks to lots of the close solutions that gave hints to this `Rails-pangu`, for
 
 At the same time, we saw couple of other repos doing the same work, but one big issue for these repos is that they are started with **Rails <= 5.0**, which is far different from **Rails 6**, and that contributes to the final decision to "reinvent the wheel again".
 
-<img src="https://res.paiyou.co/pangu.jpg" width="300" align="middle" />
-
-> Pangu is the creator of all in Chinese mythology. In the stories, Pangu created the Earth and the Sky with a swing of his giant axe and kept them seperated by standing between them.
-> Just like pangu, `Rails-pangu` aims at being a foundational code base which eliminates those tedious research and experimental work for your new Rails projects.
+> Pangu is the first living being and the creator of all in some versions of Chinese mythology[<sup>1</sup>](#refer-pangu).
+> Just like pangu, `Rails-pangu` aims to be a starter kit of your next rails project which eliminates tricky but repeated work.
 
 ## Getting Started
 ```bash
@@ -33,91 +31,11 @@ At the same time, we saw couple of other repos doing the same work, but one big 
 ~ $ cd rails-pangu
 ~ $ bundle install
 ~ $ rails db:create db:migrate db:seed
-~ $ rails s
+~ $ rspec
 ```
 
-Install `httpie` and run:
-```bash
-~ $ http post localhost:3000/users user:='{"email":"user@test.com","password":"Test1aBc"}'
-HTTP/1.1 200 OK
-Cache-Control: max-age=0, private, must-revalidate
-Content-Type: application/json; charset=utf-8
-ETag: W/"df30d418ad05c15dbfdc6e34ef53f723"
-Referrer-Policy: strict-origin-when-cross-origin
-Transfer-Encoding: chunked
-X-Content-Type-Options: nosniff
-X-Download-Options: noopen
-X-Frame-Options: SAMEORIGIN
-X-Permitted-Cross-Domain-Policies: none
-X-Request-Id: 689485eb-5e33-4ba2-afe8-ca7214088eda
-X-Runtime: 0.216293
-X-XSS-Protection: 1; mode=block
+Try [quick tests](#quick-tests) to get hands-on experience with `rails-pangu`.
 
-{
-    "created_at": "2020-10-10T05:43:20.349Z",
-    "email": "user@test.com",
-    "id": 1,
-    "updated_at": "2020-10-10T05:43:20.349Z"
-}
-
-~ $ http post localhost:3000/users/sign_in user:='{"email":"user@test.com","password":"Test1aBc"}'
-HTTP/1.1 200 OK
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjAyMzE3ODYxLCJleHAiOjE2MDI0MDQyNjEsImp0aSI6IjNkOGY4ZThkLTY2YjUtNGE5Ny05YzkzLTUxZmFmMGQyMTM1YSJ9.Q-HWFNtLtfNO2iZsTRBfmlJlBBxHWTwrSlTjBaS6GNI
-Cache-Control: max-age=0, private, must-revalidate
-Content-Type: application/json; charset=utf-8
-ETag: W/"df30d418ad05c15dbfdc6e34ef53f723"
-Referrer-Policy: strict-origin-when-cross-origin
-Transfer-Encoding: chunked
-X-Content-Type-Options: nosniff
-X-Download-Options: noopen
-X-Frame-Options: SAMEORIGIN
-X-Permitted-Cross-Domain-Policies: none
-X-Request-Id: 957a1c92-c5a8-4607-81df-6ca70ba9b846
-X-Runtime: 0.193702
-X-XSS-Protection: 1; mode=block
-
-{
-    "created_at": "2020-10-10T05:43:20.349Z",
-    "email": "user@test.com",
-    "id": 1,
-    "updated_at": "2020-10-10T05:43:20.349Z"
-}
-```
-
-`GET auth_ping` with the bearer(`eyJhbGciOiJIUzI1NiJ9...`) returned by `POST users/sign_in`:
-```bash
-~ $ http localhost:3000/auth_ping "Authorization:Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjAyMzE3ODYxLCJleHAiOjE2MDI0MDQyNjEsImp0aSI6IjNkOGY4ZThkLTY2YjUtNGE5Ny05YzkzLTUxZmFmMGQyMTM1YSJ9.Q-HWFNtLtfNO2iZsTRBfmlJlBBxHWTwrSlTjBaS6GNI"
-HTTP/1.1 200 OK
-Cache-Control: max-age=0, private, must-revalidate
-Content-Type: text/plain; charset=utf-8
-ETag: W/"9795c5ff8937f23526ccb207a5684c1f"
-Referrer-Policy: strict-origin-when-cross-origin
-Transfer-Encoding: chunked
-X-Content-Type-Options: nosniff
-X-Download-Options: noopen
-X-Frame-Options: SAMEORIGIN
-X-Permitted-Cross-Domain-Policies: none
-X-Request-Id: 5084b48f-6d27-4347-add5-b2d0c9661137
-X-Runtime: 0.004279
-X-XSS-Protection: 1; mode=block
-
-pong
-
-```
-
-`GET` `auth_ping` without bearer will result `401 Unauthorized`:
-```bash
-~ $ http localhost:3000/auth_ping                                                                                                                                                              [ruby-2.7.2]
-HTTP/1.1 401 Unauthorized
-Cache-Control: no-cache
-Content-Type: */*; charset=utf-8
-Transfer-Encoding: chunked
-X-Request-Id: 8c21f5f2-f385-4b0b-b1f6-478ef06de256
-X-Runtime: 0.003266
-
-You need to sign in or sign up before continuing.
-
-```
 ## Features
 
 #### 🚀 Rails 6
@@ -343,13 +261,104 @@ you access the routes which in dispatch_requests
   end
 ```
 
+## Quick Tests
+<div id="quick-tests"></div>
+
+**Requirements**
+* Rails server running with `rails s`
+* `httpie` installed
+
+```bash
+~ $ http post localhost:3000/users user:='{"email":"user@test.com","password":"Test1aBc"}'
+HTTP/1.1 200 OK
+Cache-Control: max-age=0, private, must-revalidate
+Content-Type: application/json; charset=utf-8
+ETag: W/"df30d418ad05c15dbfdc6e34ef53f723"
+Referrer-Policy: strict-origin-when-cross-origin
+Transfer-Encoding: chunked
+X-Content-Type-Options: nosniff
+X-Download-Options: noopen
+X-Frame-Options: SAMEORIGIN
+X-Permitted-Cross-Domain-Policies: none
+X-Request-Id: 689485eb-5e33-4ba2-afe8-ca7214088eda
+X-Runtime: 0.216293
+X-XSS-Protection: 1; mode=block
+
+{
+    "created_at": "2020-10-10T05:43:20.349Z",
+    "email": "user@test.com",
+    "id": 1,
+    "updated_at": "2020-10-10T05:43:20.349Z"
+}
+
+~ $ http post localhost:3000/users/sign_in user:='{"email":"user@test.com","password":"Test1aBc"}'
+HTTP/1.1 200 OK
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjAyMzE3ODYxLCJleHAiOjE2MDI0MDQyNjEsImp0aSI6IjNkOGY4ZThkLTY2YjUtNGE5Ny05YzkzLTUxZmFmMGQyMTM1YSJ9.Q-HWFNtLtfNO2iZsTRBfmlJlBBxHWTwrSlTjBaS6GNI
+Cache-Control: max-age=0, private, must-revalidate
+Content-Type: application/json; charset=utf-8
+ETag: W/"df30d418ad05c15dbfdc6e34ef53f723"
+Referrer-Policy: strict-origin-when-cross-origin
+Transfer-Encoding: chunked
+X-Content-Type-Options: nosniff
+X-Download-Options: noopen
+X-Frame-Options: SAMEORIGIN
+X-Permitted-Cross-Domain-Policies: none
+X-Request-Id: 957a1c92-c5a8-4607-81df-6ca70ba9b846
+X-Runtime: 0.193702
+X-XSS-Protection: 1; mode=block
+
+{
+    "created_at": "2020-10-10T05:43:20.349Z",
+    "email": "user@test.com",
+    "id": 1,
+    "updated_at": "2020-10-10T05:43:20.349Z"
+}
+```
+
+`GET auth_ping` with the bearer(`eyJhbGciOiJIUzI1NiJ9...`) returned by `POST users/sign_in`:
+```bash
+~ $ http localhost:3000/auth_ping "Authorization:Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjAyMzE3ODYxLCJleHAiOjE2MDI0MDQyNjEsImp0aSI6IjNkOGY4ZThkLTY2YjUtNGE5Ny05YzkzLTUxZmFmMGQyMTM1YSJ9.Q-HWFNtLtfNO2iZsTRBfmlJlBBxHWTwrSlTjBaS6GNI"
+HTTP/1.1 200 OK
+Cache-Control: max-age=0, private, must-revalidate
+Content-Type: text/plain; charset=utf-8
+ETag: W/"9795c5ff8937f23526ccb207a5684c1f"
+Referrer-Policy: strict-origin-when-cross-origin
+Transfer-Encoding: chunked
+X-Content-Type-Options: nosniff
+X-Download-Options: noopen
+X-Frame-Options: SAMEORIGIN
+X-Permitted-Cross-Domain-Policies: none
+X-Request-Id: 5084b48f-6d27-4347-add5-b2d0c9661137
+X-Runtime: 0.004279
+X-XSS-Protection: 1; mode=block
+
+pong
+
+```
+
+`GET` `auth_ping` without bearer will result `401 Unauthorized`:
+```bash
+~ $ http localhost:3000/auth_ping                                                                                                                                                              [ruby-2.7.2]
+HTTP/1.1 401 Unauthorized
+Cache-Control: no-cache
+Content-Type: */*; charset=utf-8
+Transfer-Encoding: chunked
+X-Request-Id: 8c21f5f2-f385-4b0b-b1f6-478ef06de256
+X-Runtime: 0.003266
+
+You need to sign in or sign up before continuing.
+
+```
+
 
 ## Projects using rails-pangu
 
-* **[LINGTI](https://lingti.io)**  (https://lingti.io/): Game booster which helps you get better, faster, smoother performance from your PC. It is now popular among game players playing [MTGA](https://magic.wizards.com/en/mtgarena), [MTGO](https://magic.wizards.com/en/mtgo), [LOL](https://lol.qq.com/main.shtml), [World of Warcraft](https://worldofwarcraft.com/), [PUBG](https://www.pubg.com/), [Dota2](https://www.dota2.com.cn/index.htm), [CSGO](https://www.csgo.com.cn/index.html), etc.
-* **[eSheep](https://esheep.io)**  (https://esheep.io/): Network booster which helps global users access better entertainment content from China.
+- **[LINGTI](https://lingti666.com)**  (https://lingti666.com/): Lingti is a game booster which brings faster, smoother gaming experience with clients of PC/Mac/Android/iOS/Router/Router Plugin implemented.
+- **[eSheep](https://esheeps.com)**  (https://esheeps.com/): Network booster which helps global users access better entertainment content from Asia.
 
-[<img src="https://assets.lingti.paiyou.co/ed568fbe.png" width="150" align="middle" />](https://lingti.io) [<img src="https://res.paiyou.co/44920709.png" width="200" align="middle" />](https://lingti.io)
+
+[<img src="https://esheeps.com/imgs/logo.jpg" height="100" align="middle" />](https://esheeps.com)
+[<img src="https://lingti666.com/imgs/lingti-logo.png" height="50" align="middle" />](https://lingti666.com)
 
 ## License
 
@@ -376,3 +385,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+## Reference
+<div id="refer-pangu"></div>
+
+- [1] [Wiki of Pangu](https://en.wikipedia.org/wiki/Pangu)
