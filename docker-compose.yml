@@ -20,11 +20,6 @@ services:
     environment:
       DATABASE_URL: postgres://postgres:postgres@postgres:5432/rails_pangu_production?pool=25&encoding=unicode&schema_search_path=public
       DEVISE_JWT_SECRET_KEY: RANDOM_SECRET
-      QINIU_ACCESS_KEY: EMPTY
-      QINIU_BUCKET: EMPTY
-      QINIU_ENABLED: 'yes'
-      QINIU_HOST: EMPTY
-      QINIU_SECRET_KEY: EMPTY
       RAILS_ENV: production
       REDIS_URL: redis://redis:6379/1
       # generate by rails secret
