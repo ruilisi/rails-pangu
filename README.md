@@ -34,7 +34,7 @@ At the same time, we saw couple of other repos doing the same work, but one big 
 ~ $ rspec
 ```
 
-Try [quick tests](#quick-tests) to get hands-on experience with `rails-pangu`.
+Try [quick tests](#run-and-test) to get hands-on experience with `rails-pangu`.
 
 ## Features
 
@@ -103,73 +103,17 @@ In this project, we leverage CircleCI to test `Rails-pangu`'s code base with bot
 A library for setting up Ruby objects as test data.
 
 #### 🚀 Docker
-
-`Dockerfile` and related scripts are provided to generate the docker image for this project.
-
-The provided docker building solution contains the following optimizations: 
-
-* Docker building acceleration
-
-  When a project grows, hundreds or even thousands of different versions of different gems will be tried or used. Even a small change in `Gemfile` causes re-bundling for every `Gem` while building a `Ruby` based docker image, that most of the docker image building time is wasted for bundling a large number of stable gems, such as `rails`, `pg`... To solve this issue, we utilized a trick which accelerates the docker building process by bundling two rounds for `Gemfile` files, and generates two layers of docker image: 
-
-  * Build the first layer for `Gemfile.core`, which is for stable or core `Gem`s, such as `rails`, `pg`.
-  * Build the second layer for `Gemfile`,  which is for mutable or non-core `Gem`s, for example, `Gem`s wrote or forted by yourself.
-
-  Though, this process generates extra one layer of docker image which makes the image lager a little bit(hundreds of `KB`s). It worths that way cause **time is much more limited than disk space**
-
-  The following lines of `Dockerfile` demonstrates this docker building process: 
-
-```dockerfile
-COPY Gemfile.core .
-RUN echo 'gem: --no-document' >> ~/.gemrc && \
-    cp ~/.gemrc /etc/gemrc && \
-    chmod +r /etc/gemrc && \
-    bundle install --gemfile Gemfile.core -j16 --binstubs=$BUNDLE_PATH/bin
-
-COPY Gemfile .
-COPY Gemfile.lock .
-RUN bundle install --gemfile Gemfile -j16 --binstubs=$BUNDLE_PATH/bin
-```
-
-* Bundling `Gem`s acceleration (For developers in China only)
-
-  By default, we mirror gem source `https://rubygems.org` to `https://gems.ruby-china.com`, which boosts the bundling speed largely for developers in China. 
-
-  
+`Dockerfile` with customized features is added to this project:
+* Original gem source `https://rubygems.org` is mirrored to `https://gems.ruby-china.com` which both accelerates bundling speed for developers in China 
+and acts as an example of using Gem mirror.
 
 #### 🚀 [Puma](https://github.com/puma/puma)
-
 Puma is a simple, fast, threaded, and highly concurrent HTTP 1.1 server for Ruby/Rack applications in development and production.
 
 #### 🚀 Redis
-
 Is there any web project isn't using `redis` as a faster and sometimes easier way of storing data? Well, if there isn't,  just replace it!
 
-
-## Test
-
-```bash
-rails db:reset db:seed RAILS_ENV="test"
-rspec
-```
-
-
-The following environment varialbes are required in order to run or test (check `docker-cmpose.yml`):
-
-- `DEVISE_JWT_SECRET_KEY`: You generate this by running `rails secret`
-- `DATABASE_URL`: Postgres database url for database connection
-- `REDIS_URL`: Redis database url for database connection
-
-
-
-## CORS
-
-We allow CORS and expose the Authorization header by default. If you want to disable it, you can comment out the contents of the `config/cors.rb` file.
-
-
-
 ## Add script to cron job
-
 You can add cron job in `bin/gen_cronjobs.rb`, an example is as follows.
 
 ```ruby
@@ -261,8 +205,9 @@ you access the routes which in dispatch_requests
   end
 ```
 
-## Quick Tests
-<div id="quick-tests"></div>
+<div id="run-and-test"></div>
+
+## Run & Test
 
 **Requirements**
 * Rails server running with `rails s`
