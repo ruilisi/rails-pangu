@@ -16,7 +16,7 @@
 
 与此同时，我们看到其他一些开发者也在研究这个问题，但是他们都面临着**Rails <= 5.0**与**Rails 6**版本兼容性的问题 。两者之间有很大区别，因此，通过梳理 `rails 6`, `devise`, `jwt` 这三项技术，我们顺利解决了这个难题，实现了三者在Rails中的完美融合。与此同时，非常感谢为此项目提供很多参考建议的朋友们，比如这篇文章： [Rails 5 API + JWT setup in minutes (using Devise)](https://medium.com/@mazik.wyry/rails-5-api-jwt-setup-in-minutes-using-devise-71670fd4ed03) 。
 
-<img src="https://res.paiyou.co/pangu.jpg" width="300" align="middle" />
+<img src="https://res.paiyou.co/pangu.jpg" width="300" style="margin-bottom: 6px;" align="center" />
 
 > 盘古在中国古神话中是万物创始之神[<sup>1</sup>](#refer-pangu).
 > 正如盘古，`Rails-pangu`意在成为您新rails项目的starter kit，它帮您扫除那些有难度但重复的活儿。
@@ -30,7 +30,7 @@
 ~ $ rspec
 ```
 
-尝试[快速测试](#run-and-test)来获得`rails-pang`的一手体验。
+尝试[开发与测试](#run-and-test)来获得`rails-pang`的一手体验。
 
 ## 特性
 
@@ -109,6 +109,15 @@ Dockerfile及与之配套的定制化特性被加入到本项目中：
 本项目提供的Docker构建方案包含了两大优化：
 
 - 原本的Gem源 `https://rubygems.org`被镜像到`https://gems.ruby-china.com`，这既帮助中国开发者加速Gem构建速度，也作为一个样例演示如何使用Gem镜像。
+
+#### 🚀 Docker Compose
+本项目添加了`docker-compose.yml`，它包括了容器`web`, `postgres`, `redis`。
+> `web`容器中无法运行`rspec`和其他一些命令，因为docker镜像通过运行`bundle config set without 'development test'`只安装生产模式的gems。
+```bash
+~ $ docker-compose up -d
+~ $ docker-compose exec web rails db:create db:migrate db:seed
+```
+接下来你就可以运行[开发与测试](#run-and-test)中的步骤了，因为`3000`端口被映射且暴露了。
 
 #### 🚀 [Puma](https://github.com/puma/puma)
 Puma是一个简单、快速、线程化、高度并发的HTTP1.1服务器，用于Ruby/Rack应用的开发。
@@ -223,21 +232,10 @@ puts [
 * 安装`httpie`
 
 ```bash
-~ $ http post localhost:3000/users user:='{"email":"user@test.com","password":"Test1aBc"}'
-HTTP/1.1 200 OK
-Cache-Control: max-age=0, private, must-revalidate
-Content-Type: application/json; charset=utf-8
-ETag: W/"df30d418ad05c15dbfdc6e34ef53f723"
-Referrer-Policy: strict-origin-when-cross-origin
-Transfer-Encoding: chunked
-X-Content-Type-Options: nosniff
-X-Download-Options: noopen
-X-Frame-Options: SAMEORIGIN
-X-Permitted-Cross-Domain-Policies: none
-X-Request-Id: 689485eb-5e33-4ba2-afe8-ca7214088eda
-X-Runtime: 0.216293
-X-XSS-Protection: 1; mode=block
+~ $ http -b localhost:3000/ping
+pong
 
+~ $ http -b post localhost:3000/users user:='{"email":"user@test.com","password":"Test1aBc"}'
 {
     "created_at": "2020-10-10T05:43:20.349Z",
     "email": "user@test.com",
@@ -271,21 +269,7 @@ X-XSS-Protection: 1; mode=block
 
 用`POST users/sign_in`得到的bearer(`eyJhbGciOiJIUzI1NiJ9...`)来`GET auth_ping`:
 ```bash
-~ $ http localhost:3000/auth_ping "Authorization:Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjAyMzE3ODYxLCJleHAiOjE2MDI0MDQyNjEsImp0aSI6IjNkOGY4ZThkLTY2YjUtNGE5Ny05YzkzLTUxZmFmMGQyMTM1YSJ9.Q-HWFNtLtfNO2iZsTRBfmlJlBBxHWTwrSlTjBaS6GNI"
-HTTP/1.1 200 OK
-Cache-Control: max-age=0, private, must-revalidate
-Content-Type: text/plain; charset=utf-8
-ETag: W/"9795c5ff8937f23526ccb207a5684c1f"
-Referrer-Policy: strict-origin-when-cross-origin
-Transfer-Encoding: chunked
-X-Content-Type-Options: nosniff
-X-Download-Options: noopen
-X-Frame-Options: SAMEORIGIN
-X-Permitted-Cross-Domain-Policies: none
-X-Request-Id: 5084b48f-6d27-4347-add5-b2d0c9661137
-X-Runtime: 0.004279
-X-XSS-Protection: 1; mode=block
-
+~ $ http -b localhost:3000/auth_ping "Authorization:Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjAyMzE3ODYxLCJleHAiOjE2MDI0MDQyNjEsImp0aSI6IjNkOGY4ZThkLTY2YjUtNGE5Ny05YzkzLTUxZmFmMGQyMTM1YSJ9.Q-HWFNtLtfNO2iZsTRBfmlJlBBxHWTwrSlTjBaS6GNI"
 pong
 
 ```

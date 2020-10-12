@@ -1,0 +1,31 @@
+version: '2'
+# https://nickjanetakis.com/blog/dockerize-a-rails-5-postgres-redis-sidekiq-action-cable-app-with-docker-compose
+
+services:
+  postgres:
+    image: 'postgres:13.0-alpine'
+    environment:
+      POSTGRES_PASSWORD: postgres
+  redis:
+    image: 'redis:6.0.8-alpine'
+  web:
+    depends_on:
+      - 'postgres'
+      - 'redis'
+    build: .
+    ports:
+      - '3000:3000'
+    # volumes:
+      # - '.:/app'
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/rails_pangu_production?pool=25&encoding=unicode&schema_search_path=public
+      DEVISE_JWT_SECRET_KEY: RANDOM_SECRET
+      QINIU_ACCESS_KEY: EMPTY
+      QINIU_BUCKET: EMPTY
+      QINIU_ENABLED: 'yes'
+      QINIU_HOST: EMPTY
+      QINIU_SECRET_KEY: EMPTY
+      RAILS_ENV: production
+      REDIS_URL: redis://redis:6379/1
+      # generate by rails secret
+      SECRET_KEY_BASE: 2be227af75def02fd9e5835199fefb6600f1031d80996302877e9ecae7cfb4ebb3bcfe87e6e3ce402ae30e63e64aa55168a4f7639ca70e419e7b2f990a8ecb84

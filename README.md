@@ -22,6 +22,8 @@ Thanks to lots of the close solutions that gave hints to this `Rails-pangu`, for
 
 At the same time, we saw couple of other repos doing the same work, but one big issue for these repos is that they are started with **Rails <= 5.0**, which is far different from **Rails 6**, and that contributes to the final decision to "reinvent the wheel again".
 
+<img src="https://res.paiyou.co/pangu.jpg" width="300" style="margin-bottom: 6px;" align="center" />
+
 > Pangu is the first living being and the creator of all in some versions of Chinese mythology[<sup>1</sup>](#refer-pangu).
 > Just like pangu, `Rails-pangu` aims to be a starter kit of your next rails project which eliminates tricky but repeated work.
 
@@ -34,7 +36,7 @@ At the same time, we saw couple of other repos doing the same work, but one big 
 ~ $ rspec
 ```
 
-Try [quick tests](#run-and-test) to get hands-on experience with `rails-pangu`.
+Try [Run & Test](#run-and-test) to get hands-on experience with `rails-pangu`.
 
 ## Features
 
@@ -107,14 +109,24 @@ A library for setting up Ruby objects as test data.
 * Original gem source `https://rubygems.org` is mirrored to `https://gems.ruby-china.com` which both accelerates bundling speed for developers in China 
 and acts as an example of using Gem mirror.
 
+#### 🚀 Docker Compose
+`docker-compose.yml` with containers `web`, `postgres`, `redis` is added.
+> `rspec` and some other commands are not avaiable in `web` container since the docker image is bundled with only gems for production mode through `bundle config set without 'development test'`.
+```bash
+~ $ docker-compose up -d
+~ $ docker-compose exec web rails db:create db:migrate db:seed
+```
+Then you can run steps in [Run & Test](#run-and-test) as port `3000` is mapped and exposed.
+
 #### 🚀 [Puma](https://github.com/puma/puma)
 Puma is a simple, fast, threaded, and highly concurrent HTTP 1.1 server for Ruby/Rack applications in development and production.
 
 #### 🚀 Redis
 Is there any web project isn't using `redis` as a faster and sometimes easier way of storing data? Well, if there isn't,  just replace it!
 
-## Add script to cron job
-You can add cron job in `bin/gen_cronjobs.rb`, an example is as follows.
+## Cronjobs
+We provide several ways with convenient defaults for adding cronjobs into the running containers as cronjobs are a big part for a project.
+
 
 ```ruby
 puts [
@@ -127,8 +139,6 @@ puts [
 ```
 
 If you want to run bash script, you can replace `cd /usr/src/app; rails runner \"Util.run_once('#{cmd}')\"` to your custom cmd.
-
-
 
 ## Create a role
 
@@ -214,21 +224,10 @@ you access the routes which in dispatch_requests
 * `httpie` installed
 
 ```bash
-~ $ http post localhost:3000/users user:='{"email":"user@test.com","password":"Test1aBc"}'
-HTTP/1.1 200 OK
-Cache-Control: max-age=0, private, must-revalidate
-Content-Type: application/json; charset=utf-8
-ETag: W/"df30d418ad05c15dbfdc6e34ef53f723"
-Referrer-Policy: strict-origin-when-cross-origin
-Transfer-Encoding: chunked
-X-Content-Type-Options: nosniff
-X-Download-Options: noopen
-X-Frame-Options: SAMEORIGIN
-X-Permitted-Cross-Domain-Policies: none
-X-Request-Id: 689485eb-5e33-4ba2-afe8-ca7214088eda
-X-Runtime: 0.216293
-X-XSS-Protection: 1; mode=block
+~ $ http -b localhost:3000/ping
+pong
 
+~ $ http -b post localhost:3000/users user:='{"email":"user@test.com","password":"Test1aBc"}'
 {
     "created_at": "2020-10-10T05:43:20.349Z",
     "email": "user@test.com",
@@ -262,21 +261,7 @@ X-XSS-Protection: 1; mode=block
 
 `GET auth_ping` with the bearer(`eyJhbGciOiJIUzI1NiJ9...`) returned by `POST users/sign_in`:
 ```bash
-~ $ http localhost:3000/auth_ping "Authorization:Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjAyMzE3ODYxLCJleHAiOjE2MDI0MDQyNjEsImp0aSI6IjNkOGY4ZThkLTY2YjUtNGE5Ny05YzkzLTUxZmFmMGQyMTM1YSJ9.Q-HWFNtLtfNO2iZsTRBfmlJlBBxHWTwrSlTjBaS6GNI"
-HTTP/1.1 200 OK
-Cache-Control: max-age=0, private, must-revalidate
-Content-Type: text/plain; charset=utf-8
-ETag: W/"9795c5ff8937f23526ccb207a5684c1f"
-Referrer-Policy: strict-origin-when-cross-origin
-Transfer-Encoding: chunked
-X-Content-Type-Options: nosniff
-X-Download-Options: noopen
-X-Frame-Options: SAMEORIGIN
-X-Permitted-Cross-Domain-Policies: none
-X-Request-Id: 5084b48f-6d27-4347-add5-b2d0c9661137
-X-Runtime: 0.004279
-X-XSS-Protection: 1; mode=block
-
+~ $ http -b localhost:3000/auth_ping "Authorization:Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjAyMzE3ODYxLCJleHAiOjE2MDI0MDQyNjEsImp0aSI6IjNkOGY4ZThkLTY2YjUtNGE5Ny05YzkzLTUxZmFmMGQyMTM1YSJ9.Q-HWFNtLtfNO2iZsTRBfmlJlBBxHWTwrSlTjBaS6GNI"
 pong
 
 ```

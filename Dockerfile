@@ -22,6 +22,5 @@ COPY --from=bundler /usr/local/bundle/ /usr/local/bundle/
 COPY . .
 RUN sed "s/^\([^ ]* *[^ ]* *[^ ]* *[^ ]* *[^ ]* *\)\(.*\)/\1cd \/app;rails runner \"\2\"/" config/cronjobs_rails >> config/cronjobs && \
     sed 's;\(.*\)$;\1 2>\&1 | tee -a /app/log/cronjobs.log;' config/cronjobs | crontab -
-ENV RAILS_ENV production
 ENTRYPOINT ["sh",  "bin/entrypoint.sh"]
 CMD ["bundle", "exec", "puma"]
