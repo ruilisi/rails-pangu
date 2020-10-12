@@ -1,0 +1,3 @@
+1 * * * * Util.hello
+2 * * * * Util.hello if Rails.env.production?
+3 * * * * Util.run_once('Util.hello')
