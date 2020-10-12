@@ -292,7 +292,7 @@ You need to sign in or sign up before continuing.
 
 ## License
 
-Code and documentation copyright 2019 the [Rails-pangu Authors](https://github.com/ruilisi/rails-pangu/graphs/contributors) and [Paiyou Network](https://paiyou.co/) Code released under the [MIT License](https://github.com/ruilisi/rails-pangu/blob/master/LICENSE). 
+Code and documentation copyright 2019 the [Rails-pangu Authors](https://github.com/ruilisi/rails-pangu/graphs/contributors) and [Ruilisi Technology](https://ruilisi.co/) Code released under the [MIT License](https://github.com/ruilisi/rails-pangu/blob/master/LICENSE). 
 
 ## Contributors ✨
 
