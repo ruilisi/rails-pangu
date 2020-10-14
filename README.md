@@ -6,21 +6,9 @@
 
 `Rails-pangu` is a **Rails 6(API Only)** boilerplate which follows cutting-edge solutions already adopted by the industry, notablly, [Devise](https://github.com/plataformatec/devise), [JWT(JSON Web Tokens)](https://jwt.io/), Postgres, Redis, Docker, Rspec, RuboCop, [CircleCI](https://circleci.com/). It is a solid production-ready starting point for your new backend projects.
 
-**Mixing all these solutions and letting them work perfectly is not easy. Here is an example**:
-
 [Devise](https://github.com/plataformatec/devise) is a flexible and almost a standard authentication solution for Rails, while [JWT](https://jwt.io/)(JSON Web Tokens) is a JSON-based open standard (RFC 7519) for creating access tokens, which is a distributed and faster solution than authentication through databases.
 
 There is always a strong need to bring these two beautiful solutions together into rails for better user authentication, however, there's no single satisfying article or project which demonstrates how to incorporate both with Rails 6(API Only), which becomes the main reason for the birth of `Rails-pangu`.
-
-Thanks to lots of the close solutions that gave hints to this `Rails-pangu`, for example, this article: [Rails 5 API + JWT setup in minutes (using Devise)](https://medium.com/@mazik.wyry/rails-5-api-jwt-setup-in-minutes-using-devise-71670fd4ed03). However, these solutions have common problems:
-
-- Blurry explanation
-
-- Buggy
-
-- Lots of legacy code that are not usable for current version of frameworks, gems
-
-At the same time, we saw couple of other repos doing the same work, but one big issue for these repos is that they are started with **Rails <= 5.0**, which is far different from **Rails 6**, and that contributes to the final decision to "reinvent the wheel again".
 
 <img src="https://res.paiyou.co/pangu.jpg" width="300" style="margin-bottom: 6px;" align="center" />
 
@@ -40,30 +28,9 @@ Try [Run & Test](#run-and-test) to get hands-on experience with `rails-pangu`.
 
 ## Features
 
-#### 🚀 Rails 6
+#### 🚀 Rails 6 (API only)
 
 As explained above, `rails 6` is the future and is far different from `rails 5`.
-
-#### 🚀 Rails API only
-
-It is common to use frontend js libraries like `react`, `vuejs` to replace `rails view` in modern web development
-
-#### 🚀 ActionCable
-
-This project demonstrates usage of actioncable with a working chatting backend which is authenticable thorugh JWT with functionalities as below:
-
-* A user can
-  * create/delete a room
-  * set his/her avatar
-* Other users can join rooms
-* Users inside a room can
-  * send messages with each other
-  * update a message
-  * delete a message
-  * launch a vote which others can attend
-  * pick up random users of a specific number inside the room
-
-The related fronend demo is written in [react-pangu](https://github.com/ruilisi/react-pangu), and the js library bridges frontend and backend is written in [actioncable-jwt](https://github.com/ruilisi/actioncable-jwt)
 
 #### 🚀 [Devise](https://github.com/plataformatec/devise)
 
@@ -290,7 +257,7 @@ You need to sign in or sign up before continuing.
 - **[eSheep](https://esheeps.com)**  (https://esheeps.com/): Network booster which helps global users access better entertainment content from Asia.
 
 
-[<img src="https://esheeps.com/imgs/logo.jpg" height="100" align="middle" />](https://esheeps.com)
+[<img src="https://esheeps.com/imgs/logo.png" height="100" align="middle" />](https://esheeps.com)
 [<img src="https://lingti666.com/imgs/lingti-logo.png" height="50" align="middle" />](https://lingti666.com)
 
 ## License

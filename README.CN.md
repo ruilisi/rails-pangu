@@ -5,17 +5,8 @@
 
 [英文文档 English document](/README.md)
 
-`Rails-pangu` 是一个基于**Rails 6(API Only)**框架搭建的一站式服务开发的技术解决方案，它整合了 [Devise](https://github.com/plataformatec/devise), [JWT(JSON Web Tokens)](https://jwt.io/), Postgres, Redis, Docker, Rspec, RuboCop, [CircleCI](https://circleci.com/) 等多项业界尖端技术，它是后端项目开发的起点，可作为开发者强有力的生产工具。
+`Rails-pangu` 是一个基于 **Rails 6(API Only)** 框架搭建的一站式服务开发的技术解决方案，它整合了 [Devise](https://github.com/plataformatec/devise), [JWT(JSON Web Tokens)](https://jwt.io/), Postgres, Redis, Docker, Rspec, RuboCop, [CircleCI](https://circleci.com/) 等多项业界端技术，它是后端项目开发的起点，可作为开发者强有力的生产工具。
 	
-**整合这些前沿技术并让他们完全兼容运行并非易事，案例如下**：
-[Devise](https://github.com/plataformatec/devise)作为一个标准第三方权限认证组件，提供了标准的Rails身份验证解决方案，而 [JWT](https://jwt.io/)（JOSN Web Tokens）是一个基于（RFC 7519）开放标准，直接用JSON创建访问令牌的高效分布式解决方案，而不是通过用数据库进行身份验证。在实际的开发需求中，我们迫切希望通过融合以上这两种技术来解决用户身份验证的问题。但是，当我们研究以上两种解决方案时，我们发现了一些共同问题：
-
-- 文档解释不清晰
-- 存在多处bug
-- 代码冗余、存在版本兼容性问题
-
-与此同时，我们看到其他一些开发者也在研究这个问题，但是他们都面临着**Rails <= 5.0**与**Rails 6**版本兼容性的问题 。两者之间有很大区别，因此，通过梳理 `rails 6`, `devise`, `jwt` 这三项技术，我们顺利解决了这个难题，实现了三者在Rails中的完美融合。与此同时，非常感谢为此项目提供很多参考建议的朋友们，比如这篇文章： [Rails 5 API + JWT setup in minutes (using Devise)](https://medium.com/@mazik.wyry/rails-5-api-jwt-setup-in-minutes-using-devise-71670fd4ed03) 。
-
 <img src="https://res.paiyou.co/pangu.jpg" width="300" style="margin-bottom: 6px;" align="center" />
 
 > 盘古在中国古神话中是万物创始之神[<sup>1</sup>](#refer-pangu).
@@ -34,30 +25,9 @@
 
 ## 特性
 
-#### 🚀 基于Rails 6
+#### 🚀 基于Rails 6 (API only)
 
 与`rails 5`不同，`rails 6`是未来发展的必然趋势。
-
-#### 🚀 Rails API
-
-使用流行前端的js库如`react`，`vuejs`，替换原来的`rails view`
-
-#### 🚀 ActionCable
-
-该项目演示了聊天的后端是如何使用JWT认证身份的actioncable，其功能如下：
-
-- 用户可以
-  - 创建/删除房间
-  - 设置他/她的头像
-- 其他用户可以加入房间
-- 在房间内的用户可以
-  - 互相发送消息
-  - 更新消息
-  - 删除消息
-  - 发起其他人可以参加的投票
-  - 随机选取房间内特定数量的用户
-
-相关的fronend演示是用[react-pangu](https://github.com/ruilisi/react-pangu)编写，桥接前端和后端的js库是用的是[actioncable-jwt](https://github.com/ruilisi/actioncable-jwt)。
 
 #### 🚀 [Devise](https://github.com/plataformatec/devise)
 
@@ -297,7 +267,7 @@ You need to sign in or sign up before continuing.
 - **[LINGTI](https://lingti666.com)**  (https://lingti666.com/): 灵缇加速器是一款游戏加速器，包含PC、Mac、iOS、Android、路由器插件、路由盒子客户端。灵缇iOS和Android客户端支持Switch游戏热点加速，让你享受极致的联机和下载体验。
 - **[eSheep](https://esheeps.com)**  (https://esheeps.com/): 电子绵羊是一款帮助您极速连接亚洲的视频音乐网站网络加速器。
 
-[<img src="https://esheeps.com/imgs/logo.jpg" height="100" align="middle" />](https://esheeps.com)
+[<img src="https://esheeps.com/imgs/logo.png" height="100" align="middle" />](https://esheeps.com)
 [<img src="https://lingti666.com/imgs/lingti-logo.png" height="50" align="middle" />](https://lingti666.com)
 
 ## 执照
