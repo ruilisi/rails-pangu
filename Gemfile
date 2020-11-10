@@ -36,9 +36,8 @@ group :development, :test do
   gem 'webmock'
 
   # rubocop
-  gem 'rubocop', require: false
-  gem 'rubocop-junit_formatter', require: false
-  gem 'rubocop-performance', require: false
+  gem 'rubocop', '1.2.0', require: false
+  gem 'rubocop-performance', '1.8.1', require: false
 
   gem 'figaro'
 end

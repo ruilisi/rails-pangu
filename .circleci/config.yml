@@ -26,9 +26,8 @@ jobs:
       - run:
           name: RuboCop
           command: |
-            gem install rubocop rubocop-junit_formatter rubocop-performance --no-document
-            rubocop --require rubocop/formatter/junit_formatter \
-                    --require rubocop-performance \
+            gem install rubocop:1.2.0  rubocop-performance:1.8.1 --no-document
+            rubocop --require rubocop-performance \
                     --format progress \
                     --format RuboCop::Formatter::JUnitFormatter \
                     --out ~/test-results/rubocop.xml
