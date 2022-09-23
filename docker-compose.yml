@@ -1,13 +1,12 @@
 version: '2'
-# https://nickjanetakis.com/blog/dockerize-a-rails-5-postgres-redis-sidekiq-action-cable-app-with-docker-compose
 
 services:
   postgres:
     image: 'postgres:13.0-alpine'
     environment:
-      POSTGRES_DB: commongoal
-      POSTGRES_USER: commongoal
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: alvin
+      POSTGRES_USER: alvin
+      POSTGRES_PASSWORD: alvin
   redis:
     image: 'redis:6.0.8-alpine'
   web:
@@ -20,9 +19,9 @@ services:
     volumes:
       - '.:/app'
     environment:
-      DATABASE_URL: postgres://commongoal:commongoal@postgres:5432/commongoal?pool=25&encoding=unicode&schema_search_path=public
+      DATABASE_URL: postgres://alvin:alvin@postgres:5432/alvin?pool=25&encoding=unicode&schema_search_path=public
       DEVISE_JWT_SECRET_KEY: RANDOM_SECRET
       RAILS_ENV: production
       REDIS_URL: redis://redis:6379/1
       # generate by rails secret
-      SECRET_KEY_BASE: 2be227af75def02fd9e5835199fefb6600f1031d80996302877e9ecae7cfb4ebb3bcfe87e6e3ce402ae30e63e64aa55168a4f7639ca70e419e7b2f990a8ecb84
+      SECRET_KEY_BASE: 1a5a0b2465d2b02807afbb953efd0d6eef86a4e92a6a905a40f182b328e484879c413984311bc94588b5308fa80dbfaf770ab6f44b503dde57e6216bfa38c03c
