@@ -5,6 +5,8 @@ services:
   postgres:
     image: 'postgres:13.0-alpine'
     environment:
+      POSTGRES_DB: commongoal
+      POSTGRES_USER: commongoal
       POSTGRES_PASSWORD: postgres
   redis:
     image: 'redis:6.0.8-alpine'
@@ -15,10 +17,10 @@ services:
     build: .
     ports:
       - '3000:3000'
-    # volumes:
-      # - '.:/app'
+    volumes:
+      - '.:/app'
     environment:
-      DATABASE_URL: postgres://postgres:postgres@postgres:5432/rails_pangu_production?pool=25&encoding=unicode&schema_search_path=public
+      DATABASE_URL: postgres://commongoal:commongoal@postgres:5432/commongoal?pool=25&encoding=unicode&schema_search_path=public
       DEVISE_JWT_SECRET_KEY: RANDOM_SECRET
       RAILS_ENV: production
       REDIS_URL: redis://redis:6379/1

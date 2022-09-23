@@ -30,16 +30,16 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
 
   # rspec related
-  gem 'factory_bot_rails'
-  gem 'rspec_junit_formatter', require: false
-  gem 'rspec-rails'
-  gem 'webmock'
+  # gem 'factory_bot_rails'
+  # gem 'rspec_junit_formatter', require: false
+  # gem 'rspec-rails'
+  # gem 'webmock'
 
   # rubocop
-  gem 'rubocop', '1.2.0', require: false
-  gem 'rubocop-performance', '1.8.1', require: false
+  # gem 'rubocop', '1.2.0', require: false
+  # gem 'rubocop-performance', '1.8.1', require: false
 
-  gem 'figaro'
+  # gem 'figaro'
 end
 
 group :development do
